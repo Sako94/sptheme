@@ -1,0 +1,208 @@
+{%- comment -%}
+  SoftPauses patch anatomy. Cross-section diagram of the transdermal patch
+  with each layer labeled. Diagram is pure SVG (sharp at any zoom, color-
+  themable). Right column: editable layer description blocks.
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-blush-soft); }
+  .sp-anat { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); }
+  @media (max-width: 720px) { .sp-anat { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-anat__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .sp-anat__grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  .sp-anat__diagram {
+    aspect-ratio: 4 / 5;
+    background: var(--sp-cream);
+    border-radius: 4px;
+    padding: 36px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sp-anat__diagram svg { width: 100%; height: auto; max-width: 360px; }
+
+  .sp-anat__layers { display: grid; gap: 14px; }
+  .sp-anat__layer {
+    background: var(--sp-cream);
+    padding: 22px 24px;
+    border-radius: 4px;
+    border-left: 3px solid var(--sp-poppy);
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .sp-anat__layer-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    color: var(--sp-poppy);
+    line-height: 1;
+    font-variation-settings: "opsz" 96;
+  }
+  .sp-anat__layer h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.125rem;
+    color: var(--sp-ink);
+    margin-bottom: 6px;
+    text-transform: lowercase;
+    font-weight: 500;
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-anat__layer p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--sp-ink-mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+
+<section class="sp-anat"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap sp-wrap--mid">
+    {%- if section.settings.chapter_label != blank or section.settings.chapter_num != blank -%}
+      <div class="sp-chapter">
+        <span class="sp-chapter__label">{{ section.settings.chapter_label }}</span>
+        <span class="sp-chapter__num">{{ section.settings.chapter_num }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}<h2 class="sp-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.lede != blank -%}<div class="sp-lede">{{ section.settings.lede }}</div>{%- endif -%}
+
+    <div class="sp-anat__grid">
+      <div class="sp-anat__diagram">
+        <svg viewBox="0 0 360 450" xmlns="http://www.w3.org/2000/svg" aria-label="Patch cross-section">
+          <defs>
+            <linearGradient id="reservoir-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FE756F"/>
+              <stop offset="50%" stop-color="#ED1B28"/>
+              <stop offset="100%" stop-color="#C8121E"/>
+            </linearGradient>
+            <pattern id="adhesive-{{ section.id }}" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+              <circle cx="4" cy="4" r="0.7" fill="#FE756F" opacity="0.7"/>
+            </pattern>
+          </defs>
+
+          <!-- Layer 1: Backing layer -->
+          <rect x="40" y="60" width="280" height="40" rx="6" fill="#FED9D1" stroke="#E8D5C5" stroke-width="0.5"/>
+          <text x="180" y="86" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#5C3A33" font-weight="500">BACKING</text>
+          <line x1="320" y1="80" x2="345" y2="80" stroke="#ED1B28" stroke-width="1"/>
+          <circle cx="350" cy="80" r="9" fill="#ED1B28"/>
+          <text x="350" y="84" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#FAF1EA" font-style="italic">1</text>
+
+          <!-- Layer 2: Active reservoir -->
+          <rect x="40" y="100" width="280" height="100" fill="url(#reservoir-{{ section.id }})" stroke="#E8D5C5" stroke-width="0.5"/>
+          <!-- Maca essence dots -->
+          <circle cx="80" cy="125" r="3" fill="#2A1410" opacity="0.5"/>
+          <circle cx="120" cy="155" r="2.5" fill="#FED9D1" opacity="0.7"/>
+          <circle cx="180" cy="135" r="3.5" fill="#C8862E" opacity="0.6"/>
+          <circle cx="220" cy="170" r="2" fill="#2A1410" opacity="0.5"/>
+          <circle cx="260" cy="140" r="3" fill="#FED9D1" opacity="0.6"/>
+          <circle cx="100" cy="180" r="2" fill="#C8862E" opacity="0.5"/>
+          <circle cx="280" cy="180" r="2.5" fill="#2A1410" opacity="0.6"/>
+          <circle cx="160" cy="180" r="2" fill="#FED9D1" opacity="0.7"/>
+          <text x="180" y="156" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#FAF1EA" font-weight="500">TRIPLE-SOURCE MACA</text>
+          <line x1="320" y1="150" x2="345" y2="150" stroke="#ED1B28" stroke-width="1"/>
+          <circle cx="350" cy="150" r="9" fill="#ED1B28"/>
+          <text x="350" y="154" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#FAF1EA" font-style="italic">2</text>
+
+          <!-- Layer 3: Adhesive -->
+          <rect x="40" y="200" width="280" height="20" fill="url(#adhesive-{{ section.id }})" stroke="#E8D5C5" stroke-width="0.5"/>
+          <rect x="40" y="200" width="280" height="20" fill="#FEE5DE" opacity="0.4"/>
+          <text x="180" y="215" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" letter-spacing="2" fill="#5C3A33" font-weight="500">ADHESIVE</text>
+          <line x1="320" y1="210" x2="345" y2="210" stroke="#ED1B28" stroke-width="1"/>
+          <circle cx="350" cy="210" r="9" fill="#ED1B28"/>
+          <text x="350" y="214" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#FAF1EA" font-style="italic">3</text>
+
+          <!-- Skin -->
+          <rect x="20" y="230" width="320" height="60" fill="#FAF1EA" stroke="#E8D5C5" stroke-width="0.5"/>
+          <!-- Skin texture lines -->
+          <path d="M 20 250 C 60 246, 120 254, 180 250 S 280 246, 340 250" fill="none" stroke="#E8D5C5" stroke-width="0.6" opacity="0.6"/>
+          <path d="M 20 270 C 80 266, 140 274, 200 270 S 300 266, 340 270" fill="none" stroke="#E8D5C5" stroke-width="0.6" opacity="0.6"/>
+          <text x="180" y="312" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-style="italic" fill="#8A6E64" font-variation-settings="'opsz' 72">your skin</text>
+
+          <!-- Absorption arrows -->
+          <g stroke="#ED1B28" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.85">
+            <path d="M 90 222 L 90 248">
+              <animate attributeName="opacity" values="0.85;0.2;0.85" dur="2.4s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 90 248 L 86 244 M 90 248 L 94 244"/>
+            <path d="M 180 222 L 180 248">
+              <animate attributeName="opacity" values="0.85;0.2;0.85" dur="2.4s" begin="0.4s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 180 248 L 176 244 M 180 248 L 184 244"/>
+            <path d="M 270 222 L 270 248">
+              <animate attributeName="opacity" values="0.85;0.2;0.85" dur="2.4s" begin="0.8s" repeatCount="indefinite"/>
+            </path>
+            <path d="M 270 248 L 266 244 M 270 248 L 274 244"/>
+          </g>
+
+          <!-- Foot caption -->
+          <text x="180" y="380" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" letter-spacing="2" fill="#8A6E64">CROSS-SECTION (NOT TO SCALE)</text>
+          <text x="180" y="410" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-style="italic" fill="#5C3A33" font-variation-settings="'opsz' 72">24-hour transdermal release</text>
+        </svg>
+      </div>
+
+      <div class="sp-anat__layers">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'layer' -%}
+            <div class="sp-anat__layer" {{ block.shopify_attributes }}>
+              <div class="sp-anat__layer-num">{{ block.settings.num }}</div>
+              <div>
+                {%- if block.settings.heading != blank -%}<h4>{{ block.settings.heading }}</h4>{%- endif -%}
+                {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Patch anatomy",
+  "tag": "section",
+  "class": "sp-patch-anatomy-section",
+  "settings": [
+    { "type": "text", "id": "chapter_label", "label": "Chapter label", "default": "anatomy" },
+    { "type": "text", "id": "chapter_num", "label": "Chapter number", "default": "/ 02b" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "what's actually inside the patch." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>three layers, one job: deliver clinical-dose maca through the skin for 24 hours. no fillers, no shortcuts, no surprises.</p>" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "layer",
+      "name": "Layer description",
+      "settings": [
+        { "type": "text", "id": "num", "label": "Number", "default": "1" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "backing layer" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "soft, breathable, water-resistant. holds everything in place all day. invisible under sleeves." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Patch anatomy",
+      "blocks": [
+        { "type": "layer", "settings": { "num": "1", "heading": "backing layer", "body": "soft, breathable, water-resistant. holds everything in place all day. invisible under sleeves." } },
+        { "type": "layer", "settings": { "num": "2", "heading": "active reservoir", "body": "clinical-dose organic triple-source maca (black, red, yellow) plus bioperine for absorption. the working layer." } },
+        { "type": "layer", "settings": { "num": "3", "heading": "skin-safe adhesive", "body": "hypoallergenic, latex-free, stays put through showers and workouts. peels off cleanly." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

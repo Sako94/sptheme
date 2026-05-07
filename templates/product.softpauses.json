@@ -78,6 +78,41 @@
       "block_order": ["mc1", "mc2", "mc3"]
     },
 
+    "patch-anatomy": {
+      "type": "sp-patch-anatomy",
+      "settings": {
+        "chapter_label": "anatomy",
+        "chapter_num": "/ 02b",
+        "heading": "what's actually inside the patch.",
+        "lede": "<p>three layers, one job: deliver clinical-dose maca through the skin for 24 hours. no fillers, no shortcuts, no surprises.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "pa1": { "type": "layer", "settings": { "num": "1", "heading": "backing layer", "body": "soft, breathable, water-resistant. holds everything in place all day. invisible under sleeves." } },
+        "pa2": { "type": "layer", "settings": { "num": "2", "heading": "active reservoir", "body": "clinical-dose organic triple-source maca (black, red, yellow) plus bioperine for absorption. the working layer." } },
+        "pa3": { "type": "layer", "settings": { "num": "3", "heading": "skin-safe adhesive", "body": "hypoallergenic, latex-free, stays put through showers and workouts. peels off cleanly." } }
+      },
+      "block_order": ["pa1", "pa2", "pa3"]
+    },
+
+    "how-it-works": {
+      "type": "sp-how-it-works",
+      "settings": {
+        "kicker": "how it works",
+        "heading": "three steps. one decision a day.",
+        "lede": "<p>peel, stick, forget about it. the only thing simpler than this routine is not having one.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "hw1": { "type": "step", "settings": { "icon": "peel", "num": "step 01", "heading": "peel", "body": "peel one patch from the daily strip. takes about three seconds. no water, no swallowing." } },
+        "hw2": { "type": "step", "settings": { "icon": "stick", "num": "step 02", "heading": "stick", "body": "place it on the inside of your forearm or shoulder. anywhere with thin, clean skin works. rotate placement daily." } },
+        "hw3": { "type": "step", "settings": { "icon": "support", "num": "step 03", "heading": "support, all day", "body": "the patch delivers organic triple-source maca through the skin for 24 hours. swap for a fresh one tomorrow morning." } }
+      },
+      "block_order": ["hw1", "hw2", "hw3"]
+    },
+
     "ingredients": {
       "type": "sp-ingredients",
       "settings": {
@@ -433,6 +468,8 @@
     "hero",
     "pain",
     "mechanism",
+    "patch-anatomy",
+    "how-it-works",
     "ingredients",
     "clinical",
     "outcome-stats",
