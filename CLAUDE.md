@@ -63,7 +63,22 @@ in incognito** to bust the cache.
 auth flow that doesn't work from this sandbox. `shopify theme check` and
 `shopify theme package` work without auth — use those for local validation.
 
-### 6. Image attachments dropped in chat aren't on disk
+### 6. Templates have a 25-section maximum
+
+A single JSON template (`templates/*.json`) can include at most **25
+sections** in its `sections` object. Going over produces:
+
+  `FileSaveError: sections: must have a maximum of 25`
+
+This is the ENTIRE sections object, not just `order`. Sections in
+the file but missing from `order` still count.
+
+Currently `product.softpauses.json` runs at 24 to leave headroom. If
+adding more, swap one out (or move to a section group / footer).
+
+`scripts/preflight.py` enforces this — fails if any template exceeds 25.
+
+### 7. Image attachments dropped in chat aren't on disk
 
 Files the user uploads via chat are visible to the model but not saved to
 the filesystem. Either:
@@ -107,6 +122,39 @@ releases/                Packaged .zip of the theme, committed for download
 scripts/preflight.py     Pre-package validation (range alignment, etc.)
 scripts/gen_images.py    Image generation via Gemini API
 ```
+
+## Variants + subscriptions setup (Shopify admin)
+
+The `sp-buybox` section auto-discovers product variants for the qty-tier
+selector and selling plans for subscribe & save. Both are configured in
+the Shopify admin, not in theme code.
+
+### Variants (qty tiers)
+
+In **Products → SoftPauses product → Variants**:
+
+1. Add an option called **Supply** with values `1 Month`, `3 Months`, `6 Months`.
+2. For each variant set its price (e.g. $40 / $108 / $194), SKU, inventory.
+3. Save. Reload the storefront PDP — the qty tier row populates from
+   `product.variants` in order. First variant becomes the default.
+
+### Subscribe & save (selling plans)
+
+Shopify Subscriptions is a free first-party app:
+
+1. Apps → Shopify App Store → search "Shopify Subscriptions" → install.
+2. Subscriptions app → **Create plan**. Pick frequency (every 30 days),
+   discount (20% off), payment terms.
+3. Apply the plan to the SoftPauses product (Plans → Apply to products).
+4. Save. Reload the PDP — the buybox shows two radio plans: subscribe
+   (with 20% discount applied automatically by Shopify) and one-time.
+
+### Graceful degradation
+
+If neither variants nor selling plans are configured, `sp-buybox` falls
+back to a plain "add to cart" button using the default variant. No
+errors, just a simpler buybox. Same applies to `sp-pdp-hero` and
+`sp-sticky-cta`.
 
 ## Build + ship workflow
 

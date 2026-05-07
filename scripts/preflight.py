@@ -120,7 +120,7 @@ def main():
         # Track section type (filename without .liquid)
         section_types[f[:-len(".liquid")]] = path
 
-    # 2. Validate every template's section references
+    # 2. Validate every template's section references + 25-section cap
     for f in sorted(os.listdir(TEMPLATES_DIR)):
         if not f.endswith(".json"):
             continue
@@ -130,10 +130,16 @@ def main():
         except json.JSONDecodeError as e:
             all_issues.append(f"{path}: NOT VALID JSON — {e}")
             continue
-        for sec_id, sec in tpl.get("sections", {}).items():
+        sections_obj = tpl.get("sections", {})
+        if len(sections_obj) > 25:
+            all_issues.append(
+                f"  {f}: has {len(sections_obj)} sections; Shopify caps "
+                f"templates at 25. Remove {len(sections_obj) - 25} or move "
+                f"to a section group."
+            )
+        for sec_id, sec in sections_obj.items():
             sec_type = sec.get("type")
             if sec_type and sec_type not in section_types:
-                # Check if file exists in sections/ (handles non-sp- types)
                 if not os.path.exists(os.path.join(SECTIONS_DIR, f"{sec_type}.liquid")):
                     all_issues.append(
                         f"  {f}: section '{sec_id}' references type '{sec_type}' "

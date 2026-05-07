@@ -25,13 +25,134 @@
 body {
   background: var(--sp-cream);
   color: var(--sp-ink);
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 22px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection { background: var(--sp-poppy); color: var(--sp-cream); }
+
+/* ==========================================================================
+   Dawn-default surface overrides
+   So default Dawn pages (cart, collections, checkout, account) inherit the
+   SoftPauses look without us replacing every section. Loaded after base.css.
+   ========================================================================== */
+
+/* Buttons */
+.button,
+.shopify-payment-button__button--unbranded,
+.button--secondary {
+  font-family: 'IBM Plex Sans', sans-serif !important;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  font-weight: 500;
+  border-radius: 999px !important;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.button--primary,
+.shopify-payment-button__button--unbranded {
+  background: var(--sp-poppy) !important;
+  color: var(--sp-cream) !important;
+  border: none !important;
+}
+.button--primary:hover,
+.shopify-payment-button__button--unbranded:hover {
+  background: var(--sp-poppy-deep) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(237, 27, 40, 0.22);
+}
+.button--secondary {
+  background: transparent !important;
+  color: var(--sp-poppy) !important;
+  border: 1px solid var(--sp-poppy) !important;
+}
+.button--secondary:hover {
+  background: var(--sp-poppy) !important;
+  color: var(--sp-cream) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+}
+
+/* Cards + media */
+.card,
+.card-wrapper,
+.card-information,
+.product-card-wrapper {
+  border-radius: 4px;
+}
+
+/* Inputs */
+.field__input,
+.text-area,
+input[type="email"],
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+  border-radius: 4px !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+/* Links inherit brand color */
+a:not(.button):not(.sp-btn):not(.sp-wordmark):not(.sp-faq__tab) {
+  color: var(--sp-ink);
+  text-decoration-color: rgba(237, 27, 40, 0.5);
+  transition: color 0.15s;
+}
+a:not(.button):not(.sp-btn):not(.sp-wordmark):not(.sp-faq__tab):hover {
+  color: var(--sp-poppy);
+}
+
+/* Header (Dawn) */
+.header__heading,
+.header__heading-link {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 500;
+  font-variation-settings: "opsz" 144;
+  color: var(--sp-poppy) !important;
+  letter-spacing: -0.025em;
+}
+.header__menu-item {
+  font-family: 'IBM Plex Sans', sans-serif !important;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+}
+
+/* Footer (Dawn) — only kicks in if merchant uses Dawn footer instead of sp-footer */
+.footer {
+  background: var(--sp-ink);
+  color: rgba(250, 241, 234, 0.7);
+}
+.footer h2, .footer h3, .footer .footer-block__heading {
+  color: var(--sp-cream) !important;
+}
+
+/* Cart drawer / cart page */
+.drawer__heading,
+.cart__heading {
+  font-family: 'Fraunces', Georgia, serif !important;
+}
+.totals__total-value,
+.totals__total {
+  font-family: 'Fraunces', Georgia, serif !important;
+}
+
+/* Predictive search dropdown */
+.predictive-search,
+.search-modal__form input {
+  border-radius: 4px !important;
+}
 
 /* Section padding helper. Sections set --sp-pad-top/bottom via inline styles
    from schema range settings; defaults below match the design rhythm. */

@@ -1,0 +1,132 @@
+{%- comment -%}
+  SoftPauses big-stat band. One huge focal stat + 3 supporting facts.
+  Used to anchor a section on a single number (e.g. "47M women in
+  perimenopause in the US").
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-poppy); color: var(--sp-cream); }
+  .sp-band { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); }
+  @media (max-width: 720px) { .sp-band { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-band__head { text-align: center; margin-bottom: 36px; }
+  .sp-band__kicker {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(250, 241, 234, 0.85);
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+  .sp-band__big {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(4rem, 14vw, 9rem);
+    line-height: 0.95;
+    color: var(--sp-cream);
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 14px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .sp-band__lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+    color: rgba(250, 241, 234, 0.92);
+    line-height: 1.3;
+    max-width: 720px;
+    margin: 0 auto;
+    font-style: italic;
+    font-variation-settings: "opsz" 96;
+  }
+
+  .sp-band__facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(250, 241, 234, 0.18);
+  }
+  @media (max-width: 720px) { .sp-band__facts { grid-template-columns: 1fr; gap: 18px; } }
+
+  .sp-band__fact {
+    text-align: center;
+  }
+  .sp-band__fact-num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 2.875rem);
+    line-height: 1;
+    color: var(--sp-cream);
+    font-variation-settings: "opsz" 96;
+    margin-bottom: 8px;
+  }
+  .sp-band__fact-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(250, 241, 234, 0.85);
+    line-height: 1.45;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+</style>
+
+<section class="sp-band"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap">
+    <div class="sp-band__head">
+      {%- if section.settings.kicker != blank -%}<span class="sp-band__kicker">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.big != blank -%}<div class="sp-band__big">{{ section.settings.big }}</div>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<div class="sp-band__lede">{{ section.settings.lede }}</div>{%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="sp-band__facts">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'fact' -%}
+            <div class="sp-band__fact" {{ block.shopify_attributes }}>
+              {%- if block.settings.num != blank -%}<div class="sp-band__fact-num">{{ block.settings.num }}</div>{%- endif -%}
+              {%- if block.settings.text != blank -%}<div class="sp-band__fact-text">{{ block.settings.text }}</div>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stat band",
+  "tag": "section",
+  "class": "sp-stat-band-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "why women" },
+    { "type": "text", "id": "big", "label": "Big number", "default": "47M" },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>women in perimenopause in the US right now. most are dismissed at the doctor's office. most try four supplements before they find one that works. most deserve better than that.</p>" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Supporting fact",
+      "settings": [
+        { "type": "text", "id": "num", "label": "Number", "default": "1 in 3" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "are dismissed by their doctor on the first visit." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Stat band",
+      "blocks": [
+        { "type": "fact", "settings": { "num": "1 in 3", "text": "are dismissed by their doctor on the first visit." } },
+        { "type": "fact", "settings": { "num": "10 yrs", "text": "is how long perimenopause can last. most assume it's months." } },
+        { "type": "fact", "settings": { "num": "$140 / mo", "text": "is the average supplement stack women try before finding what works." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
