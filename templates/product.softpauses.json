@@ -85,7 +85,7 @@
         "chapter_num": "/ 03",
         "heading": "four ingredients. clinical doses. nothing else.",
         "lede": "<p>no fillers, no flavor agents, no proprietary blends, no marketing math. each patch delivers the same dose. every day.</p>",
-        "cta_text": "view full supplement facts panel →",
+        "cta_text": "view full supplement facts panel ->",
         "pad_top": 96,
         "pad_bottom": 96
       },
@@ -118,7 +118,7 @@
         "b2": { "type": "bar", "settings": { "label": "sleep quality", "percent": 73, "value_text": "+73%" } },
         "b3": { "type": "bar", "settings": { "label": "mood stability", "percent": 81, "value_text": "+81%" } },
         "b4": { "type": "bar", "settings": { "label": "mental focus", "percent": 76, "value_text": "+76%" } },
-        "b5": { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "−64%" } }
+        "b5": { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "-64%" } }
       },
       "block_order": ["b1", "b2", "b3", "b4", "b5"]
     },
