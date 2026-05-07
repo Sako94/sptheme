@@ -106,7 +106,7 @@
     </div>
 
     {%- if section.settings.cta_action == 'add_to_cart' and product != blank -%}
-      <form method="post" action="/cart/add" enctype="multipart/form-data" novalidate style="margin: 0;">
+      <form method="post" action="{{ routes.cart_add_url }}" enctype="multipart/form-data" novalidate style="margin: 0;">
         <input type="hidden" name="id" value="{{ current_variant.id }}">
         {%- if has_subscription -%}<input type="hidden" name="selling_plan" value="{{ first_sp.id }}">{%- endif -%}
         <input type="hidden" name="quantity" value="1">
