@@ -405,7 +405,7 @@
         "copyright": "(c) 2026 soft pauses, inc.",
         "legal_text": "terms · privacy · accessibility",
         "disclaimer": "soft pauses is a dietary supplement. these statements have not been evaluated by the FDA. this product is not intended to diagnose, treat, cure, or prevent any disease. consult your physician before starting any supplement, especially if you are pregnant, nursing, or taking medication.",
-        "pad_top": 60
+        "pad_top": 64
       },
       "blocks": {
         "fc1": { "type": "menu_column", "settings": { "heading": "shop" } },
