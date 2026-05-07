@@ -2,6 +2,10 @@
 
 Context for any AI agent (or human) working on this Shopify theme.
 
+> **Onboarding humans**: read `docs/WORKFLOW.md` for the full team SOP
+> (env setup, design intake, prompt library, error cheat sheet,
+> ship cycle). This file is the AI runtime context — short and rule-y.
+
 ## What this is
 
 OS 2.0 Shopify theme for **SoftPauses**, a perimenopause support patch brand.
