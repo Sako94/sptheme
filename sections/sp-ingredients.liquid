@@ -87,36 +87,38 @@
     {%- if section.blocks.size > 0 -%}
       <div class="sp-ing__grid">
         {%- for block in section.blocks -%}
-          <div class="sp-ing__card" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}
-              <div class="sp-ing__swatch" style="overflow: hidden;">
-                {{ block.settings.image | image_url: width: 400 | image_tag:
-                  loading: 'lazy',
-                  sizes: '(min-width: 900px) 220px, 50vw',
-                  widths: '220, 440',
-                  alt: block.settings.image.alt | default: block.settings.name,
-                  style: 'width: 100%; height: 100%; object-fit: cover;'
-                }}
-              </div>
-            {%- elsif block.settings.image_asset != blank -%}
-              <div class="sp-ing__swatch" style="overflow: hidden;">
-                <img src="{{ block.settings.image_asset | asset_url }}"
-                     alt="{{ block.settings.name }}"
-                     width="800"
-                     height="800"
-                     loading="lazy"
-                     style="width: 100%; height: 100%; object-fit: cover;">
-              </div>
-            {%- else -%}
-              <div class="sp-ing__swatch"
-                style="background: linear-gradient(135deg, {{ block.settings.swatch_color_1 }}, {{ block.settings.swatch_color_2 }}); color: {{ block.settings.swatch_text_color }};">
-                {{ block.settings.swatch_label }}
-              </div>
-            {%- endif -%}
-            <h4>{{ block.settings.name }}</h4>
-            {%- if block.settings.dose != blank -%}<div class="sp-ing__dose">{{ block.settings.dose }}</div>{%- endif -%}
-            <p>{{ block.settings.description }}</p>
-          </div>
+          {%- if block.type == 'ingredient' -%}
+            <div class="sp-ing__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="sp-ing__swatch" style="overflow: hidden;">
+                  {{ block.settings.image | image_url: width: 400 | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 900px) 220px, 50vw',
+                    widths: '220, 440',
+                    alt: block.settings.name,
+                    style: 'width: 100%; height: 100%; object-fit: cover;'
+                  }}
+                </div>
+              {%- elsif block.settings.fallback_asset != blank -%}
+                <div class="sp-ing__swatch" style="overflow: hidden;">
+                  <img src="{{ block.settings.fallback_asset | asset_url }}"
+                       alt="{{ block.settings.name }}"
+                       width="800"
+                       height="800"
+                       loading="lazy"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+              {%- else -%}
+                <div class="sp-ing__swatch"
+                  style="background: linear-gradient(135deg, {{ block.settings.swatch_color_1 }}, {{ block.settings.swatch_color_2 }}); color: {{ block.settings.swatch_text_color }};">
+                  {{ block.settings.swatch_label }}
+                </div>
+              {%- endif -%}
+              <h4>{{ block.settings.name }}</h4>
+              {%- if block.settings.dose != blank -%}<div class="sp-ing__dose">{{ block.settings.dose }}</div>{%- endif -%}
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     {%- endif -%}
@@ -153,9 +155,9 @@
         { "type": "text", "id": "name", "label": "Name", "default": "black maca" },
         { "type": "text", "id": "dose", "label": "Dose / kicker", "default": "organic · andean" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "the most-studied of the three. supports mental energy, focus, and the ability to actually finish a sentence again." },
-        { "type": "header", "content": "Visual (image picker > theme asset > gradient swatch)" },
-        { "type": "image_picker", "id": "image", "label": "Image (uploaded)" },
-        { "type": "text", "id": "image_asset", "label": "Theme asset filename (fallback)", "info": "e.g. sp-ing-black-maca.png. Used only if no image is uploaded above." },
+        { "type": "header", "content": "Visual" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "info": "Used if no image is uploaded above. Example: sp-ing-black-maca.png" },
         { "type": "text", "id": "swatch_label", "label": "Swatch label", "default": "BLACK MACA" },
         { "type": "color", "id": "swatch_color_1", "label": "Swatch color (start)", "default": "#2A1410" },
         { "type": "color", "id": "swatch_color_2", "label": "Swatch color (end)", "default": "#5C3A33" },
