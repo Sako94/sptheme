@@ -96,6 +96,24 @@
       "block_order": ["pa1", "pa2", "pa3"]
     },
 
+    "timing-arc": {
+      "type": "sp-timing-arc",
+      "settings": {
+        "kicker": "the timing",
+        "heading": "one patch. 24 hours of steady support.",
+        "lede": "<p>no peaks, no crashes, no remembering a second dose. the patch releases at a consistent rate from the second you put it on until the second you swap it.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "ta1": { "type": "milestone", "settings": { "time": "0h", "heading": "morning, on", "body": "stick the patch on after your morning routine. release starts within 15 minutes." } },
+        "ta2": { "type": "milestone", "settings": { "time": "6h", "heading": "midday lift", "body": "the steady release smooths out the afternoon slump most women feel around 2-3pm." } },
+        "ta3": { "type": "milestone", "settings": { "time": "12h", "heading": "evening calm", "body": "no second dose, no remembering a pill before dinner. the patch is still working." } },
+        "ta4": { "type": "milestone", "settings": { "time": "24h", "heading": "swap, repeat", "body": "swap the patch for a fresh one tomorrow morning. one decision a day." } }
+      },
+      "block_order": ["ta1", "ta2", "ta3", "ta4"]
+    },
+
     "how-it-works": {
       "type": "sp-how-it-works",
       "settings": {
@@ -111,6 +129,20 @@
         "hw3": { "type": "step", "settings": { "icon": "support", "num": "step 03", "heading": "support, all day", "body": "the patch delivers organic triple-source maca through the skin for 24 hours. swap for a fresh one tomorrow morning." } }
       },
       "block_order": ["hw1", "hw2", "hw3"]
+    },
+
+    "absorption-compare": {
+      "type": "sp-absorption-compare",
+      "settings": {
+        "kicker": "absorption",
+        "heading": "steady release vs spike and crash.",
+        "lede": "<p>capsules dump everything at once. blood levels spike, then crash before your next dose. the patch holds you in the therapeutic window all day.</p>",
+        "legend_patch": "soft pauses patch",
+        "legend_pill": "typical maca capsule",
+        "foot": "Illustrative pharmacokinetic comparison based on transdermal vs oral release profiles. Not a clinical measurement of soft pauses specifically.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      }
     },
 
     "ingredients": {
@@ -131,6 +163,24 @@
         "i4": { "type": "ingredient", "settings": { "name": "black pepper extract", "dose": "bioperine(R) · standardized", "description": "increases absorption of the maca actives. without it, your body uses a fraction of what you take.", "fallback_asset": "sp-ing-bioperine.png", "swatch_label": "BIOPERINE", "swatch_color_1": "#1A0E0A", "swatch_color_2": "#2A1410", "swatch_text_color": "#FAF1EA" } }
       },
       "block_order": ["i1", "i2", "i3", "i4"]
+    },
+
+    "sourcing-map": {
+      "type": "sp-sourcing-map",
+      "settings": {
+        "kicker": "where it comes from",
+        "heading": "from the andean highlands. only.",
+        "lede": "<p>maca only grows well above 13,000 feet. the soil, sun, and cold are what give it its potency. we source from a single co-op of farmers in the peruvian andes who have been growing it the same way for generations.</p>",
+        "map_caption": "junin, peru",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "sm1": { "type": "fact", "settings": { "num": "14,000", "unit": "FT ELEVATION", "heading": "high-altitude grown", "body": "the maca our farmers grow develops higher concentrations of the active glucosinolates that lowland varieties don't produce." } },
+        "sm2": { "type": "fact", "settings": { "num": "100%", "unit": "USDA ORGANIC", "heading": "organic, certified", "body": "no synthetic pesticides, no GMOs, no irrigation runoff. just the same soil maca has been grown in for 2,000 years." } },
+        "sm3": { "type": "fact", "settings": { "num": "1", "unit": "SOURCE FARM CO-OP", "heading": "single origin", "body": "every patch traces back to one co-op of farmers in junin, peru. fair trade pricing, generational growers." } }
+      },
+      "block_order": ["sm1", "sm2", "sm3"]
     },
 
     "clinical": {
@@ -156,6 +206,24 @@
         "b5": { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "-64%" } }
       },
       "block_order": ["b1", "b2", "b3", "b4", "b5"]
+    },
+
+    "rings": {
+      "type": "sp-rings",
+      "settings": {
+        "kicker": "before vs after 30 days",
+        "heading": "the shape of a 30-day reset.",
+        "lede": "<p>self-reported scores at day 0 (before starting) and day 30 (after consistent daily use). same questions, same women, 30 days apart.</p>",
+        "foot": "Scores from a self-reported post-purchase survey of 500 daily users. Higher = better. Not a placebo-controlled clinical measurement.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "rg1": { "type": "ring", "settings": { "label": "mood", "before": 35, "after": 78 } },
+        "rg2": { "type": "ring", "settings": { "label": "sleep", "before": 42, "after": 81 } },
+        "rg3": { "type": "ring", "settings": { "label": "energy", "before": 38, "after": 84 } }
+      },
+      "block_order": ["rg1", "rg2", "rg3"]
     },
 
     "outcome-stats": {
@@ -469,9 +537,13 @@
     "pain",
     "mechanism",
     "patch-anatomy",
+    "timing-arc",
     "how-it-works",
+    "absorption-compare",
     "ingredients",
+    "sourcing-map",
     "clinical",
+    "rings",
     "outcome-stats",
     "buybox",
     "cost-calc",

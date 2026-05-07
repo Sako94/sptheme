@@ -1,0 +1,171 @@
+{%- comment -%}
+  SoftPauses 24-hour timing arc. Circular SVG diagram showing the patch's
+  release curve over a day with editable hour-marker blocks.
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-cream); }
+  .sp-arc { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); }
+  @media (max-width: 720px) { .sp-arc { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-arc__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .sp-arc__grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  .sp-arc__diagram {
+    aspect-ratio: 1 / 1;
+    background: var(--sp-blush-soft);
+    border-radius: 4px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sp-arc__diagram svg { width: 100%; height: auto; max-width: 380px; }
+
+  .sp-arc__legend { display: grid; gap: 14px; }
+  .sp-arc__item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    align-items: start;
+    padding: 18px 22px;
+    background: var(--sp-cream);
+    border-radius: 4px;
+    border-left: 2px solid var(--sp-poppy);
+  }
+  .sp-arc__time {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    color: var(--sp-poppy);
+    line-height: 1;
+    font-variation-settings: "opsz" 96;
+    font-weight: 500;
+  }
+  .sp-arc__item h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.0625rem;
+    color: var(--sp-ink);
+    margin-bottom: 4px;
+    text-transform: lowercase;
+    font-weight: 500;
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-arc__item p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--sp-ink-mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+
+<section class="sp-arc"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap sp-wrap--mid">
+    {%- if section.settings.kicker != blank -%}<span class="sp-kicker">{{ section.settings.kicker }}</span>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="sp-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.lede != blank -%}<div class="sp-lede">{{ section.settings.lede }}</div>{%- endif -%}
+
+    <div class="sp-arc__grid">
+      <div class="sp-arc__diagram">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="24-hour release arc">
+          <defs>
+            <linearGradient id="arc-grad-{{ section.id }}" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#FE756F"/>
+              <stop offset="50%" stop-color="#ED1B28"/>
+              <stop offset="100%" stop-color="#FE756F"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background ring -->
+          <circle cx="200" cy="200" r="140" fill="none" stroke="#E8D5C5" stroke-width="2" opacity="0.6"/>
+
+          <!-- Active arc: full 24hr, slight tapering effect via gradient -->
+          <circle cx="200" cy="200" r="140" fill="none" stroke="url(#arc-grad-{{ section.id }})" stroke-width="14" stroke-linecap="round" stroke-dasharray="879.6" stroke-dashoffset="0" transform="rotate(-90 200 200)" opacity="0.92"/>
+
+          <!-- Hour tick marks at 0, 6, 12, 18 (top, right, bottom, left) -->
+          <g stroke="#5C3A33" stroke-width="1" opacity="0.55">
+            <line x1="200" y1="48" x2="200" y2="62"/>
+            <line x1="352" y1="200" x2="338" y2="200"/>
+            <line x1="200" y1="352" x2="200" y2="338"/>
+            <line x1="48" y1="200" x2="62" y2="200"/>
+          </g>
+
+          <!-- Hour labels -->
+          <text x="200" y="40" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#8A6E64" font-weight="500">0H</text>
+          <text x="368" y="204" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#8A6E64" font-weight="500">6H</text>
+          <text x="200" y="372" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#8A6E64" font-weight="500">12H</text>
+          <text x="32" y="204" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#8A6E64" font-weight="500">18H</text>
+
+          <!-- Center label -->
+          <text x="200" y="180" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" letter-spacing="2" fill="#5C3A33">SUSTAINED RELEASE</text>
+          <text x="200" y="220" text-anchor="middle" font-family="Fraunces, serif" font-size="64" fill="#ED1B28" font-variation-settings="'opsz' 144" font-weight="500">24</text>
+          <text x="200" y="248" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-style="italic" fill="#8A6E64" font-variation-settings="'opsz' 72">hours per patch</text>
+
+          <!-- Pulse accent (decorative) -->
+          <circle cx="200" cy="60" r="6" fill="#ED1B28">
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="24s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="sp-arc__legend">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'milestone' -%}
+            <div class="sp-arc__item" {{ block.shopify_attributes }}>
+              <div class="sp-arc__time">{{ block.settings.time }}</div>
+              <div>
+                {%- if block.settings.heading != blank -%}<h4>{{ block.settings.heading }}</h4>{%- endif -%}
+                {%- if block.settings.body != blank -%}<p>{{ block.settings.body }}</p>{%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "24hr timing arc",
+  "tag": "section",
+  "class": "sp-timing-arc-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "the timing" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "one patch. 24 hours of steady support." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>no peaks, no crashes, no remembering a second dose. the patch releases at a consistent rate from the second you put it on until the second you swap it.</p>" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Hour milestone",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Time", "default": "0h" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "morning, on" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "stick the patch on after your morning routine." }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "24hr timing arc",
+      "blocks": [
+        { "type": "milestone", "settings": { "time": "0h", "heading": "morning, on", "body": "stick the patch on after your morning routine. release starts within 15 minutes." } },
+        { "type": "milestone", "settings": { "time": "6h", "heading": "midday lift", "body": "the steady release smooths out the afternoon slump most women feel around 2-3pm." } },
+        { "type": "milestone", "settings": { "time": "12h", "heading": "evening calm", "body": "no second dose, no remembering a pill before dinner. the patch is still working." } },
+        { "type": "milestone", "settings": { "time": "24h", "heading": "swap, repeat", "body": "swap the patch for a fresh one tomorrow morning. one decision a day." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
