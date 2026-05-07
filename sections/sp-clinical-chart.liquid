@@ -1,0 +1,169 @@
+{%- comment -%}
+  SoftPauses clinical chart. Left: bar chart with rows (blocks).
+  Right: editorial heading + lede + footnote.
+{%- endcomment -%}
+
+<style>
+  .sp-chart { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); background: var(--sp-cream); }
+  @media (max-width: 720px) { .sp-chart { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-chart__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 32px;
+  }
+  @media (max-width: 900px) { .sp-chart__grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  .sp-chart__box {
+    background: var(--sp-blush);
+    border-radius: 4px;
+    padding: 36px 32px;
+  }
+  .sp-chart__label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sp-poppy-deep);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .sp-chart__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .sp-chart__row:last-of-type { margin-bottom: 0; }
+  .sp-chart__row-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    color: var(--sp-ink);
+    width: 88px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  .sp-chart__track {
+    flex: 1;
+    height: 28px;
+    background: var(--sp-cream);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sp-chart__fill {
+    background: var(--sp-poppy);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: var(--sp-cream);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 2px;
+    min-width: 60px;
+    transition: width 1s cubic-bezier(0.16, 0.84, 0.44, 1);
+  }
+  .sp-chart__foot {
+    margin-top: 22px;
+    font-size: 11.5px;
+    color: var(--sp-ink-muted);
+    line-height: 1.5;
+  }
+</style>
+
+<section class="sp-chart"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap sp-wrap--mid">
+    {%- if section.settings.chapter_label != blank or section.settings.chapter_num != blank -%}
+      <div class="sp-chapter">
+        <span class="sp-chapter__label">{{ section.settings.chapter_label }}</span>
+        <span class="sp-chapter__num">{{ section.settings.chapter_num }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}<h2 class="sp-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.lede != blank -%}<div class="sp-lede">{{ section.settings.lede }}</div>{%- endif -%}
+
+    <div class="sp-chart__grid">
+      <div class="sp-chart__box">
+        {%- if section.settings.chart_label != blank -%}
+          <div class="sp-chart__label">{{ section.settings.chart_label }}</div>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'bar' -%}
+            <div class="sp-chart__row" {{ block.shopify_attributes }}>
+              <div class="sp-chart__row-label">{{ block.settings.label }}</div>
+              <div class="sp-chart__track">
+                <div class="sp-chart__fill" style="width: {{ block.settings.percent | default: 50 }}%;">
+                  {{- block.settings.value_text | default: block.settings.percent | append: '%' -}}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.settings.foot != blank -%}
+          <p class="sp-chart__foot">{{ section.settings.foot }}</p>
+        {%- endif -%}
+      </div>
+
+      <div>
+        {%- if section.settings.side_heading != blank -%}<h3 class="sp-h3">{{ section.settings.side_heading }}</h3>{%- endif -%}
+        {%- if section.settings.side_lede != blank -%}<div class="sp-lede">{{ section.settings.side_lede }}</div>{%- endif -%}
+        {%- if section.settings.side_muted != blank -%}<p class="sp-muted" style="margin-top: 14px;">{{ section.settings.side_muted }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Clinical chart",
+  "tag": "section",
+  "class": "sp-clinical-chart-section",
+  "settings": [
+    { "type": "text", "id": "chapter_label", "label": "Chapter label", "default": "does it work" },
+    { "type": "text", "id": "chapter_num", "label": "Chapter number", "default": "/ 04" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "30 days in. here's what changes." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>we surveyed 500 women using soft pauses daily for 30 days, against a baseline they self-reported on day one.</p>" },
+    { "type": "header", "content": "Chart panel (left)" },
+    { "type": "text", "id": "chart_label", "label": "Chart label", "default": "average improvement, day 30 vs day 1" },
+    { "type": "textarea", "id": "foot", "label": "Footnote", "default": "self-reported, post-purchase survey of 500 women using soft pauses daily for 30+ days. results not from a placebo-controlled clinical trial." },
+    { "type": "header", "content": "Editorial column (right)" },
+    { "type": "text", "id": "side_heading", "label": "Heading", "default": "this is the data we ran on ourselves first." },
+    { "type": "richtext", "id": "side_lede", "label": "Lede", "default": "<p>we built this for women in our family before we built it for you. the survey above is what came back when we asked customers to put a number on it.</p>" },
+    { "type": "text", "id": "side_muted", "label": "Subtle line", "default": "independent placebo-controlled trial in progress at an accredited research partner. publication target: q3." },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "bar",
+      "name": "Bar",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "energy" },
+        { "type": "range", "id": "percent", "label": "Percent (bar width)", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 80 },
+        { "type": "text", "id": "value_text", "label": "Value text (overrides percent display)", "info": "e.g. +87% or −64%" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Clinical chart",
+      "blocks": [
+        { "type": "bar", "settings": { "label": "energy", "percent": 87, "value_text": "+87%" } },
+        { "type": "bar", "settings": { "label": "sleep quality", "percent": 73, "value_text": "+73%" } },
+        { "type": "bar", "settings": { "label": "mood stability", "percent": 81, "value_text": "+81%" } },
+        { "type": "bar", "settings": { "label": "mental focus", "percent": 76, "value_text": "+76%" } },
+        { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "−64%" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

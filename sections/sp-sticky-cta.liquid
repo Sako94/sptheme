@@ -1,0 +1,177 @@
+{%- comment -%}
+  SoftPauses sticky bottom CTA. Appears on scroll past the hero.
+  CTA either anchors to the buy box section or adds to cart directly.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_subscription = false
+  if product != blank and product.selling_plan_groups.size > 0
+    assign has_subscription = true
+    assign first_sp = product.selling_plan_groups.first.selling_plans.first
+  endif
+-%}
+
+<style>
+  body { padding-bottom: 78px; }
+  @media (max-width: 720px) { body { padding-bottom: 92px; } }
+
+  .sp-sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--sp-cream);
+    border-top: 1px solid var(--sp-rule);
+    box-shadow: 0 -2px 16px rgba(42, 20, 16, 0.06);
+    padding: 12px 22px;
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.32s ease;
+  }
+  .sp-sticky.is-visible { transform: translateY(0); }
+  .sp-sticky__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .sp-sticky__info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .sp-sticky__product { line-height: 1.3; }
+  .sp-sticky__name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    color: var(--sp-ink);
+    font-weight: 500;
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-sticky__meta {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: var(--sp-ink-muted);
+  }
+  .sp-sticky__meta .pday { color: var(--sp-poppy); font-weight: 500; }
+
+  .sp-sticky .sp-btn { padding: 12px 22px; font-size: 13px; flex-shrink: 0; }
+  @media (max-width: 600px) {
+    .sp-sticky__name { font-size: 13.5px; }
+    .sp-sticky__meta { font-size: 10.5px; }
+    .sp-sticky .sp-btn { padding: 11px 18px; font-size: 12.5px; }
+    .sp-sticky { padding: 10px 16px; }
+  }
+
+  .sp-sticky__icon {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: var(--sp-coral);
+    border-radius: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .sp-sticky__icon svg {
+    position: absolute;
+    inset: 7px;
+    width: auto;
+    height: auto;
+  }
+</style>
+
+<div class="sp-sticky" id="spStickyCta-{{ section.id }}" aria-hidden="true">
+  <div class="sp-sticky__inner">
+    <div class="sp-sticky__info">
+      {%- if section.settings.show_icon -%}
+        <span class="sp-sticky__icon" aria-hidden="true">
+          <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#FAF1EA" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M 14 4 C 17 7 17 12 14 14 C 11 12 11 7 14 4 Z"/>
+              <path d="M 24 14 C 21 17 16 17 14 14 C 16 11 21 11 24 14 Z"/>
+              <path d="M 14 24 C 11 21 11 16 14 14 C 17 16 17 21 14 24 Z"/>
+              <path d="M 4 14 C 7 11 12 11 14 14 C 12 17 7 17 4 14 Z"/>
+            </g>
+          </svg>
+        </span>
+      {%- endif -%}
+      <div class="sp-sticky__product">
+        <div class="sp-sticky__name">{{ section.settings.product_name | default: product.title | default: 'soft pauses · daily patch' }}</div>
+        <div class="sp-sticky__meta">{{ section.settings.meta_text }}</div>
+      </div>
+    </div>
+
+    {%- if section.settings.cta_action == 'add_to_cart' and product != blank -%}
+      <form method="post" action="/cart/add" enctype="multipart/form-data" novalidate style="margin: 0;">
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- if has_subscription -%}<input type="hidden" name="selling_plan" value="{{ first_sp.id }}">{%- endif -%}
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="sp-btn" {% if current_variant.available == false %}disabled{% endif %}>
+          {%- if current_variant.available == false -%}sold out{%- else -%}{{ section.settings.cta_label | default: 'add to cart' }}{%- endif -%}
+        </button>
+      </form>
+    {%- else -%}
+      <a href="{{ section.settings.cta_anchor | default: '#offer' }}" class="sp-btn">{{ section.settings.cta_label | default: 'add to cart' }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sticky = document.getElementById('spStickyCta-{{ section.id }}');
+    if (!sticky) return;
+    const heroEl = document.querySelector('.sp-pdp-hero-section, .sp-hero, [data-sp-hero]');
+    const buyboxEl = document.querySelector('{{ section.settings.hide_when_visible_selector | default: "#offer" | escape }}');
+    function check() {
+      const heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : -9999;
+      let buyboxVisible = false;
+      if (buyboxEl) {
+        const r = buyboxEl.getBoundingClientRect();
+        buyboxVisible = r.top < window.innerHeight && r.bottom > 0;
+      }
+      const visible = heroBottom < 0 && !buyboxVisible;
+      sticky.classList.toggle('is-visible', visible);
+      sticky.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    check();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sticky CTA",
+  "tag": "div",
+  "class": "sp-sticky-cta-section",
+  "settings": [
+    { "type": "text", "id": "product_name", "label": "Product name (overrides product.title)", "default": "soft pauses · daily patch" },
+    { "type": "text", "id": "meta_text", "label": "Meta line (HTML allowed)", "default": "<span class=\"pday\">$1.07/day</span> · subscribe and save 20%" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show floral monogram icon", "default": true },
+    { "type": "header", "content": "Call to action" },
+    {
+      "type": "select",
+      "id": "cta_action",
+      "label": "CTA action",
+      "options": [
+        { "value": "anchor", "label": "Scroll to anchor" },
+        { "value": "add_to_cart", "label": "Add to cart" }
+      ],
+      "default": "anchor"
+    },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "add to cart" },
+    { "type": "text", "id": "cta_anchor", "label": "Anchor target (when 'Scroll to anchor')", "default": "#offer" },
+    { "type": "text", "id": "hide_when_visible_selector", "label": "Hide when this selector is in view", "info": "CSS selector — usually the on-page buy box (e.g. #offer).", "default": "#offer" }
+  ],
+  "presets": [
+    { "name": "Sticky CTA" }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

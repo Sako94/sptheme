@@ -1,0 +1,74 @@
+{%- comment -%}
+  SoftPauses promo bar — slim announcement strip above the header.
+  Each "message" block becomes a separator-divided message in the bar.
+{%- endcomment -%}
+
+<style>
+  .sp-promo {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: 11px 16px;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 50;
+  }
+  .sp-promo strong {
+    color: {{ section.settings.highlight_color }};
+    font-weight: 500;
+  }
+  .sp-promo .sp-promo__sep {
+    color: {{ section.settings.text_color }};
+    opacity: 0.55;
+    margin: 0 10px;
+  }
+  @media (max-width: 600px) {
+    .sp-promo { font-size: 12px; padding: 10px 14px; }
+    .sp-promo .sp-promo__sep { margin: 0 6px; }
+  }
+</style>
+
+<div class="sp-promo" role="region" aria-label="Promotions">
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'message' -%}
+      {%- if block.settings.bold -%}<strong>{{ block.settings.text }}</strong>{%- else -%}{{ block.settings.text }}{%- endif -%}
+      {%- unless forloop.last -%}<span class="sp-promo__sep">·</span>{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Promo bar",
+  "tag": "div",
+  "class": "sp-promo-section",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#2A1410" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FAF1EA" },
+    { "type": "color", "id": "highlight_color", "label": "Bold/highlight color", "default": "#FEB5AE" }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping on orders $50+" },
+        { "type": "checkbox", "id": "bold", "label": "Bold/highlighted", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Promo bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "first order: 20% off + free shipping", "bold": true } },
+        { "type": "message", "settings": { "text": "30-day return window" } },
+        { "type": "message", "settings": { "text": "hsa/fsa eligible" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

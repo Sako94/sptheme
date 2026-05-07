@@ -1,0 +1,170 @@
+{
+  "sections": {
+    "promo-bar": {
+      "type": "sp-promo-bar",
+      "settings": {
+        "bg_color": "#2A1410",
+        "text_color": "#FAF1EA",
+        "highlight_color": "#FEB5AE"
+      },
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "first order: 20% off + free shipping", "bold": true } },
+        "m2": { "type": "message", "settings": { "text": "30-day return window", "bold": false } },
+        "m3": { "type": "message", "settings": { "text": "hsa/fsa eligible", "bold": false } }
+      },
+      "block_order": ["m1", "m2", "m3"]
+    },
+
+    "hero": {
+      "type": "sp-pdp-hero",
+      "settings": {
+        "pricing_amount": "$1.07",
+        "pricing_text": "/day on subscribe and save",
+        "headline": "you're not losing your mind. you're losing your <em>estrogen</em>.",
+        "lede": "<p><strong>soft pauses is a daily patch for women in perimenopause.</strong> one patch a day. organic triple-source maca. not a drug. not HRT. just daily support, made simple.</p>",
+        "cta_action": "anchor",
+        "cta_label": "try soft pauses",
+        "cta_anchor": "#offer",
+        "fineprint": "$40 / 30-day supply · free shipping · 30-day returns"
+      },
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "headline": "★ 4.8 / 5", "subline": "12,000+ verified reviews" } },
+        "t2": { "type": "trust", "settings": { "headline": "50,000+", "subline": "women in perimenopause" } },
+        "t3": { "type": "trust", "settings": { "headline": "30 days", "subline": "money-back guarantee" } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+
+    "ingredients": {
+      "type": "sp-ingredients",
+      "settings": {
+        "chapter_label": "what's in it",
+        "chapter_num": "/ 03",
+        "heading": "four ingredients. clinical doses. nothing else.",
+        "lede": "<p>no fillers, no flavor agents, no proprietary blends, no marketing math. each patch delivers the same dose. every day.</p>",
+        "cta_text": "view full supplement facts panel →",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "i1": { "type": "ingredient", "settings": { "name": "black maca", "dose": "organic · andean", "description": "the most-studied of the three. supports mental energy, focus, and the ability to actually finish a sentence again.", "swatch_label": "BLACK MACA", "swatch_color_1": "#2A1410", "swatch_color_2": "#5C3A33", "swatch_text_color": "#FAF1EA" } },
+        "i2": { "type": "ingredient", "settings": { "name": "red maca", "dose": "organic · andean", "description": "traditionally used for hormonal balance. associated with mood support and hot-flash relief in clinical research.", "swatch_label": "RED MACA", "swatch_color_1": "#C8121E", "swatch_color_2": "#ED1B28", "swatch_text_color": "#FAF1EA" } },
+        "i3": { "type": "ingredient", "settings": { "name": "yellow maca", "dose": "organic · andean", "description": "the most common variety. supports overall stamina and helps round out the full-spectrum extract.", "swatch_label": "YELLOW MACA", "swatch_color_1": "#C8862E", "swatch_color_2": "#E0A040", "swatch_text_color": "#2A1410" } },
+        "i4": { "type": "ingredient", "settings": { "name": "black pepper extract", "dose": "bioperine® · standardized", "description": "increases absorption of the maca actives. without it, your body uses a fraction of what you take.", "swatch_label": "BIOPERINE", "swatch_color_1": "#1A0E0A", "swatch_color_2": "#2A1410", "swatch_text_color": "#FAF1EA" } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4"]
+    },
+
+    "clinical": {
+      "type": "sp-clinical-chart",
+      "settings": {
+        "chapter_label": "does it work",
+        "chapter_num": "/ 04",
+        "heading": "30 days in. here's what changes.",
+        "lede": "<p>we surveyed 500 women using soft pauses daily for 30 days, against a baseline they self-reported on day one.</p>",
+        "chart_label": "average improvement, day 30 vs day 1",
+        "foot": "self-reported, post-purchase survey of 500 women using soft pauses daily for 30+ days. results not from a placebo-controlled clinical trial.",
+        "side_heading": "this is the data we ran on ourselves first.",
+        "side_lede": "<p>we built this for women in our family before we built it for you. the survey above is what came back when we asked customers to put a number on it.</p>",
+        "side_muted": "independent placebo-controlled trial in progress at an accredited research partner. publication target: q3.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "b1": { "type": "bar", "settings": { "label": "energy", "percent": 87, "value_text": "+87%" } },
+        "b2": { "type": "bar", "settings": { "label": "sleep quality", "percent": 73, "value_text": "+73%" } },
+        "b3": { "type": "bar", "settings": { "label": "mood stability", "percent": 81, "value_text": "+81%" } },
+        "b4": { "type": "bar", "settings": { "label": "mental focus", "percent": 76, "value_text": "+76%" } },
+        "b5": { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "−64%" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"]
+    },
+
+    "comparison": {
+      "type": "sp-comparison-table",
+      "settings": {
+        "chapter_label": "how it compares",
+        "chapter_num": "/ 06",
+        "heading": "soft pauses vs. typical perimenopause supplements.",
+        "us_column": "soft pauses",
+        "competitor_columns": 2,
+        "competitor_1": "typical maca capsule",
+        "competitor_2": "menopause \"blend\"",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "r1": { "type": "row", "settings": { "feature": "triple-source maca (black, red, yellow)", "us_cell": "check", "c1_cell": "single-source", "c2_cell": "often unspecified" } },
+        "r2": { "type": "row", "settings": { "feature": "transdermal delivery (no pills)", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } },
+        "r3": { "type": "row", "settings": { "feature": "black pepper extract for absorption", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } },
+        "r4": { "type": "row", "settings": { "feature": "once daily, no food required", "us_cell": "check", "c1_cell": "2–3 capsules with food", "c2_cell": "varies" } },
+        "r5": { "type": "row", "settings": { "feature": "vegan, sugar-free, latex-free", "us_cell": "check", "c1_cell": "varies", "c2_cell": "dash" } },
+        "r6": { "type": "row", "settings": { "feature": "full ingredient transparency", "us_cell": "check", "c1_cell": "varies", "c2_cell": "dash" } },
+        "r7": { "type": "row", "settings": { "feature": "30-day money-back guarantee", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7"]
+    },
+
+    "faq": {
+      "type": "sp-faq",
+      "settings": {
+        "heading": "questions, asked honestly.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "tab-product": { "type": "tab", "settings": { "tab_id": "product", "label": "product" } },
+        "tab-subscription": { "type": "tab", "settings": { "tab_id": "subscription", "label": "subscription" } },
+        "tab-shipping": { "type": "tab", "settings": { "tab_id": "shipping", "label": "shipping & returns" } },
+        "tab-medical": { "type": "tab", "settings": { "tab_id": "medical", "label": "medical" } },
+
+        "q1": { "type": "item", "settings": { "tab": "product", "question": "is this HRT?", "answer": "<p>no. soft pauses is not a hormone and not a drug. it is a daily plant-based support. if you are exploring HRT, we recommend finding a menopause-trained physician. the menopause society maintains a directory.</p>" } },
+        "q2": { "type": "item", "settings": { "tab": "product", "question": "how long until i feel something?", "answer": "<p>most women report a difference in energy and mood within the first two to four weeks of daily use. perimenopause symptoms are not linear, and neither is the support. give it a full 30 days.</p>" } },
+        "q3": { "type": "item", "settings": { "tab": "product", "question": "why a patch and not a pill?", "answer": "<p>pills require a digestive system, a routine, and a memory. a patch is once a day, on the skin, done. for a lot of women in perimenopause, that simplicity is the whole point.</p>" } },
+        "q4": { "type": "item", "settings": { "tab": "product", "question": "where do i wear the patch?", "answer": "<p>the inside of the forearm, the shoulder, or the upper hip work best. anywhere with thin, clean skin. rotate placement to avoid skin irritation.</p>" } },
+
+        "s1": { "type": "item", "settings": { "tab": "subscription", "question": "how does the subscription work?", "answer": "<p>your first order ships free with 20% off. after that, you get a fresh 30-day supply every 30 days at the subscription price. you can pause, skip, change cadence, or cancel from your account in one click.</p>" } },
+        "s2": { "type": "item", "settings": { "tab": "subscription", "question": "how do i cancel?", "answer": "<p>log in, click cancel. it takes about 10 seconds. no phone calls, no chat queues, no \"wait, before you go\" modals.</p>" } },
+        "s3": { "type": "item", "settings": { "tab": "subscription", "question": "can i pause or skip a month?", "answer": "<p>yes. pause for any reason, any length. skip a month, skip three. resume whenever you want.</p>" } },
+
+        "ship1": { "type": "item", "settings": { "tab": "shipping", "question": "when will my order ship?", "answer": "<p>orders placed before 1pm ET ship the same business day. you'll get a tracking number by email. delivery is typically 2–5 business days within the US.</p>" } },
+        "ship2": { "type": "item", "settings": { "tab": "shipping", "question": "do you ship internationally?", "answer": "<p>we ship within the US and Canada today. the EU and UK are on the roadmap for q3.</p>" } },
+        "ship3": { "type": "item", "settings": { "tab": "shipping", "question": "what if it doesn't work for me?", "answer": "<p>send it back within 30 days for a full refund. no questions, no forms, no friction.</p>" } },
+
+        "med1": { "type": "item", "settings": { "tab": "medical", "question": "is maca safe for me?", "answer": "<p>maca has been used for centuries and is generally well-tolerated. if you are pregnant, breastfeeding, on thyroid medication, or being treated for a hormone-sensitive condition, please talk to your doctor before starting.</p>" } },
+        "med2": { "type": "item", "settings": { "tab": "medical", "question": "can i take this with HRT?", "answer": "<p>most women on HRT can use soft pauses as a daily floor of support. confirm with your prescribing physician first. we are not a replacement for a treatment your doctor has prescribed.</p>" } },
+        "med3": { "type": "item", "settings": { "tab": "medical", "question": "are there side effects?", "answer": "<p>the most common is mild skin irritation at the patch site, usually from leaving the patch on the same spot. rotate placement and it typically resolves. discontinue use if irritation persists.</p>" } },
+        "med4": { "type": "item", "settings": { "tab": "medical", "question": "is this hsa/fsa eligible?", "answer": "<p>yes, with a letter of medical necessity through truemed (free, takes about 5 minutes at checkout). the vast majority of applicants are approved.</p>" } }
+      },
+      "block_order": [
+        "tab-product", "tab-subscription", "tab-shipping", "tab-medical",
+        "q1", "q2", "q3", "q4",
+        "s1", "s2", "s3",
+        "ship1", "ship2", "ship3",
+        "med1", "med2", "med3", "med4"
+      ]
+    },
+
+    "sticky-cta": {
+      "type": "sp-sticky-cta",
+      "settings": {
+        "product_name": "soft pauses · daily patch",
+        "meta_text": "<span class=\"pday\">$1.07/day</span> · subscribe and save 20%",
+        "show_icon": true,
+        "cta_action": "anchor",
+        "cta_label": "add to cart",
+        "cta_anchor": "#offer",
+        "hide_when_visible_selector": "#offer"
+      }
+    }
+  },
+  "order": [
+    "promo-bar",
+    "hero",
+    "ingredients",
+    "clinical",
+    "comparison",
+    "faq",
+    "sticky-cta"
+  ]
+}

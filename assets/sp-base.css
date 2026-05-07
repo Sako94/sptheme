@@ -1,0 +1,194 @@
+/* ==========================================================================
+   SoftPauses brand foundation
+   Extracted from the PDP design system. Loaded site-wide via theme.liquid.
+   All custom sections (sp-*) reference these tokens and utility classes.
+   ========================================================================== */
+
+:root {
+  --sp-cream: #FAF1EA;
+  --sp-cream-deep: #F4E5D6;
+  --sp-blush: #FED9D1;
+  --sp-blush-soft: #FEE5DE;
+  --sp-shell: #FEB5AE;
+  --sp-coral: #FE756F;
+  --sp-coral-deep: #E55E58;
+  --sp-poppy: #ED1B28;
+  --sp-poppy-deep: #C8121E;
+  --sp-ink: #2A1410;
+  --sp-ink-mid: #5C3A33;
+  --sp-ink-muted: #8A6E64;
+  --sp-rule: #E8D5C5;
+  --sp-rule-soft: #F0DDC9;
+}
+
+/* Brand-wide overrides */
+body {
+  background: var(--sp-cream);
+  color: var(--sp-ink);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--sp-poppy); color: var(--sp-cream); }
+
+/* Section padding helper. Sections set --sp-pad-top/bottom via inline styles
+   from schema range settings; defaults below match the design rhythm. */
+.sp-section {
+  padding-top: var(--sp-pad-top, 96px);
+  padding-bottom: var(--sp-pad-bottom, 96px);
+  position: relative;
+}
+@media (max-width: 720px) {
+  .sp-section {
+    padding-top: calc(var(--sp-pad-top, 96px) * 0.66);
+    padding-bottom: calc(var(--sp-pad-bottom, 96px) * 0.66);
+  }
+}
+.sp-section--cream { background: var(--sp-cream); }
+.sp-section--blush { background: var(--sp-blush-soft); }
+.sp-section--ink { background: var(--sp-ink); color: var(--sp-cream); }
+
+.sp-wrap { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+.sp-wrap--narrow { max-width: 720px; }
+.sp-wrap--mid { max-width: 920px; }
+@media (max-width: 720px) { .sp-wrap { padding: 0 22px; } }
+
+/* Typography */
+.sp-h1, .sp-h2, .sp-h3, .sp-h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  color: var(--sp-ink);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  text-transform: lowercase;
+}
+.sp-h1 { font-size: clamp(2.5rem, 7vw, 4.4rem); line-height: 1; }
+.sp-h2 { font-size: clamp(2rem, 5vw, 3.25rem); margin-bottom: 28px; }
+.sp-h3 { font-size: clamp(1.4rem, 2.6vw, 1.875rem); margin-bottom: 16px; }
+.sp-h4 { font-size: 1.25rem; line-height: 1.25; font-weight: 500; }
+.sp-h2 em, .sp-h1 em { font-style: italic; color: var(--sp-poppy); font-variation-settings: "opsz" 144; }
+
+.sp-lede {
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: var(--sp-ink-mid);
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.sp-muted { color: var(--sp-ink-muted); }
+
+/* Kicker — small caps eyebrow */
+.sp-kicker {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sp-poppy);
+  margin-bottom: 18px;
+  display: inline-block;
+}
+
+/* Chapter tag — section number + label rule */
+.sp-chapter {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sp-rule);
+  padding-bottom: 14px;
+  margin-bottom: 32px;
+}
+.sp-chapter__label {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sp-poppy);
+}
+.sp-chapter__num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--sp-ink-muted);
+  font-variation-settings: "opsz" 72;
+}
+
+/* Buttons */
+.sp-btn {
+  display: inline-block;
+  background: var(--sp-poppy);
+  color: var(--sp-cream);
+  padding: 18px 36px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  text-align: center;
+  text-transform: lowercase;
+  box-shadow: 0 1px 2px rgba(42, 20, 16, 0.05);
+}
+.sp-btn:hover {
+  background: var(--sp-poppy-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(237, 27, 40, 0.22);
+  color: var(--sp-cream);
+}
+.sp-btn:active { transform: translateY(0); }
+.sp-btn--block { display: block; width: 100%; }
+.sp-btn--lg { padding: 22px 44px; font-size: 16px; }
+.sp-btn--sm { padding: 12px 22px; font-size: 13px; }
+.sp-btn--ghost {
+  background: transparent;
+  color: var(--sp-poppy);
+  border: 1px solid var(--sp-poppy);
+  box-shadow: none;
+}
+.sp-btn--ghost:hover { background: var(--sp-poppy); color: var(--sp-cream); }
+
+/* Wordmark */
+.sp-wordmark {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--sp-poppy);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  font-variation-settings: "opsz" 144;
+}
+.sp-wordmark em { font-style: italic; font-weight: 500; }
+.sp-wordmark sup {
+  font-size: 0.32em;
+  vertical-align: super;
+  margin-left: 2px;
+  font-style: normal;
+}
+
+/* Common card */
+.sp-card {
+  background: var(--sp-cream);
+  border-radius: 4px;
+  padding: 28px 22px;
+  border: 1px solid var(--sp-rule);
+}
+
+/* Reduced motion respected by sections via @media (prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .sp-rise {
+    opacity: 0;
+    animation: sp-rise 0.7s ease-out forwards;
+  }
+  @keyframes sp-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+}
