@@ -11,6 +11,9 @@ Thumbs.db
 .shopify/
 config.yml
 
+# Claude Code local permissions (do not commit)
+.claude/
+
 # Editors
 .idea/
 .vscode/
