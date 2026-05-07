@@ -93,7 +93,7 @@
         "i1": { "type": "ingredient", "settings": { "name": "black maca", "dose": "organic · andean", "description": "the most-studied of the three. supports mental energy, focus, and the ability to actually finish a sentence again.", "fallback_asset": "sp-ing-black-maca.png", "swatch_label": "BLACK MACA", "swatch_color_1": "#2A1410", "swatch_color_2": "#5C3A33", "swatch_text_color": "#FAF1EA" } },
         "i2": { "type": "ingredient", "settings": { "name": "red maca", "dose": "organic · andean", "description": "traditionally used for hormonal balance. associated with mood support and hot-flash relief in clinical research.", "fallback_asset": "sp-ing-red-maca.png", "swatch_label": "RED MACA", "swatch_color_1": "#C8121E", "swatch_color_2": "#ED1B28", "swatch_text_color": "#FAF1EA" } },
         "i3": { "type": "ingredient", "settings": { "name": "yellow maca", "dose": "organic · andean", "description": "the most common variety. supports overall stamina and helps round out the full-spectrum extract.", "fallback_asset": "sp-ing-yellow-maca.png", "swatch_label": "YELLOW MACA", "swatch_color_1": "#C8862E", "swatch_color_2": "#E0A040", "swatch_text_color": "#2A1410" } },
-        "i4": { "type": "ingredient", "settings": { "name": "black pepper extract", "dose": "bioperine® · standardized", "description": "increases absorption of the maca actives. without it, your body uses a fraction of what you take.", "fallback_asset": "sp-ing-bioperine.png", "swatch_label": "BIOPERINE", "swatch_color_1": "#1A0E0A", "swatch_color_2": "#2A1410", "swatch_text_color": "#FAF1EA" } }
+        "i4": { "type": "ingredient", "settings": { "name": "black pepper extract", "dose": "bioperine(R) · standardized", "description": "increases absorption of the maca actives. without it, your body uses a fraction of what you take.", "fallback_asset": "sp-ing-bioperine.png", "swatch_label": "BIOPERINE", "swatch_color_1": "#1A0E0A", "swatch_color_2": "#2A1410", "swatch_text_color": "#FAF1EA" } }
       },
       "block_order": ["i1", "i2", "i3", "i4"]
     },
@@ -402,7 +402,7 @@
         "wordmark": "SoftPauses",
         "tagline": "pause. breathe. bloom.",
         "description": "<p>a daily transdermal patch with organic triple-source maca, designed for women in perimenopause. made with women, for women, in the US.</p>",
-        "copyright": "© 2026 soft pauses, inc.",
+        "copyright": "(c) 2026 soft pauses, inc.",
         "legal_text": "terms · privacy · accessibility",
         "disclaimer": "soft pauses is a dietary supplement. these statements have not been evaluated by the FDA. this product is not intended to diagnose, treat, cure, or prevent any disease. consult your physician before starting any supplement, especially if you are pregnant, nursing, or taking medication.",
         "pad_top": 60

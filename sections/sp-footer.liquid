@@ -116,7 +116,7 @@
     </div>
 
     <div class="sp-footer__bottom">
-      <span>{{ section.settings.copyright | default: '© 2026 soft pauses, inc.' }}</span>
+      <span>{{ section.settings.copyright | default: '(c) 2026 soft pauses, inc.' }}</span>
       {%- if section.settings.legal_text != blank -%}
         <span>{{ section.settings.legal_text }}</span>
       {%- endif -%}
@@ -138,8 +138,8 @@
     { "type": "text", "id": "tagline", "label": "Tagline (small caps)", "default": "pause. breathe. bloom." },
     { "type": "richtext", "id": "description", "label": "Description", "default": "<p>a daily transdermal patch with organic triple-source maca, designed for women in perimenopause. made with women, for women, in the US.</p>" },
     { "type": "header", "content": "Bottom row" },
-    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026 soft pauses, inc." },
-    { "type": "text", "id": "legal_text", "label": "Legal links text", "default": "terms · privacy · accessibility" },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "(c) 2026 soft pauses, inc." },
+    { "type": "text", "id": "legal_text", "label": "Legal links text", "default": "terms | privacy | accessibility" },
     { "type": "header", "content": "Disclaimer" },
     { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "soft pauses is a dietary supplement. these statements have not been evaluated by the FDA. this product is not intended to diagnose, treat, cure, or prevent any disease. consult your physician before starting any supplement, especially if you are pregnant, nursing, or taking medication." },
     { "type": "header", "content": "Spacing" },
