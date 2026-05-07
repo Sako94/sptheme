@@ -1,0 +1,211 @@
+{%- comment -%}
+  SoftPauses cost calculator. Left: editable line items (blocks) + total.
+  Right: brand alternative card with savings.
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-cream); }
+  .sp-calc { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); }
+  @media (max-width: 720px) { .sp-calc { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-calc__head { text-align: center; }
+  .sp-calc__head .sp-kicker { display: inline-block; }
+  .sp-calc__head h2 { margin-bottom: 14px; }
+  .sp-calc__head p { color: var(--sp-ink-mid); max-width: 540px; margin: 0 auto; }
+
+  .sp-calc__grid {
+    max-width: 720px;
+    margin: 36px auto 0;
+  }
+  .sp-calc__panel, .sp-calc__vs {
+    background: var(--sp-cream);
+    border: 1px solid var(--sp-rule);
+    border-radius: 4px;
+    padding: 28px 32px;
+  }
+  @media (max-width: 600px) {
+    .sp-calc__panel, .sp-calc__vs { padding: 22px; }
+  }
+  .sp-calc__panel h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.125rem;
+    color: var(--sp-ink-mid);
+    margin-bottom: 18px;
+    text-transform: lowercase;
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-calc__line {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--sp-rule-soft);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    color: var(--sp-ink-mid);
+  }
+  .sp-calc__line:last-of-type { border-bottom: none; }
+  .sp-calc__line .cost {
+    font-family: 'Fraunces', serif;
+    color: var(--sp-ink);
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-calc__total {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--sp-ink);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--sp-ink);
+    font-variation-settings: "opsz" 96;
+  }
+
+  .sp-calc__divider {
+    text-align: center;
+    margin: 18px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--sp-poppy);
+    font-size: 1rem;
+    font-variation-settings: "opsz" 72;
+    letter-spacing: 0.02em;
+  }
+
+  .sp-calc__vs {
+    background: var(--sp-poppy);
+    color: var(--sp-cream);
+    text-align: center;
+    border: none;
+  }
+  .sp-calc__vs .label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 14px;
+  }
+  .sp-calc__vs .name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    text-transform: lowercase;
+    font-variation-settings: "opsz" 96;
+  }
+  .sp-calc__vs .price-big {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1;
+    margin: 14px 0 8px;
+    font-variation-settings: "opsz" 144;
+  }
+  .sp-calc__vs .savings {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.95;
+  }
+  .sp-calc__vs .savings strong { color: var(--sp-cream); font-weight: 500; }
+  .sp-calc__vs .annual {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(250, 241, 234, 0.3);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+</style>
+
+<section class="sp-calc"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap">
+    <div class="sp-calc__head">
+      {%- if section.settings.kicker != blank -%}<span class="sp-kicker">{{ section.settings.kicker }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="sp-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+
+    <div class="sp-calc__grid">
+      <div class="sp-calc__panel">
+        {%- if section.settings.panel_heading != blank -%}<h4>{{ section.settings.panel_heading }}</h4>{%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <div class="sp-calc__line" {{ block.shopify_attributes }}>
+              <span>{{ block.settings.item }}</span>
+              <span class="cost">{{ block.settings.cost }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if section.settings.total_label != blank or section.settings.total_amount != blank -%}
+          <div class="sp-calc__total">
+            <span>{{ section.settings.total_label }}</span>
+            <span>{{ section.settings.total_amount }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="sp-calc__divider">{{ section.settings.divider | default: 'vs.' }}</div>
+
+      <div class="sp-calc__vs">
+        {%- if section.settings.vs_label != blank -%}<div class="label">{{ section.settings.vs_label }}</div>{%- endif -%}
+        {%- if section.settings.vs_name != blank -%}<div class="name">{{ section.settings.vs_name }}</div>{%- endif -%}
+        {%- if section.settings.vs_price != blank -%}<div class="price-big">{{ section.settings.vs_price }}</div>{%- endif -%}
+        {%- if section.settings.vs_savings != blank -%}<div class="savings">{{ section.settings.vs_savings }}</div>{%- endif -%}
+        {%- if section.settings.vs_annual != blank -%}<div class="annual">{{ section.settings.vs_annual }}</div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cost calculator",
+  "tag": "section",
+  "class": "sp-cost-calculator-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "the math" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "what you're probably already spending." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "most women in perimenopause stack three or four supplements, a sleep aid, and an adaptogen. the patch replaces the routine." },
+    { "type": "header", "content": "Stack panel (left)" },
+    { "type": "text", "id": "panel_heading", "label": "Panel heading", "default": "your current monthly stack:" },
+    { "type": "text", "id": "total_label", "label": "Total label", "default": "monthly total" },
+    { "type": "text", "id": "total_amount", "label": "Total amount", "default": "$140" },
+    { "type": "header", "content": "Versus panel (right)" },
+    { "type": "text", "id": "divider", "label": "Divider text", "default": "vs." },
+    { "type": "text", "id": "vs_label", "label": "Brand label", "default": "soft pauses" },
+    { "type": "text", "id": "vs_name", "label": "Plan name", "default": "subscribe and save" },
+    { "type": "text", "id": "vs_price", "label": "Price", "default": "$32 / mo" },
+    { "type": "richtext", "id": "vs_savings", "label": "Savings line", "default": "<p>that's <strong>$108 saved every month.</strong></p>" },
+    { "type": "text", "id": "vs_annual", "label": "Annual line", "default": "$1,296 saved a year. one patch a day. less to remember." },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Stack item",
+      "settings": [
+        { "type": "text", "id": "item", "label": "Item", "default": "multivitamin for women 40+" },
+        { "type": "text", "id": "cost", "label": "Cost", "default": "$28" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Cost calculator",
+      "blocks": [
+        { "type": "item", "settings": { "item": "multivitamin for women 40+", "cost": "$28" } },
+        { "type": "item", "settings": { "item": "maca powder or capsules", "cost": "$32" } },
+        { "type": "item", "settings": { "item": "magnesium glycinate (sleep)", "cost": "$24" } },
+        { "type": "item", "settings": { "item": "ashwagandha (mood, cortisol)", "cost": "$30" } },
+        { "type": "item", "settings": { "item": "evening primrose / black cohosh", "cost": "$26" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

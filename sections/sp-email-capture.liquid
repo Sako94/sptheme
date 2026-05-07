@@ -1,0 +1,160 @@
+{%- comment -%}
+  SoftPauses email capture + charity row. Uses Shopify's customer form
+  to subscribe to marketing. Falls back to a simple form if no customer
+  context.
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-cream); }
+  .sp-email { padding-top: var(--sp-pad-top, 80px); padding-bottom: var(--sp-pad-bottom, 80px); }
+  @media (max-width: 720px) { .sp-email { padding-top: 56px; padding-bottom: 56px; } }
+  .sp-email__card {
+    background: var(--sp-ink);
+    color: var(--sp-cream);
+    border-radius: 4px;
+    padding: 48px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @media (max-width: 600px) { .sp-email__card { padding: 36px 24px; } }
+  .sp-email__card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.625rem, 3.5vw, 2rem);
+    margin-bottom: 10px;
+    color: var(--sp-cream);
+    text-transform: lowercase;
+    font-weight: 400;
+    line-height: 1.1;
+    font-variation-settings: "opsz" 144;
+  }
+  .sp-email__card .lede {
+    color: rgba(250, 241, 234, 0.8);
+    margin-bottom: 22px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .sp-email__form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  @media (max-width: 540px) { .sp-email__form { grid-template-columns: 1fr; } }
+  .sp-email__form input[type="email"] {
+    background: rgba(250, 241, 234, 0.07);
+    border: 1px solid rgba(250, 241, 234, 0.18);
+    color: var(--sp-cream);
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.18s;
+  }
+  .sp-email__form input[type="email"]::placeholder { color: rgba(250, 241, 234, 0.5); }
+  .sp-email__form input[type="email"]:focus { border-color: var(--sp-coral); }
+  .sp-email__form button {
+    background: var(--sp-poppy);
+    color: var(--sp-cream);
+    border: none;
+    padding: 16px 28px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    transition: background 0.18s;
+  }
+  .sp-email__form button:hover { background: var(--sp-poppy-deep); }
+  .sp-email__success, .sp-email__error {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+  }
+  .sp-email__success { background: rgba(254, 217, 209, 0.15); color: var(--sp-shell); }
+  .sp-email__error { background: rgba(237, 27, 40, 0.18); color: var(--sp-shell); }
+
+  .sp-email__charity {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: rgba(250, 241, 234, 0.06);
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(250, 241, 234, 0.85);
+    line-height: 1.55;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sp-email__charity svg { flex-shrink: 0; }
+  .sp-email__charity strong { color: var(--sp-shell); font-weight: 500; }
+</style>
+
+<section class="sp-email"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap">
+    <div class="sp-email__card">
+      {%- if section.settings.heading != blank -%}<h3>{{ section.settings.heading }}</h3>{%- endif -%}
+      {%- if section.settings.lede != blank -%}<div class="lede">{{ section.settings.lede }}</div>{%- endif -%}
+
+      {%- form 'customer', class: 'sp-email__form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          type="email"
+          name="contact[email]"
+          id="sp-email-{{ section.id }}"
+          placeholder="{{ section.settings.placeholder | default: 'your email' }}"
+          required
+          autocomplete="email"
+        >
+        <button type="submit" name="commit">{{ section.settings.button_label | default: 'get my code' }}</button>
+
+        {%- if form.posted_successfully? -%}
+          <div class="sp-email__success" style="grid-column: 1 / -1;">{{ section.settings.success_message | default: 'thanks. check your email.' }}</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="sp-email__error" style="grid-column: 1 / -1;">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.charity_text != blank -%}
+        <div class="sp-email__charity">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" stroke="#FE756F" stroke-width="1.5" fill="rgba(254,117,111,0.15)"/>
+          </svg>
+          <span>{{ section.settings.charity_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Email capture",
+  "tag": "section",
+  "class": "sp-email-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "get $5 off your first order." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>plus a short, honest weekly note on perimenopause from our medical advisors. no fluff, no spam, no \"hey besties.\" you can unsubscribe with one click.</p>" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your email" },
+    { "type": "text", "id": "button_label", "label": "Submit button", "default": "get my code" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "thanks. check your email." },
+    { "type": "header", "content": "Charity row" },
+    { "type": "richtext", "id": "charity_text", "label": "Charity text (HTML allowed)", "default": "<p>every order funds 1 month of menopause-related research at <strong>[research partner]</strong>. small lever, real work.</p>" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 80 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    { "name": "Email capture" }
+  ]
+}
+{% endschema %}

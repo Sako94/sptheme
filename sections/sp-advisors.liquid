@@ -1,0 +1,183 @@
+{%- comment -%}
+  SoftPauses advisors / founders. 4 advisor cards (blocks) + a quote callout.
+  Each card has a photo (image_picker) with gradient placeholder fallback.
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} { background: var(--sp-blush-soft); }
+  .sp-adv { padding-top: var(--sp-pad-top, 96px); padding-bottom: var(--sp-pad-bottom, 96px); }
+  @media (max-width: 720px) { .sp-adv { padding-top: 64px; padding-bottom: 64px; } }
+  .sp-adv__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  @media (max-width: 900px) { .sp-adv__grid { grid-template-columns: repeat(2, 1fr); } }
+  .sp-adv__card {
+    background: var(--sp-cream);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--sp-rule);
+  }
+  .sp-adv__photo {
+    aspect-ratio: 1 / 1;
+    background:
+      radial-gradient(ellipse at center, rgba(254, 217, 209, 0.6), transparent 60%),
+      var(--sp-cream-deep);
+    overflow: hidden;
+  }
+  .sp-adv__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .sp-adv__info {
+    padding: 18px 20px 22px;
+  }
+  .sp-adv__info h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    color: var(--sp-ink);
+    margin-bottom: 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    font-variation-settings: "opsz" 72;
+  }
+  .sp-adv__creds {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: var(--sp-poppy);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .sp-adv__info p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    color: var(--sp-ink-mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .sp-adv__quote {
+    margin-top: 36px;
+    padding: 32px 36px;
+    background: var(--sp-blush);
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--sp-ink);
+    font-variation-settings: "opsz" 96;
+  }
+  .sp-adv__quote-source {
+    margin-top: 14px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    color: var(--sp-ink-muted);
+    font-style: normal;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 600px) {
+    .sp-adv__quote { padding: 24px 22px; font-size: 1.0625rem; }
+  }
+</style>
+
+<section class="sp-adv"
+  style="--sp-pad-top: {{ section.settings.pad_top }}px; --sp-pad-bottom: {{ section.settings.pad_bottom }}px;">
+  <div class="sp-wrap">
+    {%- if section.settings.chapter_label != blank or section.settings.chapter_num != blank -%}
+      <div class="sp-chapter">
+        <span class="sp-chapter__label">{{ section.settings.chapter_label }}</span>
+        <span class="sp-chapter__num">{{ section.settings.chapter_num }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}<h2 class="sp-h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.lede != blank -%}<div class="sp-lede">{{ section.settings.lede }}</div>{%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="sp-adv__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'advisor' -%}
+            <div class="sp-adv__card" {{ block.shopify_attributes }}>
+              <div class="sp-adv__photo">
+                {%- if block.settings.photo != blank -%}
+                  {{ block.settings.photo | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 900px) 220px, 50vw',
+                    widths: '220, 440, 600',
+                    alt: block.settings.photo.alt | default: block.settings.name
+                  }}
+                {%- endif -%}
+              </div>
+              <div class="sp-adv__info">
+                {%- if block.settings.name != blank -%}<h4>{{ block.settings.name }}</h4>{%- endif -%}
+                {%- if block.settings.credentials != blank -%}<div class="sp-adv__creds">{{ block.settings.credentials }}</div>{%- endif -%}
+                {%- if block.settings.bio != blank -%}<p>{{ block.settings.bio }}</p>{%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.quote_text != blank -%}
+      <div class="sp-adv__quote">
+        &ldquo;{{ section.settings.quote_text }}&rdquo;
+        {%- if section.settings.quote_source != blank -%}
+          <div class="sp-adv__quote-source">{{ section.settings.quote_source }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Advisors",
+  "tag": "section",
+  "class": "sp-advisors-section",
+  "settings": [
+    { "type": "text", "id": "chapter_label", "label": "Chapter label", "default": "who built this" },
+    { "type": "text", "id": "chapter_num", "label": "Chapter number", "default": "/ 08" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "backed by women in medicine, who are also living it." },
+    { "type": "richtext", "id": "lede", "label": "Lede", "default": "<p>soft pauses was built with input from menopause-trained physicians, registered dietitians, and women's health researchers.</p>" },
+    { "type": "header", "content": "Pull quote" },
+    { "type": "textarea", "id": "quote_text", "label": "Quote text", "default": "most consumer products in this category are underdosed and over-marketed. soft pauses is the first one i'd hand to my own patients." },
+    { "type": "text", "id": "quote_source", "label": "Quote source", "default": "[advisor name], MD · Menopause Society Certified Practitioner" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "advisor",
+      "name": "Advisor",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo (square, ~1000x1000px)" },
+        { "type": "text", "id": "name", "label": "Name", "default": "[founder name]" },
+        { "type": "text", "id": "credentials", "label": "Credentials / role", "default": "founder" },
+        { "type": "textarea", "id": "bio", "label": "Bio", "default": "started soft pauses after three doctors and six supplements. wrote the first formula on a kitchen counter at 4am." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Advisors",
+      "blocks": [
+        { "type": "advisor", "settings": { "name": "[founder name]", "credentials": "founder", "bio": "started soft pauses after three doctors and six supplements. wrote the first formula on a kitchen counter at 4am." } },
+        { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "md, obgyn · menopause society", "bio": "menopause-trained physician with 15+ years in women's health. reviews every formulation decision." } },
+        { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "phd · women's health research", "bio": "focus on hormone-related research at an accredited research institute. lead on the soft pauses placebo trial." } },
+        { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "rd, ms · clinical nutrition", "bio": "registered dietitian specializing in midlife women's nutrition. set the dosing for the maca extract." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

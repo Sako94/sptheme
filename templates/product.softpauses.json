@@ -35,6 +35,49 @@
       "block_order": ["t1", "t2", "t3"]
     },
 
+    "pain": {
+      "type": "sp-pain-agitation",
+      "settings": {
+        "chapter_label": "the wake-up call",
+        "chapter_num": "/ 01",
+        "heading": "if you've heard any of this, this is for you.",
+        "lede": "<p>you already knew something was wrong. you were right.</p>",
+        "stat_big": "1 in 3",
+        "stat_text": "women in perimenopause are dismissed by their doctor on the first visit. perimenopause can start in your late 30s and last up to a decade. the medical system is a generation behind on this. you don't have a generation.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "p1": { "type": "pain", "settings": { "quote": "it's just stress.", "reframe": "it isn't just stress." } },
+        "p2": { "type": "pain", "settings": { "quote": "your labs are normal.", "reframe": "labs miss perimenopause." } },
+        "p3": { "type": "pain", "settings": { "quote": "you're too young for that.", "reframe": "it can start at 38." } },
+        "p4": { "type": "pain", "settings": { "quote": "have you tried yoga.", "reframe": "yoga is not a hormone." } },
+        "p5": { "type": "pain", "settings": { "quote": "maybe try an antidepressant.", "reframe": "it's not depression." } },
+        "p6": { "type": "pain", "settings": { "quote": "it's just part of getting older.", "reframe": "it doesn't have to be." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"]
+    },
+
+    "mechanism": {
+      "type": "sp-mechanism",
+      "settings": {
+        "chapter_label": "the biology",
+        "chapter_num": "/ 02",
+        "heading": "what's actually happening.",
+        "lede": "<p>perimenopause is the years of hormonal turbulence before your last period. estrogen and progesterone don't taper smoothly. they swing.</p>",
+        "bio_label_now": "YOUR ESTROGEN, NOW",
+        "bio_label_before": "YOUR ESTROGEN, BEFORE 38",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "mc1": { "type": "card", "settings": { "label": "the problem", "heading": "hormones swing, not taper.", "body": "estrogen drops, spikes, drops again. your sleep, energy, mood, and focus follow. this is not a deficiency you fix once. it's a transition you support, daily." } },
+        "mc2": { "type": "card", "settings": { "label": "why a patch", "heading": "once a day, on the skin, done.", "body": "pills require a digestive system that is also doing its own thing right now. they require remembering. a patch delivers organic maca through the skin for 24 hours. peel, stick, forget about it." } },
+        "mc3": { "type": "card", "settings": { "label": "why maca", "heading": "used for centuries. studied for decades.", "body": "women in the andes have used maca to support energy and mood through major hormonal transitions for over 2,000 years. modern research backs the same use." } }
+      },
+      "block_order": ["mc1", "mc2", "mc3"]
+    },
+
     "ingredients": {
       "type": "sp-ingredients",
       "settings": {
@@ -80,6 +123,82 @@
       "block_order": ["b1", "b2", "b3", "b4", "b5"]
     },
 
+    "outcome-stats": {
+      "type": "sp-outcome-stats",
+      "settings": {
+        "chapter_label": "what they say",
+        "chapter_num": "/ 05",
+        "heading": "real users. real results.",
+        "foot": "*post-purchase survey, 500 women, 30+ days of daily use.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "os1": { "type": "stat", "settings": { "number": "87%", "label": "say they have steadier energy through the day" } },
+        "os2": { "type": "stat", "settings": { "number": "79%", "label": "say they sleep through the night more often" } },
+        "os3": { "type": "stat", "settings": { "number": "91%", "label": "would recommend it to a friend in perimenopause" } }
+      },
+      "block_order": ["os1", "os2", "os3"]
+    },
+
+    "buybox": {
+      "type": "sp-buybox",
+      "settings": {
+        "heading": "start with 30 days.",
+        "lede": "two ways to start. cancel or pause anytime, in one click.",
+        "box_title": "the daily patch.",
+        "anchor_id": "offer",
+        "tier_2_save": "save 10%",
+        "tier_3_save": "save 18%",
+        "popular_banner": "most popular",
+        "subscribe_name": "subscribe and save 20%",
+        "subscribe_meta": "30 patches every 30 days. <span class=\"pday\">$1.07/day.</span>",
+        "perk_1": "free shipping, every order",
+        "perk_2": "cancel or pause in one click",
+        "perk_3": "30-day money-back guarantee",
+        "onetime_name": "one-time",
+        "onetime_meta": "30 patches, shipped once. <span class=\"pday\">$1.33/day.</span>",
+        "cta_label": "add to cart",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "tb1": { "type": "trust", "settings": { "headline": "30 days", "subline": "money-back" } },
+        "tb2": { "type": "trust", "settings": { "headline": "HSA / FSA", "subline": "eligible" } },
+        "tb3": { "type": "trust", "settings": { "headline": "free", "subline": "shipping" } },
+        "tb4": { "type": "trust", "settings": { "headline": "cancel", "subline": "anytime" } }
+      },
+      "block_order": ["tb1", "tb2", "tb3", "tb4"]
+    },
+
+    "cost-calc": {
+      "type": "sp-cost-calculator",
+      "settings": {
+        "kicker": "the math",
+        "heading": "what you're probably already spending.",
+        "lede": "most women in perimenopause stack three or four supplements, a sleep aid, and an adaptogen. the patch replaces the routine.",
+        "panel_heading": "your current monthly stack:",
+        "total_label": "monthly total",
+        "total_amount": "$140",
+        "divider": "vs.",
+        "vs_label": "soft pauses",
+        "vs_name": "subscribe and save",
+        "vs_price": "$32 / mo",
+        "vs_savings": "<p>that's <strong>$108 saved every month.</strong></p>",
+        "vs_annual": "$1,296 saved a year. one patch a day. less to remember.",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "cc1": { "type": "item", "settings": { "item": "multivitamin for women 40+", "cost": "$28" } },
+        "cc2": { "type": "item", "settings": { "item": "maca powder or capsules", "cost": "$32" } },
+        "cc3": { "type": "item", "settings": { "item": "magnesium glycinate (sleep)", "cost": "$24" } },
+        "cc4": { "type": "item", "settings": { "item": "ashwagandha (mood, cortisol)", "cost": "$30" } },
+        "cc5": { "type": "item", "settings": { "item": "evening primrose / black cohosh", "cost": "$26" } }
+      },
+      "block_order": ["cc1", "cc2", "cc3", "cc4", "cc5"]
+    },
+
     "comparison": {
       "type": "sp-comparison-table",
       "settings": {
@@ -96,12 +215,131 @@
         "r1": { "type": "row", "settings": { "feature": "triple-source maca (black, red, yellow)", "us_cell": "check", "c1_cell": "single-source", "c2_cell": "often unspecified" } },
         "r2": { "type": "row", "settings": { "feature": "transdermal delivery (no pills)", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } },
         "r3": { "type": "row", "settings": { "feature": "black pepper extract for absorption", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } },
-        "r4": { "type": "row", "settings": { "feature": "once daily, no food required", "us_cell": "check", "c1_cell": "2–3 capsules with food", "c2_cell": "varies" } },
+        "r4": { "type": "row", "settings": { "feature": "once daily, no food required", "us_cell": "check", "c1_cell": "2-3 capsules with food", "c2_cell": "varies" } },
         "r5": { "type": "row", "settings": { "feature": "vegan, sugar-free, latex-free", "us_cell": "check", "c1_cell": "varies", "c2_cell": "dash" } },
         "r6": { "type": "row", "settings": { "feature": "full ingredient transparency", "us_cell": "check", "c1_cell": "varies", "c2_cell": "dash" } },
         "r7": { "type": "row", "settings": { "feature": "30-day money-back guarantee", "us_cell": "check", "c1_cell": "dash", "c2_cell": "dash" } }
       },
       "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7"]
+    },
+
+    "timeline": {
+      "type": "sp-timeline",
+      "settings": {
+        "chapter_label": "what to expect",
+        "chapter_num": "/ 07",
+        "heading": "perimenopause isn't linear. neither is the support.",
+        "lede": "<p>most women feel it in two to four weeks. some feel it on day one. some take longer. give it 30 days before deciding.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "tl1": { "type": "milestone", "settings": { "when": "day 1", "heading": "first patch on.", "body": "peel, stick to the inside of your forearm or shoulder. wear it for 24 hours. swap it the next morning." } },
+        "tl2": { "type": "milestone", "settings": { "when": "week 2", "heading": "steadier mornings.", "body": "most women report fewer 3am wakings, less afternoon crash, and a quieter background buzz." } },
+        "tl3": { "type": "milestone", "settings": { "when": "month 1", "heading": "mood and energy reset.", "body": "the bigger shifts show up here. less rage out of nowhere. fewer days that feel like buffering." } },
+        "tl4": { "type": "milestone", "settings": { "when": "month 3", "heading": "your new baseline.", "body": "the patch becomes background. the routine is one decision a day. you stop noticing it. that's the point." } }
+      },
+      "block_order": ["tl1", "tl2", "tl3", "tl4"]
+    },
+
+    "qualify": {
+      "type": "sp-qualify-checklist",
+      "settings": {
+        "heading": "is this for you?",
+        "lede": "<p>if any of these sound like you, the answer is probably yes.</p>",
+        "followup": "<p>soft pauses is not magic and it is not a cure. it is daily support, taken consistently, that helps a lot of women feel more like themselves again.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "q1": { "type": "item", "settings": { "text": "you're between 38 and 55 and your body has stopped doing what it used to." } },
+        "q2": { "type": "item", "settings": { "text": "you wake up at 3am for no reason and can't fall back asleep." } },
+        "q3": { "type": "item", "settings": { "text": "your labs came back 'normal' but you do not feel normal." } },
+        "q4": { "type": "item", "settings": { "text": "you've been told it's stress, depression, or just getting older." } },
+        "q5": { "type": "item", "settings": { "text": "you've tried three or more supplements that did nothing." } },
+        "q6": { "type": "item", "settings": { "text": "you're not ready for HRT, or you're on it and want a daily floor of support." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    },
+
+    "advisors": {
+      "type": "sp-advisors",
+      "settings": {
+        "chapter_label": "who built this",
+        "chapter_num": "/ 08",
+        "heading": "backed by women in medicine, who are also living it.",
+        "lede": "<p>soft pauses was built with input from menopause-trained physicians, registered dietitians, and women's health researchers. all listed below.</p>",
+        "quote_text": "most consumer products in this category are underdosed and over-marketed. soft pauses is the first one i'd hand to my own patients.",
+        "quote_source": "[advisor name], MD · Menopause Society Certified Practitioner",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "a1": { "type": "advisor", "settings": { "name": "[founder name]", "credentials": "founder", "bio": "started soft pauses after three doctors and six supplements. wrote the first formula on a kitchen counter at 4am." } },
+        "a2": { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "md, obgyn · menopause society", "bio": "menopause-trained physician with 15+ years in women's health. reviews every formulation decision." } },
+        "a3": { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "phd · women's health research", "bio": "focus on hormone-related research at an accredited research institute. lead on the soft pauses placebo trial." } },
+        "a4": { "type": "advisor", "settings": { "name": "[advisor name]", "credentials": "rd, ms · clinical nutrition", "bio": "registered dietitian specializing in midlife women's nutrition. set the dosing for the maca extract." } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"]
+    },
+
+    "press": {
+      "type": "sp-press-strip",
+      "settings": {
+        "label": "as featured in",
+        "pad_top": 56,
+        "pad_bottom": 56
+      },
+      "blocks": {
+        "pl1": { "type": "logo", "settings": { "name": "Women's Health", "style": "serif" } },
+        "pl2": { "type": "logo", "settings": { "name": "Vogue", "style": "italic" } },
+        "pl3": { "type": "logo", "settings": { "name": "FORBES", "style": "allcaps" } },
+        "pl4": { "type": "logo", "settings": { "name": "The Cut", "style": "italic" } },
+        "pl5": { "type": "logo", "settings": { "name": "GOOP", "style": "allcaps" } }
+      },
+      "block_order": ["pl1", "pl2", "pl3", "pl4", "pl5"]
+    },
+
+    "ugc": {
+      "type": "sp-ugc-reviews",
+      "settings": {
+        "kicker": "what women are saying",
+        "heading": "12,000+ verified reviews.",
+        "rating_text": "4.8 average · trustpilot verified",
+        "avg_rating": "4.8",
+        "total_text": "based on 12,432 reviews",
+        "pct_5": 88,
+        "pct_4": 8,
+        "pct_3": 3,
+        "pct_2": 1,
+        "pct_1": 0,
+        "foot": "<p><strong>customer favorite.</strong> less than 4% of customers return this product.</p>",
+        "pad_top": 96,
+        "pad_bottom": 96
+      },
+      "blocks": {
+        "u1": { "type": "review", "settings": { "quote": "i feel like myself again. not a younger version. just myself.", "name": "sarah", "age": "46", "verified": true } },
+        "u2": { "type": "review", "settings": { "quote": "my husband said you seem more like you. i burst into tears.", "name": "jen", "age": "44", "verified": true } },
+        "u3": { "type": "review", "settings": { "quote": "i forgot what it felt like to have steady energy through the day. it came back slowly. then it just stayed.", "name": "maria", "age": "49", "verified": true } }
+      },
+      "block_order": ["u1", "u2", "u3"]
+    },
+
+    "risk-free": {
+      "type": "sp-risk-free",
+      "settings": {
+        "tag": "our promise",
+        "heading": "try it for 30 days. on us.",
+        "body": "if it does not feel like it is doing something for you, send it back. no questions, no forms, no friction. that's the offer.",
+        "pad_top": 64,
+        "pad_bottom": 64
+      },
+      "blocks": {
+        "rb1": { "type": "badge", "settings": { "headline": "30 days", "subline": "full refund" } },
+        "rb2": { "type": "badge", "settings": { "headline": "HSA / FSA", "subline": "eligible via truemed" } },
+        "rb3": { "type": "badge", "settings": { "headline": "free shipping", "subline": "every order" } }
+      },
+      "block_order": ["rb1", "rb2", "rb3"]
     },
 
     "faq": {
@@ -117,31 +355,64 @@
         "tab-shipping": { "type": "tab", "settings": { "tab_id": "shipping", "label": "shipping & returns" } },
         "tab-medical": { "type": "tab", "settings": { "tab_id": "medical", "label": "medical" } },
 
-        "q1": { "type": "item", "settings": { "tab": "product", "question": "is this HRT?", "answer": "<p>no. soft pauses is not a hormone and not a drug. it is a daily plant-based support. if you are exploring HRT, we recommend finding a menopause-trained physician. the menopause society maintains a directory.</p>" } },
-        "q2": { "type": "item", "settings": { "tab": "product", "question": "how long until i feel something?", "answer": "<p>most women report a difference in energy and mood within the first two to four weeks of daily use. perimenopause symptoms are not linear, and neither is the support. give it a full 30 days.</p>" } },
-        "q3": { "type": "item", "settings": { "tab": "product", "question": "why a patch and not a pill?", "answer": "<p>pills require a digestive system, a routine, and a memory. a patch is once a day, on the skin, done. for a lot of women in perimenopause, that simplicity is the whole point.</p>" } },
-        "q4": { "type": "item", "settings": { "tab": "product", "question": "where do i wear the patch?", "answer": "<p>the inside of the forearm, the shoulder, or the upper hip work best. anywhere with thin, clean skin. rotate placement to avoid skin irritation.</p>" } },
+        "f1": { "type": "item", "settings": { "tab": "product", "question": "is this HRT?", "answer": "<p>no. soft pauses is not a hormone and not a drug. it is a daily plant-based support. if you are exploring HRT, we recommend finding a menopause-trained physician.</p>" } },
+        "f2": { "type": "item", "settings": { "tab": "product", "question": "how long until i feel something?", "answer": "<p>most women report a difference in energy and mood within the first two to four weeks of daily use. give it a full 30 days.</p>" } },
+        "f3": { "type": "item", "settings": { "tab": "product", "question": "why a patch and not a pill?", "answer": "<p>pills require a digestive system, a routine, and a memory. a patch is once a day, on the skin, done.</p>" } },
+        "f4": { "type": "item", "settings": { "tab": "product", "question": "where do i wear the patch?", "answer": "<p>the inside of the forearm, the shoulder, or the upper hip work best. anywhere with thin, clean skin. rotate placement to avoid skin irritation.</p>" } },
 
-        "s1": { "type": "item", "settings": { "tab": "subscription", "question": "how does the subscription work?", "answer": "<p>your first order ships free with 20% off. after that, you get a fresh 30-day supply every 30 days at the subscription price. you can pause, skip, change cadence, or cancel from your account in one click.</p>" } },
-        "s2": { "type": "item", "settings": { "tab": "subscription", "question": "how do i cancel?", "answer": "<p>log in, click cancel. it takes about 10 seconds. no phone calls, no chat queues, no \"wait, before you go\" modals.</p>" } },
-        "s3": { "type": "item", "settings": { "tab": "subscription", "question": "can i pause or skip a month?", "answer": "<p>yes. pause for any reason, any length. skip a month, skip three. resume whenever you want.</p>" } },
+        "f5": { "type": "item", "settings": { "tab": "subscription", "question": "how does the subscription work?", "answer": "<p>your first order ships free with 20% off. after that, you get a fresh 30-day supply every 30 days at the subscription price. pause, skip, or cancel anytime in one click.</p>" } },
+        "f6": { "type": "item", "settings": { "tab": "subscription", "question": "how do i cancel?", "answer": "<p>log in, click cancel. it takes about 10 seconds. no phone calls, no chat queues.</p>" } },
+        "f7": { "type": "item", "settings": { "tab": "subscription", "question": "can i pause or skip a month?", "answer": "<p>yes. pause for any reason, any length. skip a month, skip three. resume whenever you want.</p>" } },
 
-        "ship1": { "type": "item", "settings": { "tab": "shipping", "question": "when will my order ship?", "answer": "<p>orders placed before 1pm ET ship the same business day. you'll get a tracking number by email. delivery is typically 2–5 business days within the US.</p>" } },
-        "ship2": { "type": "item", "settings": { "tab": "shipping", "question": "do you ship internationally?", "answer": "<p>we ship within the US and Canada today. the EU and UK are on the roadmap for q3.</p>" } },
-        "ship3": { "type": "item", "settings": { "tab": "shipping", "question": "what if it doesn't work for me?", "answer": "<p>send it back within 30 days for a full refund. no questions, no forms, no friction.</p>" } },
+        "f8": { "type": "item", "settings": { "tab": "shipping", "question": "when will my order ship?", "answer": "<p>orders placed before 1pm ET ship the same business day. delivery is typically 2-5 business days within the US.</p>" } },
+        "f9": { "type": "item", "settings": { "tab": "shipping", "question": "do you ship internationally?", "answer": "<p>we ship within the US and Canada today. the EU and UK are on the roadmap for q3.</p>" } },
+        "f10": { "type": "item", "settings": { "tab": "shipping", "question": "what if it doesn't work for me?", "answer": "<p>send it back within 30 days for a full refund. no questions, no forms, no friction.</p>" } },
 
-        "med1": { "type": "item", "settings": { "tab": "medical", "question": "is maca safe for me?", "answer": "<p>maca has been used for centuries and is generally well-tolerated. if you are pregnant, breastfeeding, on thyroid medication, or being treated for a hormone-sensitive condition, please talk to your doctor before starting.</p>" } },
-        "med2": { "type": "item", "settings": { "tab": "medical", "question": "can i take this with HRT?", "answer": "<p>most women on HRT can use soft pauses as a daily floor of support. confirm with your prescribing physician first. we are not a replacement for a treatment your doctor has prescribed.</p>" } },
-        "med3": { "type": "item", "settings": { "tab": "medical", "question": "are there side effects?", "answer": "<p>the most common is mild skin irritation at the patch site, usually from leaving the patch on the same spot. rotate placement and it typically resolves. discontinue use if irritation persists.</p>" } },
-        "med4": { "type": "item", "settings": { "tab": "medical", "question": "is this hsa/fsa eligible?", "answer": "<p>yes, with a letter of medical necessity through truemed (free, takes about 5 minutes at checkout). the vast majority of applicants are approved.</p>" } }
+        "f11": { "type": "item", "settings": { "tab": "medical", "question": "is maca safe for me?", "answer": "<p>maca has been used for centuries and is generally well-tolerated. if you are pregnant, breastfeeding, on thyroid medication, or being treated for a hormone-sensitive condition, please talk to your doctor before starting.</p>" } },
+        "f12": { "type": "item", "settings": { "tab": "medical", "question": "can i take this with HRT?", "answer": "<p>most women on HRT can use soft pauses as a daily floor of support. confirm with your prescribing physician first.</p>" } },
+        "f13": { "type": "item", "settings": { "tab": "medical", "question": "are there side effects?", "answer": "<p>the most common is mild skin irritation at the patch site, usually from leaving the patch on the same spot. rotate placement and it typically resolves.</p>" } },
+        "f14": { "type": "item", "settings": { "tab": "medical", "question": "is this hsa/fsa eligible?", "answer": "<p>yes, with a letter of medical necessity through truemed (free, takes about 5 minutes at checkout).</p>" } }
       },
       "block_order": [
         "tab-product", "tab-subscription", "tab-shipping", "tab-medical",
-        "q1", "q2", "q3", "q4",
-        "s1", "s2", "s3",
-        "ship1", "ship2", "ship3",
-        "med1", "med2", "med3", "med4"
+        "f1", "f2", "f3", "f4",
+        "f5", "f6", "f7",
+        "f8", "f9", "f10",
+        "f11", "f12", "f13", "f14"
       ]
+    },
+
+    "email": {
+      "type": "sp-email-capture",
+      "settings": {
+        "heading": "get $5 off your first order.",
+        "lede": "<p>plus a short, honest weekly note on perimenopause from our medical advisors. no fluff, no spam. you can unsubscribe with one click.</p>",
+        "placeholder": "your email",
+        "button_label": "get my code",
+        "success_message": "thanks. check your email.",
+        "charity_text": "<p>every order funds 1 month of menopause-related research at <strong>[research partner]</strong>. small lever, real work.</p>",
+        "pad_top": 80,
+        "pad_bottom": 80
+      }
+    },
+
+    "footer": {
+      "type": "sp-footer",
+      "settings": {
+        "wordmark": "SoftPauses",
+        "tagline": "pause. breathe. bloom.",
+        "description": "<p>a daily transdermal patch with organic triple-source maca, designed for women in perimenopause. made with women, for women, in the US.</p>",
+        "copyright": "© 2026 soft pauses, inc.",
+        "legal_text": "terms · privacy · accessibility",
+        "disclaimer": "soft pauses is a dietary supplement. these statements have not been evaluated by the FDA. this product is not intended to diagnose, treat, cure, or prevent any disease. consult your physician before starting any supplement, especially if you are pregnant, nursing, or taking medication.",
+        "pad_top": 60
+      },
+      "blocks": {
+        "fc1": { "type": "menu_column", "settings": { "heading": "shop" } },
+        "fc2": { "type": "menu_column", "settings": { "heading": "learn" } },
+        "fc3": { "type": "menu_column", "settings": { "heading": "support" } }
+      },
+      "block_order": ["fc1", "fc2", "fc3"]
     },
 
     "sticky-cta": {
@@ -160,10 +431,23 @@
   "order": [
     "promo-bar",
     "hero",
+    "pain",
+    "mechanism",
     "ingredients",
     "clinical",
+    "outcome-stats",
+    "buybox",
+    "cost-calc",
     "comparison",
+    "timeline",
+    "qualify",
+    "advisors",
+    "press",
+    "ugc",
+    "risk-free",
     "faq",
+    "email",
+    "footer",
     "sticky-cta"
   ]
 }
