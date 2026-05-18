@@ -1,6 +1,8 @@
 /* ==========================================================================
    SoftPauses brand layer for Debutify Zorix theme.
-   Brand tokens + CSS overrides targeting Debutify's class names.
+   Brand tokens and color overrides only. Fonts and sizes flow through
+   Debutify's theme settings — DO NOT override font-family or font-size
+   here with !important, or Theme Editor font controls won't work.
    ========================================================================== */
 
 :root {
@@ -20,84 +22,66 @@
   --sp-rule-soft: #F0DDC9;
 }
 
-/* Brand-wide overrides */
+/* Page-level brand surface (no font-family override — Debutify drives fonts) */
 body {
   background: var(--sp-cream);
   color: var(--sp-ink);
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection { background: var(--sp-poppy); color: var(--sp-cream); }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6,
-.h0, .h1, .h2, .h3, .h4, .h5, .h6,
-.heading,
-.section-heading,
-[class*="__title"],
-[class*="__heading"] {
-  font-family: 'Fraunces', Georgia, serif !important;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--sp-ink);
-  font-variation-settings: "opsz" 96, "SOFT" 50;
+/* Italic emphasis in headings shows brand color */
+h1 em, h2 em, h3 em,
+.h0 em, .h1 em, .h2 em, .h3 em {
+  color: var(--sp-poppy);
+  font-style: italic;
 }
 
-em, i { font-style: italic; }
-h1 em, h2 em, h3 em, .h1 em, .h2 em, .h3 em { color: var(--sp-poppy); }
-
-/* Buttons (Debutify uses .button, .button--primary, etc.) */
+/* Buttons — color/shape only, font flows from theme settings */
 .button,
 .btn,
 button[type="submit"],
 .shopify-payment-button__button--unbranded {
-  font-family: 'IBM Plex Sans', sans-serif !important;
-  letter-spacing: 0.02em;
-  font-weight: 500;
-  border-radius: 999px !important;
+  border-radius: 999px;
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .button--primary,
 .btn--primary,
-button[type="submit"]:not([class*="secondary"]):not([class*="ghost"]),
 .shopify-payment-button__button--unbranded {
-  background: var(--sp-poppy) !important;
-  color: var(--sp-cream) !important;
-  border: none !important;
+  background: var(--sp-poppy);
+  color: var(--sp-cream);
+  border: none;
 }
 .button--primary:hover,
 .btn--primary:hover,
-button[type="submit"]:not([class*="secondary"]):not([class*="ghost"]):hover,
 .shopify-payment-button__button--unbranded:hover {
-  background: var(--sp-poppy-deep) !important;
+  background: var(--sp-poppy-deep);
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(237, 27, 40, 0.22);
 }
 
 .button--secondary,
 .btn--secondary {
-  background: transparent !important;
-  color: var(--sp-poppy) !important;
-  border: 1px solid var(--sp-poppy) !important;
+  background: transparent;
+  color: var(--sp-poppy);
+  border: 1px solid var(--sp-poppy);
 }
 .button--secondary:hover,
 .btn--secondary:hover {
-  background: var(--sp-poppy) !important;
-  color: var(--sp-cream) !important;
+  background: var(--sp-poppy);
+  color: var(--sp-cream);
 }
 
-/* Cards + media */
+/* Cards and inputs — radius only */
 .card,
 .card-wrapper,
-.product-card,
-[class*="-card"]:not([class*="card-text"]) {
+.product-card {
   border-radius: 8px;
 }
 
-/* Inputs */
 input[type="email"],
 input[type="text"],
 input[type="search"],
@@ -107,41 +91,16 @@ input[type="tel"],
 textarea,
 select,
 .field__input {
-  border-radius: 6px !important;
-  font-family: 'IBM Plex Sans', sans-serif !important;
+  border-radius: 6px;
 }
 
-/* Header (Debutify) */
-.header,
-.site-header {
-  background: var(--sp-cream);
-}
-.header__heading,
+/* Header — keep brand color on logo only, don't touch nav fonts */
 .header__heading-link,
-.site-header__logo a,
-.shop-name,
 .shop-name a {
-  font-family: 'Fraunces', Georgia, serif !important;
-  font-weight: 500;
-  font-variation-settings: "opsz" 144;
-  color: var(--sp-poppy) !important;
-  letter-spacing: -0.025em;
+  color: var(--sp-poppy);
 }
 
-.header__menu-item,
-.site-nav__link,
-.list-menu__item {
-  font-family: 'IBM Plex Sans', sans-serif !important;
-  text-transform: lowercase;
-  letter-spacing: 0.01em;
-  color: var(--sp-ink) !important;
-}
-.header__menu-item:hover,
-.site-nav__link:hover {
-  color: var(--sp-poppy) !important;
-}
-
-/* Footer */
+/* Footer — brand surface */
 .footer,
 .site-footer {
   background: var(--sp-ink);
@@ -150,43 +109,28 @@ select,
 .footer h2, .footer h3, .footer h4, .footer h5,
 .site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5,
 .footer-block__heading {
-  color: var(--sp-cream) !important;
+  color: var(--sp-cream);
 }
-.footer a, .site-footer a {
-  color: rgba(250, 241, 234, 0.65);
-}
-.footer a:hover, .site-footer a:hover {
-  color: var(--sp-coral) !important;
-}
+.footer a, .site-footer a { color: rgba(250, 241, 234, 0.65); }
+.footer a:hover, .site-footer a:hover { color: var(--sp-coral); }
 
-/* Promo / announcement bar */
+/* Promo / scrolling banners */
 .announcement-bar,
-.dbtfy-announcement,
-.scrolling-banner,
-.dbtfy-scrolling-banner {
-  background: var(--sp-ink) !important;
-  color: var(--sp-cream) !important;
+.dbtfy-announcement {
+  background: var(--sp-ink);
+  color: var(--sp-cream);
 }
-.announcement-bar strong,
-.scrolling-banner strong {
-  color: var(--sp-shell) !important;
-}
+.announcement-bar strong { color: var(--sp-shell); }
 
 /* Badges */
 .badge,
-.product-card__badge,
-.price__badge {
+.product-card__badge {
   background: var(--sp-poppy);
   color: var(--sp-cream);
   border-radius: 999px;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 11px;
 }
 
-/* Reviews / stars */
+/* Star ratings */
 .rating-star,
 .review-stars,
 [class*="star"] svg {
@@ -194,15 +138,9 @@ select,
   fill: var(--sp-poppy);
 }
 
-/* Sticky add-to-cart bar (Debutify) */
+/* Sticky add-to-cart */
 .dbtfy-sticky-addtocart,
 .sticky-add-to-cart {
-  background: var(--sp-cream) !important;
+  background: var(--sp-cream);
   border-top: 1px solid var(--sp-rule);
 }
-
-/* Color-scheme background overrides (Debutify scheme classes) */
-.color-scheme-1 { background: var(--sp-poppy); color: var(--sp-cream); }
-.color-scheme-2 { background: var(--sp-cream); color: var(--sp-ink); }
-.color-scheme-3 { background: var(--sp-blush); color: var(--sp-ink); }
-.color-scheme-4 { background: var(--sp-ink); color: var(--sp-cream); }
