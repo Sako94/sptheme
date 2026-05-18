@@ -102,7 +102,7 @@
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
 
-    {{ 'template-giftcard.css' | asset_url | stylesheet_tag }}
+    {{ 'template-giftcard.css' | asset_url | stylesheet_tag: preload: true }}
   </head>
 
   <body class="gradient gift-card">
@@ -136,7 +136,7 @@
           <img
             class="gift-card__image"
             src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
-            alt=""
+            alt="Gift Card"
             height="{{ 570 | divided_by: 1.5 }}"
             width="570"
             loading="eager"

@@ -49,10 +49,12 @@ def check_schema(schema, file):
             if t == "range" and "default" in obj:
                 mn, mx = obj.get("min", 0), obj.get("max")
                 st, df = obj.get("step", 1), obj["default"]
-                if (df - mn) % st != 0:
+                # Float-safe step check: compute steps from min, compare with epsilon
+                steps_from_min = (df - mn) / st if st else 0
+                if abs(steps_from_min - round(steps_from_min)) > 1e-6:
                     issues.append(
                         f"{path}: range '{obj.get('id')}' default={df} doesn't align to step={st} "
-                        f"(min={mn}). Use min + N*step. Nearest valid: {mn + round((df-mn)/st)*st}"
+                        f"(min={mn}). Use min + N*step. Nearest valid: {mn + round(steps_from_min)*st}"
                     )
                 if mx is not None and df > mx:
                     issues.append(f"{path}: range '{obj.get('id')}' default={df} > max={mx}")
@@ -108,11 +110,17 @@ def main():
         if not m:
             # No schema is fine for some files
             continue
+        schema_str = m.group(1)
         try:
-            schema = json.loads(m.group(1))
-        except json.JSONDecodeError as e:
-            all_issues.append(f"{path}: SCHEMA NOT VALID JSON — {e}")
-            continue
+            schema = json.loads(schema_str)
+        except json.JSONDecodeError:
+            # Shopify accepts trailing commas; strict JSON doesn't. Strip them.
+            cleaned = re.sub(r",(\s*[}\]])", r"\1", schema_str)
+            try:
+                schema = json.loads(cleaned)
+            except json.JSONDecodeError as e:
+                all_issues.append(f"{path}: SCHEMA NOT VALID JSON — {e}")
+                continue
         issues = check_schema(schema, path)
         if issues:
             for i in issues:

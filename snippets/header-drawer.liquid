@@ -16,20 +16,27 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
-    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+    <div
+      id="menu-drawer"
+      class="mobile-width-{{ section.settings.mobile_width}} gradient menu-drawer motion-reduce color-{{ section.settings.custom_menu_color_scheme }} dbtfy-color-{{ section.settings.menu_color_scheme }}"
+    >
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
-              {%- for link in section.settings.menu.links -%}
+              {%- assign menu_links = section.settings.menu.links -%}
+              {%- if section.settings.mobile_menu != blank -%}
+                {%- assign menu_links = section.settings.mobile_menu.links -%}
+              {%- endif -%}
+              {%- for link in menu_links -%}
                 <li>
                   {%- if link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
-                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset font-size-custom{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
                       >
-                        {{ link.title | escape }}
+                        {{- link.title | escape -}}
                         <span class="svg-wrapper">
                           {{- 'icon-arrow.svg' | inline_asset_content -}}
                         </span>
@@ -47,7 +54,7 @@
                             <span class="svg-wrapper">
                               {{- 'icon-arrow.svg' | inline_asset_content -}}
                             </span>
-                            {{ link.title | escape }}
+                            {{- link.title | escape -}}
                           </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {%- for childlink in link.links -%}
@@ -61,15 +68,15 @@
                                       aria-current="page"
                                     {% endif %}
                                   >
-                                    {{ childlink.title | escape }}
+                                    {{- childlink.title | escape -}}
                                   </a>
                                 {%- else -%}
                                   <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
                                     <summary
                                       id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
-                                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset dropdown-font-size"
                                     >
-                                      {{ childlink.title | escape }}
+                                      {{- childlink.title | escape -}}
                                       <span class="svg-wrapper">
                                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                                       </span>
@@ -88,7 +95,7 @@
                                         <span class="svg-wrapper">
                                           {{- 'icon-arrow.svg' | inline_asset_content -}}
                                         </span>
-                                        {{ childlink.title | escape }}
+                                        {{- childlink.title | escape -}}
                                       </button>
                                       <ul
                                         class="menu-drawer__menu list-menu"
@@ -100,12 +107,12 @@
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                               href="{{ grandchildlink.url }}"
-                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset dropdown-font-size-level-2 {% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
                                               {% if grandchildlink.current %}
                                                 aria-current="page"
                                               {% endif %}
                                             >
-                                              {{ grandchildlink.title | escape }}
+                                              {{- grandchildlink.title | escape -}}
                                             </a>
                                           </li>
                                         {%- endfor -%}
@@ -123,7 +130,7 @@
                     <a
                       id="HeaderDrawer-{{ link.handle }}"
                       href="{{ link.url }}"
-                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset font-size-custom{% if link.current %} menu-drawer__menu-item--active{% endif %}"
                       {% if link.current %}
                         aria-current="page"
                       {% endif %}
@@ -134,64 +141,117 @@
                 </li>
               {%- endfor -%}
             </ul>
+
+            {%- if section.settings.mobile_secondary_menu != blank -%}
+              <div class="secondary-menu-wrapper">
+                {%- if section.settings.secondary_menu_separator -%}
+                  <hr>
+                {%- endif -%}
+                {%- if section.settings.secondary_menu_heading -%}
+                  <h3 class="secondary-heading m-0">{{ section.settings.secondary_menu_heading }}</h3>
+                {%- endif -%}
+                <ul class="menu-drawer__menu list-menu" role="list">
+                  {%- assign menu_links = section.settings.mobile_secondary_menu.links -%}
+                  {%- for link in menu_links -%}
+                    <li>
+                      <a
+                        id="HeaderDrawer-{{ link.handle }}"
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ link.title | escape }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
           </nav>
           <div class="menu-drawer__utility-links">
-            {%- if shop.customer_accounts_enabled -%}
-              <a
-                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
-                rel="nofollow"
-              >
-                {%- if section.settings.enable_customer_avatar -%}
-                  <account-icon>
-                    {%- if customer and customer.has_avatar? -%}
-                      {{ customer | avatar }}
-                    {%- else -%}
-                      <span class="svg-wrapper">
-                        {{- 'icon-account.svg' | inline_asset_content -}}
-                      </span>
-                    {%- endif -%}
-                  </account-icon>
-                {%- else -%}
-                  <span class="svg-wrapper">
-                    {{- 'icon-account.svg' | inline_asset_content -}}
-                  </span>
-                {%- endif -%}
-                {%- liquid
-                  if customer
-                    echo 'customer.account_fallback' | t
-                  else
-                    echo 'customer.log_in' | t
-                  endif
-                -%}
-              </a>
-            {%- endif -%}
+            <div class="d-grid">
+              {%- if shop.customer_accounts_enabled -%}
+                <a
+                  href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                  class="grid--4-col menu-drawer__account link focus-inset h5 medium-hide large-up-hide {% if section.settings.enable_customer_avatar != true %} menu-drawer__account--avatar {% endif %}"
+                  rel="nofollow"
+                >
+                  {%- if section.settings.enable_customer_avatar -%}
+                    <shopify-account menu="{{ section.settings.customer_account_menu }}">
+                      {%- if customer and customer.has_avatar? -%}
+                        {{ customer | avatar }}
+                      {%- else -%}
+                        <span class="svg-wrapper">
+                          {% render 'material-icon', icon: 'account_circle' %}
+                        </span>
+                      {%- endif -%}
+                    </shopify-account>
+                  {%- else -%}
+                    <span class="svg-wrapper">
+                      {% render 'material-icon', icon: 'account_circle' %}
+                    </span>
+                  {%- endif -%}
+                  {%- liquid
+                    if customer
+                      echo 'customer.account_fallback' | t
+                    else
+                      echo 'customer.log_in' | t
+                    endif
+                  -%}
+                </a>
+              {%- endif -%}
+              {% if settings.dbtfy_wish_list %}
+                <a
+                  href="{{settings.dbtfy_wish_list_page}}"
+                  class="grid--2-col header__icon header__icon--wishlist link focus-inset relative medium-hide"
+                >
+                  {% render 'dbtfy-wishlist' %}
+                </a>
+              {% endif %}
+              {% if settings.dbtfy_quick_compare %}
+                <a
+                  href="{{ settings.dbtfy_quick_compare_page }}"
+                  class="grid--2-col header__icon relative header__icon--compare link focus-inset medium-hide {% if section.settings.show_compare_text_icon == 'text' %} header-text-width {% endif %}"
+                >
+                  {% render 'dbtfy-quick-compare' %}
+                </a>
+              {% endif %}
+            </div>
             {%- if localization.available_countries or localization.available_languages -%}
               <div class="menu-drawer__localization header-localization">
                 {%- if localization.available_countries and localization.available_countries.size > 1 -%}
-                  <localization-form>
-                    {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
-                      <div>
-                        <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                          {{ 'localization.country_label' | t }}
-                        </h2>
-                        {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
-                      </div>
-                    {%- endform -%}
-                  </localization-form>
+                  {% if section.settings.enable_country_selector or section.settings.enable_country_selector_mobile %}
+                    <localization-form class="{{ desktop_localization_country }} {{ mobile_localization_country }}">
+                      {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                            {{ 'localization.country_label' | t }}
+                          </h2>
+                          {%- render 'country-localization',
+                            localPosition: 'HeaderCountryMobile',
+                            show_flags: show_flags
+                          -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {% endif %}
                 {% endif %}
 
                 {%- if localization.available_languages and localization.available_languages.size > 1 -%}
-                  <localization-form>
-                    {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
-                      <div>
-                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
-                          {{ 'localization.language_label' | t }}
-                        </h2>
-                        {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
-                      </div>
-                    {%- endform -%}
-                  </localization-form>
+                  {% if section.settings.enable_language_selector or section.settings.enable_language_selector_mobile %}
+                    <localization-form class="{{ desktop_localization_language }} {{ mobile_localization_language }}">
+                      {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                        <div>
+                          <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                            {{ 'localization.language_label' | t }}
+                          </h2>
+                          {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                        </div>
+                      {%- endform -%}
+                    </localization-form>
+                  {% endif %}
                 {%- endif -%}
               </div>
             {%- endif -%}

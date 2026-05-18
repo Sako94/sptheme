@@ -1,31 +1,71 @@
 {
   "sections": {
+    "dbtfy-breadcrumbs": {
+      "type": "dbtfy-breadcrumbs",
+      "settings": {
+        "show_on": "both",
+        "show_social_media_icons": "both",
+        "share_on_facebook": true,
+        "share_on_messenger": true,
+        "tweet_on_twitter": true,
+        "pin_on_pinterest": true,
+        "share_on_whatsapp": true,
+        "share_on_linkedin": true,
+        "share_on_reddit": true,
+        "share_on_email": true,
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "small",
+        "custom_padding_top": 36,
+        "padding___bottom": "small",
+        "custom_padding_bottom": 36
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
-        "color_scheme": "scheme-1"
+        "show_image_on": "both",
+        "height": "medium",
+        "height_mobile": "medium",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": ""
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 20,
         "columns_desktop": 4,
-        "image_ratio": "adapt",
-        "show_secondary_image": false,
+        "display_type": "grid",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "image_ratio": "inherit",
+        "image_crop_position": "inherit",
+        "image_shape": "default",
+        "show_secondary_image": "inherit",
+        "show_carousel": "inherit",
         "show_vendor": false,
         "show_rating": false,
-        "enable_filtering": true,
+        "show_description": false,
+        "show_variant_swatches": "inherit",
+        "quick_add": "standard",
+        "filter_type": "horizontal",
         "enable_sorting": true,
+        "icon_filter": "filter_alt",
+        "show_unavailable_options": true,
+        "filters_products_count_visibility": "none",
         "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
       }
     }
   },
   "order": [
+    "dbtfy-breadcrumbs",
     "banner",
     "product-grid"
   ]

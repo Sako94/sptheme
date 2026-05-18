@@ -23,6 +23,8 @@
   if currencies.size > 1
     assign show_currencies = true
   endif
+
+  assign show_flags = show_flags
 %}
 
 <div class="disclosure">
@@ -33,16 +35,25 @@
     aria-controls="{{ localPosition }}-country-results"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>
+    <span class="country__flags">
+      {%- if show_flags -%}
+        <img
+          src="https://flagcdn.com/w80/{{ localization.country.iso_code | downcase }}.png"
+          width="20"
+          height="15"
+          alt="{{ localization.country.name }}"
+          class="localization-flag"
+        >
+      {%- endif -%}
       {{- localization.country.name }} |
       {{ localization.country.currency.iso_code }}
       {{ localization.country.currency.symbol -}}
     </span>
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
-  <div class="disclosure__list-wrapper country-selector" hidden>
+  <div class="disclosure__list-wrapper country-selector {% if show_flags %} localization__flags{% endif %}" hidden>
     <div class="country-filter{% unless show_country_filter %} country-filter--no-padding{% endunless %}">
-      {% if show_country_filter %}
+      {%- if show_country_filter -%}
         <div class="field">
           <input
             class="country-filter__input field__input"
@@ -73,7 +84,7 @@
             {{- 'icon-search.svg' | inline_asset_content -}}
           </div>
         </div>
-      {% endif %}
+      {%- endif -%}
       <button
         class="country-selector__close-button button--small link"
         type="button"
@@ -87,7 +98,7 @@
       class="disclosure__list country-selector__list{% if show_currencies %} country-selector__list--with-multiple-currencies{% endif %}"
       id="{{ localPosition }}-country-results"
     >
-      {% if show_popular_countries %}
+      {%- if show_popular_countries -%}
         <ul
           role="list"
           class="list-unstyled popular-countries"
@@ -98,23 +109,20 @@
               <a
                 class="link link--text disclosure__link caption-large focus-inset"
                 href="#"
-                {% if country.iso_code == localization.country.iso_code %}
+                {% if country.iso_code == localization.country.iso_code -%}
                   aria-current="true"
-                {% endif %}
+                {%- endif -%}
                 data-value="{{ country.iso_code }}"
                 id="{{ country.name }}"
               >
-                <span
-                  {% if country.iso_code != localization.country.iso_code %}
-                    class="visibility-hidden"
-                  {% endif %}
-                >
+                <span class="{% if country.iso_code != localization.country.iso_code %}visibility-hidden{% endif %} localization-form__checkmark">
                   {{- 'icon-checkmark.svg' | inline_asset_content -}}
                 </span>
-                <span class="country">{{- country.name }}</span>
+
+                <span class="country">{{- country.name -}}</span>
                 <span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
-                  {{ country.currency.iso_code }}
-                  {{ country.currency.symbol -}}
+                  {{- country.currency.iso_code -}}
+                  {{- country.currency.symbol -}}
                 </span>
               </a>
             </li>
@@ -123,27 +131,34 @@
       {% endif %}
       <ul role="list" class="list-unstyled countries">
         {%- for country in localization.available_countries -%}
-          <li class="disclosure__item" tabindex="-1">
+          <li class="disclosure__item localization_flags" tabindex="-1">
             <a
-              class="link link--text disclosure__link caption-large focus-inset"
+              class="link link--text disclosure__link caption-large focus-inset w-full {% if show_flags %} country_flags {% endif %}"
               href="#"
-              {% if country.iso_code == localization.country.iso_code %}
-                aria-current="true"
-              {% endif %}
               data-value="{{ country.iso_code }}"
               id="{{ country.name }}"
+              {% if country.iso_code == localization.country.iso_code -%}
+                aria-current="true"
+              {%- endif -%}
             >
-              <span
-                {% if country.iso_code != localization.country.iso_code %}
-                  class="visibility-hidden"
-                {% endif %}
-              >
+              <span class="{% if country.iso_code != localization.country.iso_code %}visibility-hidden{% endif %} localization-form__checkmark">
                 {{- 'icon-checkmark.svg' | inline_asset_content -}}
               </span>
-              <span class="country">{{- country.name }}</span>
+
+              {%- if show_flags -%}
+                <img
+                  src="https://flagcdn.com/w80/{{ country.iso_code | downcase }}.png"
+                  width="20"
+                  height="15"
+                  alt="{{ country.name }}"
+                  class="localization-flag"
+                >
+              {%- endif -%}
+
+              <span class="country">{{- country.name -}}</span>
               <span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
-                {{ country.currency.iso_code }}
-                {{ country.currency.symbol -}}
+                {{- country.currency.iso_code -}}
+                {{- country.currency.symbol -}}
               </span>
             </a>
           </li>

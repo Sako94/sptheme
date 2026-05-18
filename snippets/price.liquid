@@ -35,9 +35,22 @@
     assign money_price_max = price_max | money_with_currency
   endif
 
-  if target == product and product.price_varies
+  assign show_sales_price = false
+  if compare_at_price > price
+    assign show_sales_price = true
+  endif
+
+  if show_compare_at_price == false
+    assign show_sales_price = false
+  endif
+
+  if target == product and show_sales_price
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
   endif
+
+  unless show_compare_at_price
+    assign compare_at_price = false
+  endunless
 -%}
 
 {%- unless target == null and placeholder == null -%}
@@ -48,7 +61,7 @@
       {%- if available == false %} price--sold-out{% endif -%}
       {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
       {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
-      {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+      {%- if show_sales_price %} price--no-compare{% endif -%}
       {%- if show_badges %} price--show-badge{% endif -%}
     "
   >
@@ -61,8 +74,11 @@
       <div class="price__regular">
         {%- if product.quantity_price_breaks_configured? -%}
           {%- if show_compare_at_price and compare_at_price -%}
-            {%- unless product.price_varies == false and product.compare_at_price_varies %}
-              <span class="visually-hidden visually-hidden--inline">
+            {%- unless show_sales_price == false -%}
+              <span
+                class="visually-hidden visually-hidden--inline"
+                data-show_compare_at_price="{{show_compare_at_price}}"
+              >
                 {{- 'products.product.price.regular_price' | t -}}
               </span>
               <span>
@@ -77,7 +93,7 @@
             {%- endunless -%}
           {%- endif -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular">
+          <span class="price-item price-item--regular bold">
             {{-
               'products.product.volume_pricing.price_range'
               | t: minimum: money_price_min, maximum: money_price_max
@@ -85,13 +101,13 @@
           </span>
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular">
-            {{ money_price }}
+          <span class="price-item price-item--regular bold">
+            {{- money_price -}}
           </span>
         {%- endif -%}
       </div>
       <div class="price__sale">
-        {%- unless product.price_varies == false and product.compare_at_price_varies %}
+        {%- unless show_sales_price == false %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
             <s class="price-item price-item--regular">
@@ -104,21 +120,44 @@
           </span>
         {%- endunless -%}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-        <span class="price-item price-item--sale price-item--last">
-          {{ money_price }}
+        <span class="price-item price-item--sale price-item--last bold">
+          {{- money_price -}}
         </span>
       </div>
-      {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
-        {% render 'unit-price', price: product.selected_or_first_available_variant.unit_price, measurement: product.selected_or_first_available_variant.unit_price_measurement %}
-      {%- endif -%}
+      <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
+        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+        <span class="price-item price-item--last">
+          <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+          <span aria-hidden="true">/</span>
+          <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+          <span>
+            {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+              {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+            {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+          </span>
+        </span>
+      </small>
     </div>
     {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
-      </span>
+      {% if settings.dbtfy_discount_saved %}
+        {% render 'dbtfy-discount-saved', product_compare_price: compare_at_price, product_price: price %}
+      {% else %}
+        <span class="badge price__badge-sale dbtfy-sale-badge">
+          {%- if settings.sale_badge_text != blank -%}
+            {{- settings.sale_badge_text -}}
+          {%- else -%}
+            {{- 'products.product.on_sale' | t -}}
+          {%- endif -%}
+        </span>
+      {% endif %}
 
-      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
-        {{ 'products.product.sold_out' | t }}
+      <span class="badge price__badge-sold-out dbtfy-sold-out-badge">
+        {%- if settings.sold_out_badge_text != blank -%}
+          {{- settings.sold_out_badge_text -}}
+        {%- else -%}
+          {{- 'products.product.sold_out' | t -}}
+        {%- endif -%}
       </span>
     {%- endif -%}
   </div>

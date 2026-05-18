@@ -1,7 +1,6 @@
 /* ==========================================================================
-   SoftPauses brand foundation
-   Extracted from the PDP design system. Loaded site-wide via theme.liquid.
-   All custom sections (sp-*) reference these tokens and utility classes.
+   SoftPauses brand layer for Debutify Zorix theme.
+   Brand tokens + CSS overrides targeting Debutify's class names.
    ========================================================================== */
 
 :root {
@@ -25,73 +24,80 @@
 body {
   background: var(--sp-cream);
   color: var(--sp-ink);
-  font-size: 22px;
-  line-height: 1.55;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection { background: var(--sp-poppy); color: var(--sp-cream); }
 
-/* ==========================================================================
-   Dawn-default surface overrides
-   So default Dawn pages (cart, collections, checkout, account) inherit the
-   SoftPauses look without us replacing every section. Loaded after base.css.
-   ========================================================================== */
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6,
+.heading,
+.section-heading,
+[class*="__title"],
+[class*="__heading"] {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--sp-ink);
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+}
 
-/* Buttons */
+em, i { font-style: italic; }
+h1 em, h2 em, h3 em, .h1 em, .h2 em, .h3 em { color: var(--sp-poppy); }
+
+/* Buttons (Debutify uses .button, .button--primary, etc.) */
 .button,
-.shopify-payment-button__button--unbranded,
-.button--secondary {
+.btn,
+button[type="submit"],
+.shopify-payment-button__button--unbranded {
   font-family: 'IBM Plex Sans', sans-serif !important;
   letter-spacing: 0.02em;
-  text-transform: lowercase;
   font-weight: 500;
   border-radius: 999px !important;
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
+
 .button--primary,
+.btn--primary,
+button[type="submit"]:not([class*="secondary"]):not([class*="ghost"]),
 .shopify-payment-button__button--unbranded {
   background: var(--sp-poppy) !important;
   color: var(--sp-cream) !important;
   border: none !important;
 }
 .button--primary:hover,
+.btn--primary:hover,
+button[type="submit"]:not([class*="secondary"]):not([class*="ghost"]):hover,
 .shopify-payment-button__button--unbranded:hover {
   background: var(--sp-poppy-deep) !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(237, 27, 40, 0.22);
 }
-.button--secondary {
+
+.button--secondary,
+.btn--secondary {
   background: transparent !important;
   color: var(--sp-poppy) !important;
   border: 1px solid var(--sp-poppy) !important;
 }
-.button--secondary:hover {
+.button--secondary:hover,
+.btn--secondary:hover {
   background: var(--sp-poppy) !important;
   color: var(--sp-cream) !important;
-}
-
-/* Headings */
-h1, h2, h3, h4, h5, h6,
-.h0, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'Fraunces', Georgia, serif !important;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 96, "SOFT" 50;
 }
 
 /* Cards + media */
 .card,
 .card-wrapper,
-.card-information,
-.product-card-wrapper {
-  border-radius: 4px;
+.product-card,
+[class*="-card"]:not([class*="card-text"]) {
+  border-radius: 8px;
 }
 
 /* Inputs */
-.field__input,
-.text-area,
 input[type="email"],
 input[type="text"],
 input[type="search"],
@@ -99,217 +105,104 @@ input[type="password"],
 input[type="number"],
 input[type="tel"],
 textarea,
-select {
-  border-radius: 4px !important;
+select,
+.field__input {
+  border-radius: 6px !important;
   font-family: 'IBM Plex Sans', sans-serif !important;
 }
 
-/* Links inherit brand color */
-a:not(.button):not(.sp-btn):not(.sp-wordmark):not(.sp-faq__tab) {
-  color: var(--sp-ink);
-  text-decoration-color: rgba(237, 27, 40, 0.5);
-  transition: color 0.15s;
+/* Header (Debutify) */
+.header,
+.site-header {
+  background: var(--sp-cream);
 }
-a:not(.button):not(.sp-btn):not(.sp-wordmark):not(.sp-faq__tab):hover {
-  color: var(--sp-poppy);
-}
-
-/* Header (Dawn) */
 .header__heading,
-.header__heading-link {
+.header__heading-link,
+.site-header__logo a,
+.shop-name,
+.shop-name a {
   font-family: 'Fraunces', Georgia, serif !important;
   font-weight: 500;
   font-variation-settings: "opsz" 144;
   color: var(--sp-poppy) !important;
   letter-spacing: -0.025em;
 }
-.header__menu-item {
+
+.header__menu-item,
+.site-nav__link,
+.list-menu__item {
   font-family: 'IBM Plex Sans', sans-serif !important;
   text-transform: lowercase;
   letter-spacing: 0.01em;
+  color: var(--sp-ink) !important;
+}
+.header__menu-item:hover,
+.site-nav__link:hover {
+  color: var(--sp-poppy) !important;
 }
 
-/* Footer (Dawn) — only kicks in if merchant uses Dawn footer instead of sp-footer */
-.footer {
+/* Footer */
+.footer,
+.site-footer {
   background: var(--sp-ink);
   color: rgba(250, 241, 234, 0.7);
 }
-.footer h2, .footer h3, .footer .footer-block__heading {
+.footer h2, .footer h3, .footer h4, .footer h5,
+.site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5,
+.footer-block__heading {
   color: var(--sp-cream) !important;
 }
-
-/* Cart drawer / cart page */
-.drawer__heading,
-.cart__heading {
-  font-family: 'Fraunces', Georgia, serif !important;
+.footer a, .site-footer a {
+  color: rgba(250, 241, 234, 0.65);
 }
-.totals__total-value,
-.totals__total {
-  font-family: 'Fraunces', Georgia, serif !important;
+.footer a:hover, .site-footer a:hover {
+  color: var(--sp-coral) !important;
 }
 
-/* Predictive search dropdown */
-.predictive-search,
-.search-modal__form input {
-  border-radius: 4px !important;
+/* Promo / announcement bar */
+.announcement-bar,
+.dbtfy-announcement,
+.scrolling-banner,
+.dbtfy-scrolling-banner {
+  background: var(--sp-ink) !important;
+  color: var(--sp-cream) !important;
+}
+.announcement-bar strong,
+.scrolling-banner strong {
+  color: var(--sp-shell) !important;
 }
 
-/* Section padding helper. Sections set --sp-pad-top/bottom via inline styles
-   from schema range settings; defaults below match the design rhythm. */
-.sp-section {
-  padding-top: var(--sp-pad-top, 96px);
-  padding-bottom: var(--sp-pad-bottom, 96px);
-  position: relative;
-}
-@media (max-width: 720px) {
-  .sp-section {
-    padding-top: calc(var(--sp-pad-top, 96px) * 0.66);
-    padding-bottom: calc(var(--sp-pad-bottom, 96px) * 0.66);
-  }
-}
-.sp-section--cream { background: var(--sp-cream); }
-.sp-section--blush { background: var(--sp-blush-soft); }
-.sp-section--ink { background: var(--sp-ink); color: var(--sp-cream); }
-
-.sp-wrap { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
-.sp-wrap--narrow { max-width: 720px; }
-.sp-wrap--mid { max-width: 920px; }
-@media (max-width: 720px) { .sp-wrap { padding: 0 22px; } }
-
-/* Typography */
-.sp-h1, .sp-h2, .sp-h3, .sp-h4 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 400;
-  color: var(--sp-ink);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  font-variation-settings: "opsz" 144, "SOFT" 50;
-  text-transform: lowercase;
-}
-.sp-h1 { font-size: clamp(2.5rem, 7vw, 4.4rem); line-height: 1; }
-.sp-h2 { font-size: clamp(2rem, 5vw, 3.25rem); margin-bottom: 28px; }
-.sp-h3 { font-size: clamp(1.4rem, 2.6vw, 1.875rem); margin-bottom: 16px; }
-.sp-h4 { font-size: 1.25rem; line-height: 1.25; font-weight: 500; }
-.sp-h2 em, .sp-h1 em { font-style: italic; color: var(--sp-poppy); font-variation-settings: "opsz" 144; }
-
-.sp-lede {
-  font-size: 1.1875rem;
-  line-height: 1.55;
-  color: var(--sp-ink-mid);
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-.sp-muted { color: var(--sp-ink-muted); }
-
-/* Kicker — small caps eyebrow */
-.sp-kicker {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sp-poppy);
-  margin-bottom: 18px;
-  display: inline-block;
-}
-
-/* Chapter tag — section number + label rule */
-.sp-chapter {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid var(--sp-rule);
-  padding-bottom: 14px;
-  margin-bottom: 32px;
-}
-.sp-chapter__label {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sp-poppy);
-}
-.sp-chapter__num {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--sp-ink-muted);
-  font-variation-settings: "opsz" 72;
-}
-
-/* Buttons */
-.sp-btn {
-  display: inline-block;
+/* Badges */
+.badge,
+.product-card__badge,
+.price__badge {
   background: var(--sp-poppy);
   color: var(--sp-cream);
-  padding: 18px 36px;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-decoration: none;
   border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  text-align: center;
-  text-transform: lowercase;
-  box-shadow: 0 1px 2px rgba(42, 20, 16, 0.05);
-}
-.sp-btn:hover {
-  background: var(--sp-poppy-deep);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(237, 27, 40, 0.22);
-  color: var(--sp-cream);
-}
-.sp-btn:active { transform: translateY(0); }
-.sp-btn--block { display: block; width: 100%; }
-.sp-btn--lg { padding: 22px 44px; font-size: 16px; }
-.sp-btn--sm { padding: 12px 22px; font-size: 13px; }
-.sp-btn--ghost {
-  background: transparent;
-  color: var(--sp-poppy);
-  border: 1px solid var(--sp-poppy);
-  box-shadow: none;
-}
-.sp-btn--ghost:hover { background: var(--sp-poppy); color: var(--sp-cream); }
-
-/* Wordmark */
-.sp-wordmark {
-  font-family: 'Fraunces', serif;
-  font-size: 30px;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+/* Reviews / stars */
+.rating-star,
+.review-stars,
+[class*="star"] svg {
   color: var(--sp-poppy);
-  letter-spacing: -0.025em;
-  line-height: 1;
-  display: inline-block;
-  text-decoration: none;
-  font-variation-settings: "opsz" 144;
-}
-.sp-wordmark em { font-style: italic; font-weight: 500; }
-.sp-wordmark sup {
-  font-size: 0.32em;
-  vertical-align: super;
-  margin-left: 2px;
-  font-style: normal;
+  fill: var(--sp-poppy);
 }
 
-/* Common card */
-.sp-card {
-  background: var(--sp-cream);
-  border-radius: 4px;
-  padding: 28px 22px;
-  border: 1px solid var(--sp-rule);
+/* Sticky add-to-cart bar (Debutify) */
+.dbtfy-sticky-addtocart,
+.sticky-add-to-cart {
+  background: var(--sp-cream) !important;
+  border-top: 1px solid var(--sp-rule);
 }
 
-/* Reduced motion respected by sections via @media (prefers-reduced-motion) */
-@media (prefers-reduced-motion: no-preference) {
-  .sp-rise {
-    opacity: 0;
-    animation: sp-rise 0.7s ease-out forwards;
-  }
-  @keyframes sp-rise {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: none; }
-  }
-}
+/* Color-scheme background overrides (Debutify scheme classes) */
+.color-scheme-1 { background: var(--sp-poppy); color: var(--sp-cream); }
+.color-scheme-2 { background: var(--sp-cream); color: var(--sp-ink); }
+.color-scheme-3 { background: var(--sp-blush); color: var(--sp-ink); }
+.color-scheme-4 { background: var(--sp-ink); color: var(--sp-cream); }

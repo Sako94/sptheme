@@ -25,9 +25,9 @@
             href="#"
             hreflang="{{ language.iso_code }}"
             lang="{{ language.iso_code }}"
-            {% if language.iso_code == localization.language.iso_code %}
+            {% if language.iso_code == localization.language.iso_code -%}
               aria-current="true"
-            {% endif %}
+            {%- endif %}
             data-value="{{ language.iso_code }}"
           >
             <span
@@ -37,9 +37,7 @@
             >
               {{- 'icon-checkmark.svg' | inline_asset_content -}}
             </span>
-            <span>
-              {{ language.endonym_name | capitalize }}
-            </span>
+            <span>{{- language.endonym_name | capitalize -}}</span>
           </a>
         </li>
       {%- endfor -%}

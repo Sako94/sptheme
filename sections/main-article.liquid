@@ -1,4 +1,4 @@
-{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag: preload: true }}
 
 <article class="article-template">
   {%- for block in section.blocks -%}
@@ -99,7 +99,7 @@
         class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
       >
         {%- if article.comments_count > 0 -%}
-          {%- assign anchorId = '#Comments-' | append: article.id -%}
+          {%- assign anchor_id = '#Comments-' | append: article.id -%}
 
           <h2 id="Comments-{{ article.id }}" tabindex="-1">
             {{ 'blogs.article.comments' | t: count: article.comments_count }}
@@ -126,7 +126,7 @@
                   </footer>
                 </article>
               {%- endfor -%}
-              {% render 'pagination', paginate: paginate, anchor: anchorId %}
+              {% render 'pagination', paginate: paginate, anchor: anchor_id %}
             </div>
           {% endpaginate %}
         {%- endif -%}
@@ -281,7 +281,7 @@
           {%- if blog.moderated? -%}
             <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
           {%- endif -%}
-          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+          <input type="submit" class="button button--primary" value="{{ 'blogs.article.post' | t }}">
         {% endform %}
       </div>
     </div>
@@ -312,29 +312,30 @@
           "options": [
             {
               "value": "adapt",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
+              "label": "t:sections.dbtfy-image-video-testimonial.settings.adapt_to_image"
             },
             {
               "value": "small",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
+              "label": "t:general.settings.small"
             },
             {
               "value": "medium",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
+              "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
             },
             {
               "value": "large",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
+              "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
             }
           ],
           "default": "adapt",
-          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label"
+          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
+          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
         }
       ]
     },
     {
       "type": "title",
-      "name": "t:sections.main-article.blocks.title.name",
+      "name": "t:general.settings.title",
       "limit": 1,
       "settings": [
         {
@@ -353,7 +354,7 @@
     },
     {
       "type": "content",
-      "name": "t:sections.main-article.blocks.content.name",
+      "name": "t:general.settings.content",
       "limit": 1
     },
     {
@@ -364,8 +365,16 @@
         {
           "type": "text",
           "id": "share_label",
-          "label": "t:sections.main-article.blocks.share.settings.text.label",
+          "label": "t:general.settings.text",
           "default": "t:sections.main-article.blocks.share.settings.text.default"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
         }
       ]
     }

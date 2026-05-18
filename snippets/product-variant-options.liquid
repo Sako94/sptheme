@@ -37,19 +37,37 @@
     if value.available
       assign option_disabled = false
     endif
+
+    if section.id
+      assign section_id = section.id
+    else
+      assign section_id = 'swatches'
+    endif
   -%}
 
   {%- capture input_id -%}
-    {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+    {{ section_id  }}-{{ product.id }}-{{ option.position }}-{{ forloop.index0 -}}
   {%- endcapture -%}
 
   {%- capture input_name -%}
     {{ option.name }}-{{ option.position }}
   {%- endcapture -%}
 
+  {% assign selected_variant = product.selected_variant %}
+  {% for variant in product.variants %}
+    {% if variant.title contains value and variant.image %}
+      {% assign selected_variant = variant %}
+    {% endif %}
+  {% endfor %}
+
   {%- capture input_dataset -%}
     data-product-url="{{ value.product_url }}"
     data-option-value-id="{{ value.id }}"
+    data-option-value="{{ value | handleize }}"
+    data-media-id="{{ selected_variant.featured_media.id }}"
+    {% if selected_variant.featured_media.preview_image %}
+    data-media-image="{{ selected_variant.featured_media.preview_image | image_url: width: 700, height:700  }}"
+    {% endif %}
   {%- endcapture -%}
 
   {%- capture label_unavailable -%}
@@ -58,33 +76,32 @@
     </span>
   {%- endcapture -%}
 
-  {% assign escaped_value = value | escape %}
-
   {%- if picker_type == 'swatch' -%}
+    {% comment %}theme-check-disable UnusedAssign{% endcomment %}
     {%- capture help_text -%}
-      <span class="visually-hidden">{{ escaped_value }}</span>
+      <span class="visually-hidden">{{ value | escape }}</span>
       {{ label_unavailable }}
     {%- endcapture -%}
-
     {%
       render 'swatch-input',
       id: input_id,
       name: input_name,
-      value: escaped_value,
+      value: value | escape,
       swatch: value.swatch,
       product_form_id: product_form_id,
       checked: value.selected,
       visually_disabled: option_disabled,
-      shape: block.settings.swatch_shape,
+      shape: settings.swatch_shape,
       help_text: help_text,
       additional_props: input_dataset
     %}
+
   {%- elsif picker_type == 'button' -%}
     <input
       type="radio"
       id="{{ input_id }}"
       name="{{ input_name | escape }}"
-      value="{{ escaped_value }}"
+      value="{{ value | escape }}"
       form="{{ product_form_id }}"
       {% if value.selected %}
         checked
@@ -101,7 +118,8 @@
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
-      value="{{ escaped_value }}"
+      value="{{ value | escape }}"
+      class="{% if option_disabled %}dropdown_disabled{% endif %}"
       {% if value.selected %}
         selected="selected"
       {% endif %}

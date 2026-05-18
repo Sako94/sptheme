@@ -17,15 +17,31 @@
   class="variant-item{% unless show_image %} variant-item--no-media{% endunless %}{% if item.available and item.unit_price_measurement %} variant-item--unit-price{% endif %}"
   id="Variant-{{ variant.id }}"
   data-variant-id="{{ variant.id }}"
+  data-cart-qty="{{ cart_qty }}"
 >
   <td class="variant-item__inner{% unless sku and show_sku %} variant-item__inner--no-sku{% endunless %}">
     {%- if show_image -%}
       <div class="variant-item__media">
         <div class="variant-item__image-container global-media-settings{% unless is_modal %} gradient{% endunless %}{% unless image %} variant-item__image-container--no-img{% endunless %}">
+          {%- assign img_height = 43 | divided_by: image.aspect_ratio | ceil -%}
           {% if image %}
-            {%- assign img_height = 43 | divided_by: image.aspect_ratio | ceil -%}
             {{
               image
+              | image_url: width: 86
+              | image_tag:
+                loading: 'lazy',
+                fetchpriority: 'low',
+                decoding: 'async',
+                class: 'variant-item__image',
+                width: 43,
+                height: img_height,
+                widths: '86',
+                alt: image.alt
+              | escape
+            }}
+          {% else %}
+            {{
+              product.images.first
               | image_url: width: 86
               | image_tag:
                 loading: 'lazy',
@@ -145,7 +161,16 @@
     {%- endif -%}
 
     {%- if item.available and item.unit_price_measurement -%}
-      {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+      <div class="unit-price caption">
+        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+        {{ item.unit_price | money }}
+        <span aria-hidden="true">/</span>
+        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {%- if item.unit_price_measurement.reference_value != 1 -%}
+          {{- item.unit_price_measurement.reference_value -}}
+        {%- endif -%}
+        {{ item.unit_price_measurement.reference_unit }}
+      </div>
     {%- endif -%}
   </td>
 
@@ -275,21 +300,20 @@
           {%- endif -%}
         </div>
         {% if cart_qty > 0 %}
-          <div
+          <quick-order-list-remove-button
             id="Remove-{{ variant.id }}"
-            class="quick-order-list-remove-button"
             data-index="{{ variant.id }}"
           >
-            <button
+            <a
+              href="{{ item.url_to_remove }}"
               class="button button--tertiary"
               aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
-              data-target="remove-{{ variant.id }}"
             >
               <span class="svg-wrapper">
                 {{- 'icon-remove.svg' | inline_asset_content -}}
               </span>
-            </button>
-          </div>
+            </a>
+          </quick-order-list-remove-button>
         {% endif %}
       </div>
       {%- if has_popover -%}
@@ -408,7 +432,16 @@
     {%- endif -%}
 
     {%- if item.available and item.unit_price_measurement -%}
-      {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+      <div class="unit-price caption">
+        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+        {{ item.unit_price | money }}
+        <span aria-hidden="true">/</span>
+        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {%- if item.unit_price_measurement.reference_value != 1 -%}
+          {{- item.unit_price_measurement.reference_value -}}
+        {%- endif -%}
+        {{ item.unit_price_measurement.reference_unit }}
+      </div>
     {%- endif -%}
   </td>
   <td class="variant-item__totals right small-hide medium-hide">

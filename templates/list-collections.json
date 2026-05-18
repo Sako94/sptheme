@@ -2,10 +2,28 @@
   "sections": {
     "main": {
       "type": "main-list-collections",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "title_jLQgHn": {
+              "type": "_title",
+              "settings": {
+                "title": "Collection"
+              }
+            }
+          },
+          "block_order": [
+            "title_jLQgHn"
+          ]
+        }
+      },
       "settings": {
-        "title": "Collections",
         "sort": "alphabetical",
-        "image_ratio": "square"
+        "columns_desktop": 3,
+        "columns_mobile": "2"
       }
     }
   },

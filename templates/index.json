@@ -1,321 +1,1926 @@
 {
   "sections": {
-    "promo-bar": {
-      "type": "sp-promo-bar",
-      "settings": {
-        "bg_color": "#2A1410",
-        "text_color": "#FAF1EA",
-        "highlight_color": "#FEB5AE"
-      },
+    "slideshow_CnH9TB": {
+      "type": "slideshow",
       "blocks": {
-        "m1": { "type": "message", "settings": { "text": "first order: 20% off + free shipping", "bold": true } },
-        "m2": { "type": "message", "settings": { "text": "30-day return window", "bold": false } },
-        "m3": { "type": "message", "settings": { "text": "hsa/fsa eligible", "bold": false } }
+        "slideshow_item_fkjFBc": {
+          "type": "_slideshow-item",
+          "settings": {
+            "enable_schedule": false,
+            "schedule_start": "",
+            "schedule_end": "",
+            "media_priority": "image",
+            "image_desktop": "",
+            "image_position_desktop": "top-center",
+            "image_position_mobile": "top-center",
+            "box_align": "bottom-center",
+            "box_align_mobile": "middle-center",
+            "show_text_box": false,
+            "image_overlay_opacity": 10,
+            "image_overlay_opacity_mobile": 0,
+            "color_scheme": "scheme-2",
+            "custom_color_scheme": ""
+          },
+          "blocks": {
+            "title_ey8rQJ": {
+              "type": "_title",
+              "settings": {
+                "title": "you're not losing your mind. you're losing your <em>estrogen</em>",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h1",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "title_cm6j8C": {
+              "type": "_title",
+              "settings": {
+                "title": "one patch a day  ·  24-hour transdermal release  ·  organic triple-source maca",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h3",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "description_YVcCdB": {
+              "type": "_description",
+              "settings": {
+                "description": "<h5>Soft Pauses is the ultimate daily support that powers your mind and body to go beyond limits</h5>",
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "custom",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            },
+            "double_button_9YFJgY": {
+              "type": "_double_button",
+              "settings": {
+                "button_label_1": "try soft pauses",
+                "button_link_1": "shopify://products/soft pauses-mixed-bundle-24-x-330ml",
+                "button_style_1": "button button--primary",
+                "button_size_1": "inherit",
+                "text_style_first": "inherit",
+                "button_1_icon_show": false,
+                "button_1_icon": "shopping_cart",
+                "icon_position_1": "left",
+                "button_label_2": "",
+                "button_link_2": "",
+                "button_style_2": "button button--primary",
+                "button_size_2": "inherit",
+                "text_style_second": "inherit",
+                "button_2_icon_show": false,
+                "button_2_icon": "shopping_cart",
+                "icon_position_2": "left",
+                "alignment": "justify-content-center",
+                "alignment_mobile": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_ey8rQJ",
+            "title_cm6j8C",
+            "description_YVcCdB",
+            "double_button_9YFJgY"
+          ]
+        }
       },
-      "block_order": ["m1", "m2", "m3"]
-    },
-
-    "hero": {
-      "type": "sp-pdp-hero",
+      "block_order": [
+        "slideshow_item_fkjFBc"
+      ],
       "settings": {
-        "pricing_amount": "",
-        "pricing_text": "",
-        "headline": "soft <em>pauses</em>. for the years your body is shifting.",
-        "lede": "<p><strong>a daily patch for women in perimenopause.</strong> one patch a day. organic triple-source maca. not a drug. not HRT. just daily support, made simple.</p>",
-        "cta_action": "anchor",
-        "cta_label": "shop the patch",
-        "cta_anchor": "/products/soft-pauses-daily-perimenopause-patch",
-        "fineprint": "$40 / 30-day supply  ·  free shipping  ·  30-day returns"
-      },
-      "blocks": {
-        "t1": { "type": "trust", "settings": { "headline": "4.8 / 5 stars", "subline": "12,000+ verified reviews" } },
-        "t2": { "type": "trust", "settings": { "headline": "50,000+", "subline": "women supported daily" } },
-        "t3": { "type": "trust", "settings": { "headline": "30 days", "subline": "money-back guarantee" } }
-      },
-      "block_order": ["t1", "t2", "t3"]
-    },
-
-    "stat-band": {
-      "type": "sp-stat-band",
-      "settings": {
-        "kicker": "why this exists",
-        "big": "47M",
-        "lede": "<p>women in perimenopause in the US right now. most are dismissed at the doctor's office. most try four supplements before they find one that works. most deserve better than that.</p>",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "sb1": { "type": "fact", "settings": { "num": "1 in 3", "text": "are dismissed by their doctor on the first visit." } },
-        "sb2": { "type": "fact", "settings": { "num": "10 yrs", "text": "is how long perimenopause can last. most assume it's months." } },
-        "sb3": { "type": "fact", "settings": { "num": "$140 / mo", "text": "is the average supplement stack women try before finding what works." } }
-      },
-      "block_order": ["sb1", "sb2", "sb3"]
-    },
-
-    "pain": {
-      "type": "sp-pain-agitation",
-      "settings": {
-        "chapter_label": "the wake-up call",
-        "chapter_num": "/ 01",
-        "heading": "if you've heard any of this, this is for you.",
-        "lede": "<p>you already knew something was wrong. you were right.</p>",
-        "stat_big": "",
-        "stat_text": "",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "p1": { "type": "pain", "settings": { "quote": "it's just stress.", "reframe": "it isn't just stress." } },
-        "p2": { "type": "pain", "settings": { "quote": "your labs are normal.", "reframe": "labs miss perimenopause." } },
-        "p3": { "type": "pain", "settings": { "quote": "you're too young for that.", "reframe": "it can start at 38." } },
-        "p4": { "type": "pain", "settings": { "quote": "have you tried yoga.", "reframe": "yoga is not a hormone." } },
-        "p5": { "type": "pain", "settings": { "quote": "maybe try an antidepressant.", "reframe": "it's not depression." } },
-        "p6": { "type": "pain", "settings": { "quote": "it's just part of getting older.", "reframe": "it doesn't have to be." } }
-      },
-      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"]
-    },
-
-    "mechanism": {
-      "type": "sp-mechanism",
-      "settings": {
-        "chapter_label": "the biology",
-        "chapter_num": "/ 02",
-        "heading": "what's actually happening.",
-        "lede": "<p>perimenopause is the years of hormonal turbulence before your last period. estrogen and progesterone don't taper smoothly. they swing.</p>",
-        "bio_label_now": "YOUR ESTROGEN, NOW",
-        "bio_label_before": "YOUR ESTROGEN, BEFORE 38",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "mc1": { "type": "card", "settings": { "label": "the problem", "heading": "hormones swing, not taper.", "body": "estrogen drops, spikes, drops again. your sleep, energy, mood, and focus follow. this is not a deficiency you fix once. it's a transition you support, daily." } },
-        "mc2": { "type": "card", "settings": { "label": "why a patch", "heading": "once a day, on the skin, done.", "body": "pills require a digestive system that is also doing its own thing right now. they require remembering. a patch delivers organic maca through the skin for 24 hours. peel, stick, forget about it." } },
-        "mc3": { "type": "card", "settings": { "label": "why maca", "heading": "used for centuries. studied for decades.", "body": "women in the andes have used maca to support energy and mood through major hormonal transitions for over 2,000 years. modern research backs the same use." } }
-      },
-      "block_order": ["mc1", "mc2", "mc3"]
-    },
-
-    "ingredients": {
-      "type": "sp-ingredients",
-      "settings": {
-        "chapter_label": "what's in it",
-        "chapter_num": "/ 03",
-        "heading": "four ingredients. clinical doses. nothing else.",
-        "lede": "<p>no fillers, no flavor agents, no proprietary blends, no marketing math. each patch delivers the same dose. every day.</p>",
-        "cta_text": "view the full product ->",
-        "cta_url": "/products/soft-pauses-daily-perimenopause-patch",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "i1": { "type": "ingredient", "settings": { "name": "black maca", "dose": "organic  ·  andean", "description": "the most-studied of the three. supports mental energy, focus, and the ability to actually finish a sentence again.", "fallback_asset": "sp-ing-black-maca.png", "swatch_label": "BLACK MACA", "swatch_color_1": "#2A1410", "swatch_color_2": "#5C3A33", "swatch_text_color": "#FAF1EA" } },
-        "i2": { "type": "ingredient", "settings": { "name": "red maca", "dose": "organic  ·  andean", "description": "traditionally used for hormonal balance. associated with mood support and hot-flash relief in clinical research.", "fallback_asset": "sp-ing-red-maca.png", "swatch_label": "RED MACA", "swatch_color_1": "#C8121E", "swatch_color_2": "#ED1B28", "swatch_text_color": "#FAF1EA" } },
-        "i3": { "type": "ingredient", "settings": { "name": "yellow maca", "dose": "organic  ·  andean", "description": "the most common variety. supports overall stamina and helps round out the full-spectrum extract.", "fallback_asset": "sp-ing-yellow-maca.png", "swatch_label": "YELLOW MACA", "swatch_color_1": "#C8862E", "swatch_color_2": "#E0A040", "swatch_text_color": "#2A1410" } },
-        "i4": { "type": "ingredient", "settings": { "name": "black pepper extract", "dose": "bioperine  ·  standardized", "description": "increases absorption of the maca actives. without it, your body uses a fraction of what you take.", "fallback_asset": "sp-ing-bioperine.png", "swatch_label": "BIOPERINE", "swatch_color_1": "#1A0E0A", "swatch_color_2": "#2A1410", "swatch_text_color": "#FAF1EA" } }
-      },
-      "block_order": ["i1", "i2", "i3", "i4"]
-    },
-
-    "how-it-works": {
-      "type": "sp-how-it-works",
-      "settings": {
-        "kicker": "how it works",
-        "heading": "three steps. one decision a day.",
-        "lede": "<p>peel, stick, forget about it. the only thing simpler than this routine is not having one.</p>",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "hw1": { "type": "step", "settings": { "icon": "peel", "num": "step 01", "heading": "peel", "body": "peel one patch from the daily strip. takes about three seconds. no water, no swallowing." } },
-        "hw2": { "type": "step", "settings": { "icon": "stick", "num": "step 02", "heading": "stick", "body": "place it on the inside of your forearm or shoulder. anywhere with thin, clean skin works. rotate placement daily." } },
-        "hw3": { "type": "step", "settings": { "icon": "support", "num": "step 03", "heading": "support, all day", "body": "the patch delivers organic triple-source maca through the skin for 24 hours. swap for a fresh one tomorrow morning." } }
-      },
-      "block_order": ["hw1", "hw2", "hw3"]
-    },
-
-    "clinical": {
-      "type": "sp-clinical-chart",
-      "settings": {
-        "chapter_label": "does it work",
-        "chapter_num": "/ 04",
-        "heading": "30 days in. here's what changes.",
-        "lede": "<p>we surveyed 500 women using soft pauses daily for 30 days, against a baseline they self-reported on day one.</p>",
-        "chart_label": "average improvement, day 30 vs day 1",
-        "foot": "self-reported, post-purchase survey of 500 women using soft pauses daily for 30+ days. results not from a placebo-controlled clinical trial.",
-        "side_heading": "this is the data we ran on ourselves first.",
-        "side_lede": "<p>we built this for women in our family before we built it for you. the survey above is what came back when we asked customers to put a number on it.</p>",
-        "side_muted": "independent placebo-controlled trial in progress at an accredited research partner. publication target: q3.",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "b1": { "type": "bar", "settings": { "label": "energy", "percent": 87, "value_text": "+87%" } },
-        "b2": { "type": "bar", "settings": { "label": "sleep quality", "percent": 73, "value_text": "+73%" } },
-        "b3": { "type": "bar", "settings": { "label": "mood stability", "percent": 81, "value_text": "+81%" } },
-        "b4": { "type": "bar", "settings": { "label": "mental focus", "percent": 76, "value_text": "+76%" } },
-        "b5": { "type": "bar", "settings": { "label": "hot flashes", "percent": 64, "value_text": "-64%" } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5"]
-    },
-
-    "rings": {
-      "type": "sp-rings",
-      "settings": {
-        "kicker": "before vs after 30 days",
-        "heading": "the shape of a 30-day reset.",
-        "lede": "<p>self-reported scores at day 0 (before starting) and day 30 (after consistent daily use). same questions, same women, 30 days apart.</p>",
-        "foot": "Scores from a self-reported post-purchase survey of 500 daily users. Higher = better. Not a placebo-controlled clinical measurement.",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "rg1": { "type": "ring", "settings": { "label": "mood", "before": 35, "after": 78 } },
-        "rg2": { "type": "ring", "settings": { "label": "sleep", "before": 42, "after": 81 } },
-        "rg3": { "type": "ring", "settings": { "label": "energy", "before": 38, "after": 84 } }
-      },
-      "block_order": ["rg1", "rg2", "rg3"]
-    },
-
-    "ugc": {
-      "type": "sp-ugc-reviews",
-      "settings": {
-        "kicker": "what women are saying",
-        "heading": "loved by 12,000+ real women.",
-        "rating_text": "4.8 average  ·  trustpilot verified",
-        "avg_rating": "4.8",
-        "total_text": "based on 12,432 reviews",
-        "pct_5": 88,
-        "pct_4": 8,
-        "pct_3": 3,
-        "pct_2": 1,
-        "pct_1": 0,
-        "foot": "<p><strong>customer favorite.</strong> less than 4% of customers return this product.</p>",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "u1": { "type": "review", "settings": { "quote": "i feel like myself again. not a younger version. just myself.", "name": "sarah", "age": "46", "verified": true, "fallback_asset": "sp-ugc-1.png" } },
-        "u2": { "type": "review", "settings": { "quote": "my husband said you seem more like you. i burst into tears.", "name": "jen", "age": "44", "verified": true, "fallback_asset": "sp-ugc-2.png" } },
-        "u3": { "type": "review", "settings": { "quote": "i forgot what it felt like to have steady energy through the day. it came back slowly. then it just stayed.", "name": "maria", "age": "49", "verified": true, "fallback_asset": "sp-ugc-3.png" } }
-      },
-      "block_order": ["u1", "u2", "u3"]
-    },
-
-    "press": {
-      "type": "sp-press-strip",
-      "settings": {
-        "label": "as featured in",
-        "pad_top": 56,
-        "pad_bottom": 56
-      },
-      "blocks": {
-        "pl1": { "type": "logo", "settings": { "name": "Women's Health", "style": "serif" } },
-        "pl2": { "type": "logo", "settings": { "name": "Vogue", "style": "italic" } },
-        "pl3": { "type": "logo", "settings": { "name": "FORBES", "style": "allcaps" } },
-        "pl4": { "type": "logo", "settings": { "name": "The Cut", "style": "italic" } },
-        "pl5": { "type": "logo", "settings": { "name": "GOOP", "style": "allcaps" } }
-      },
-      "block_order": ["pl1", "pl2", "pl3", "pl4", "pl5"]
-    },
-
-    "risk-free": {
-      "type": "sp-risk-free",
-      "settings": {
-        "tag": "our promise",
-        "heading": "try it for 30 days. on us.",
-        "body": "if it does not feel like it is doing something for you, send it back. no questions, no forms, no friction. that's the offer.",
-        "pad_top": 64,
-        "pad_bottom": 64
-      },
-      "blocks": {
-        "rb1": { "type": "badge", "settings": { "headline": "30 days", "subline": "full refund" } },
-        "rb2": { "type": "badge", "settings": { "headline": "HSA / FSA", "subline": "eligible via truemed" } },
-        "rb3": { "type": "badge", "settings": { "headline": "free shipping", "subline": "every order" } }
-      },
-      "block_order": ["rb1", "rb2", "rb3"]
-    },
-
-    "faq": {
-      "type": "sp-faq",
-      "settings": {
-        "heading": "questions, asked honestly.",
-        "pad_top": 96,
-        "pad_bottom": 96
-      },
-      "blocks": {
-        "tab-product": { "type": "tab", "settings": { "tab_id": "product", "label": "product" } },
-        "tab-subscription": { "type": "tab", "settings": { "tab_id": "subscription", "label": "subscription" } },
-        "f1": { "type": "item", "settings": { "tab": "product", "question": "is this HRT?", "answer": "<p>no. soft pauses is not a hormone and not a drug. it is a daily plant-based support. if you are exploring HRT, we recommend finding a menopause-trained physician.</p>" } },
-        "f2": { "type": "item", "settings": { "tab": "product", "question": "how long until i feel something?", "answer": "<p>most women report a difference in energy and mood within the first two to four weeks of daily use. give it a full 30 days.</p>" } },
-        "f3": { "type": "item", "settings": { "tab": "product", "question": "why a patch and not a pill?", "answer": "<p>pills require a digestive system, a routine, and a memory. a patch is once a day, on the skin, done.</p>" } },
-        "f4": { "type": "item", "settings": { "tab": "subscription", "question": "how does the subscription work?", "answer": "<p>your first order ships free with 20% off. after that, you get a fresh 30-day supply every 30 days at the subscription price. pause, skip, or cancel anytime in one click.</p>" } },
-        "f5": { "type": "item", "settings": { "tab": "subscription", "question": "how do i cancel?", "answer": "<p>log in, click cancel. it takes about 10 seconds. no phone calls, no chat queues.</p>" } }
-      },
-      "block_order": ["tab-product", "tab-subscription", "f1", "f2", "f3", "f4", "f5"]
-    },
-
-    "email": {
-      "type": "sp-email-capture",
-      "settings": {
-        "heading": "get $5 off your first order.",
-        "lede": "<p>plus a short, honest weekly note on perimenopause from our medical advisors. no fluff, no spam. you can unsubscribe with one click.</p>",
-        "placeholder": "your email",
-        "button_label": "get my code",
-        "success_message": "thanks. check your email.",
-        "charity_text": "<p>every order funds 1 month of menopause-related research at <strong>[research partner]</strong>. small lever, real work.</p>",
-        "pad_top": 80,
-        "pad_bottom": 80
+        "show_on": "both",
+        "container_size": "",
+        "slide_height": "large",
+        "slide_height_mobile": "medium",
+        "image_behavior": "none",
+        "show_text_below": "bottom",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "control_position": "inside",
+        "accessibility_info": "Slideshow about our brand"
       }
     },
-
-    "footer": {
-      "type": "sp-footer",
-      "settings": {
-        "wordmark": "SoftPauses",
-        "tagline": "pause. breathe. bloom.",
-        "description": "<p>a daily transdermal patch with organic triple-source maca, designed for women in perimenopause. made with women, for women, in the US.</p>",
-        "copyright": "(c) 2026 soft pauses, inc.",
-        "legal_text": "terms | privacy | accessibility",
-        "disclaimer": "soft pauses is a dietary supplement. these statements have not been evaluated by the FDA. this product is not intended to diagnose, treat, cure, or prevent any disease. consult your physician before starting any supplement, especially if you are pregnant, nursing, or taking medication.",
-        "pad_top": 64
-      },
+    "featured_collection_iTAeV4": {
+      "type": "featured-collection",
       "blocks": {
-        "fc1": { "type": "menu_column", "settings": { "heading": "shop" } },
-        "fc2": { "type": "menu_column", "settings": { "heading": "learn" } },
-        "fc3": { "type": "menu_column", "settings": { "heading": "support" } }
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_6Rc4wL": {
+              "type": "_title",
+              "settings": {
+                "title": "daily perimenopause support <strong>you don't have to think about</strong>",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": true,
+                "title_color": "#cb1279",
+                "title_line": "curve",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "inherit",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_6Rc4wL"
+          ]
+        }
       },
-      "block_order": ["fc1", "fc2", "fc3"]
-    },
-
-    "sticky-cta": {
-      "type": "sp-sticky-cta",
+      "name": "t:sections.featured-collection.name",
       "settings": {
-        "product_name": "soft pauses  ·  daily patch",
-        "meta_text": "<span class=\"pday\">$1.07/day</span>  ·  subscribe and save 20%",
-        "show_icon": true,
-        "cta_action": "anchor",
-        "cta_label": "shop the patch",
-        "cta_anchor": "/products/soft-pauses-daily-perimenopause-patch",
-        "hide_when_visible_selector": "#sp-never"
+        "show_on": "both",
+        "container_size": "page-width",
+        "collection": "soft pauses",
+        "products_to_show": 9,
+        "columns_desktop": 3,
+        "list_type": false,
+        "show_view_all": true,
+        "view_all_text": "View all",
+        "view_all_link": "",
+        "view_all_style": "button button--primary",
+        "button_size": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "custom_badge_label": "",
+        "custom_badge_icon": "local_shipping",
+        "custom_badge_bg_color": "",
+        "custom_badge_color": "",
+        "image_ratio": "100%",
+        "image_crop_position": "inherit",
+        "image_shape": "default",
+        "show_secondary_image": "inherit",
+        "show_carousel": "inherit",
+        "show_vendor": false,
+        "show_rating": false,
+        "show_description": false,
+        "show_price": true,
+        "show_variant_swatches": "inherit",
+        "show_out_of_stock_products": true,
+        "show_sold_out_badge": true,
+        "show_sale_badge": true,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "slider_on": "both",
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": true,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "middle",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_tgTHe7": {
+              "type": "_title",
+              "settings": {
+                "title": "ready-to-patch flavoured maca water",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "inherit",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_tgTHe7"
+          ]
+        },
+        "collection-list": {
+          "type": "_collection-list",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "collection_list_block_kkQrUi": {
+              "type": "_collection-list-block",
+              "settings": {
+                "collection": "automated-collection",
+                "image_position": "center-center",
+                "title": ""
+              },
+              "blocks": {}
+            },
+            "collection_list_block_6PMAgB": {
+              "type": "_collection-list-block",
+              "settings": {
+                "collection": "frontpage",
+                "image_position": "center-center",
+                "title": ""
+              },
+              "blocks": {}
+            },
+            "collection_list_block_caaGqz": {
+              "type": "_collection-list-block",
+              "settings": {
+                "collection": "tees",
+                "image_position": "center-center",
+                "title": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "collection_list_block_kkQrUi",
+            "collection_list_block_6PMAgB",
+            "collection_list_block_caaGqz"
+          ]
+        }
+      },
+      "disabled": true,
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "show_view_all": false,
+        "view_all_style": "button button--primary",
+        "button_size": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "columns_mobile": "1",
+        "slider_on": "mobile",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": true,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "comparison_table_K8mphh": {
+      "type": "comparison-table",
+      "blocks": {
+        "cta_block": {
+          "type": "_cta_block",
+          "static": true,
+          "settings": {
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_jEr3qe": {
+              "type": "_title",
+              "settings": {
+                "title": "not all perimenopause solutions are created equal.",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "size": "inherit",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "description_8E46q7": {
+              "type": "_description",
+              "settings": {
+                "description": "<p>Some electrolyte patchs promise optimal recovery and performance, but without the right mineral balance and bioavailability, they fall short of delivering real results.<br/></p><p>For effective support and recovery, we examine:</p>",
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "description_qUfyma": {
+              "type": "_description",
+              "settings": {
+                "description": "<ul><li><h3>Electrolyte absorption rate</h3></li><li><h3>Sodium concentration levels</h3></li><li><h3>Potassium balance ratios</h3></li><li><h3>Magnesium bioavailability</h3></li><li><h3>Mineral retention capacity</h3></li></ul>",
+                "alignment": "inherit",
+                "alignment_mobile": "",
+                "custom_bullet_icon": "checkmarl",
+                "text_animation": "none",
+                "glacier_speed": 5,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            },
+            "single_button_KYG8QR": {
+              "type": "_single_button",
+              "settings": {
+                "button_label": "ADD TO CART",
+                "button_link": "shopify://collections/soft pauses",
+                "button_style": "button button--primary",
+                "button_size": "inherit",
+                "text_style": "inherit",
+                "button_icon_show": true,
+                "button_icon": "Shopping Cart",
+                "icon_position": "left",
+                "alignment": "justify-content-left",
+                "alignment_mobile": "",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 36
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_jEr3qe",
+            "description_8E46q7",
+            "description_qUfyma",
+            "single_button_KYG8QR"
+          ]
+        },
+        "dbtfy-comparision-tables": {
+          "type": "_dbtfy-comparision-tables",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_comparision_table_Ua6W7U": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Digestibility Rating (Casein being 1.00)",
+                "subtitle": "",
+                "display_type": "text",
+                "shop": true,
+                "icon1": "check",
+                "icon1_color": "",
+                "text_1": "0.89",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "",
+                "text_2": "0.00"
+              },
+              "blocks": {}
+            },
+            "dbtfy_comparision_table_xFcPRP": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Threonine %",
+                "subtitle": "",
+                "display_type": "text",
+                "shop": true,
+                "icon1": "check",
+                "icon1_color": "",
+                "text_1": "9.25",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "",
+                "text_2": "2.1"
+              },
+              "blocks": {}
+            },
+            "dbtfy_comparision_table_ECqMCp": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Phenylalanine %",
+                "subtitle": "",
+                "display_type": "text",
+                "shop": true,
+                "icon1": "home",
+                "icon1_color": "",
+                "text_1": "4.28",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "",
+                "text_2": "1.1"
+              },
+              "blocks": {}
+            },
+            "dbtfy_comparision_table_fWh93g": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Histidine %",
+                "subtitle": "",
+                "display_type": "text",
+                "shop": true,
+                "icon1": "home",
+                "icon1_color": "",
+                "text_1": "5.93",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "",
+                "text_2": "1.9"
+              },
+              "blocks": {}
+            },
+            "dbtfy_comparision_table_DUcLgC": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Methionine %",
+                "subtitle": "",
+                "display_type": "image",
+                "shop": true,
+                "icon1": "checkmark",
+                "icon1_color": "#54e716",
+                "text_1": "~0.8",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "#ff0017",
+                "text_2": "0.00"
+              },
+              "blocks": {}
+            },
+            "dbtfy_comparision_table_w8mRtB": {
+              "type": "_dbtfy-comparision-table",
+              "settings": {
+                "title": "Boost Nutritional%",
+                "subtitle": "",
+                "display_type": "image",
+                "shop": true,
+                "icon1": "checkmark",
+                "icon1_color": "#54e716",
+                "text_1": "~0.8",
+                "competitor": true,
+                "icon2": "close",
+                "icon2_color": "#ff0017",
+                "text_2": "0.00"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_comparision_table_Ua6W7U",
+            "dbtfy_comparision_table_xFcPRP",
+            "dbtfy_comparision_table_ECqMCp",
+            "dbtfy_comparision_table_fWh93g",
+            "dbtfy_comparision_table_DUcLgC",
+            "dbtfy_comparision_table_w8mRtB"
+          ]
+        }
+      },
+      "name": "Comparison Table",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "hoverable": true,
+        "desktop_table_placement": "right",
+        "mobile_table_placement": "top",
+        "table_style": "centered",
+        "box_shadow_active": true,
+        "border_radius": 13,
+        "title_size": "large",
+        "title_size_mobile": "large",
+        "logo_size": 104,
+        "logo_size_mobile": 50,
+        "shop_logo": "shopify://shop_images/soft pauses-logo.png",
+        "shop_title": "pea maca",
+        "competitor_title": "collagen",
+        "table_title_size": "large",
+        "table_subtitle_size": "small",
+        "color_scheme": "custom",
+        "custom_color_scheme": "scheme-2",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_scrolling_banner_FJB4gg": {
+      "type": "dbtfy-scrolling-banner",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-scrolling-banner": {
+          "type": "_dbtfy-scrolling-banner",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_scrolling_banner_image_f4PwAg": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "",
+                "image_height_on_desktop": 100,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_image_MXRxJa": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "",
+                "image_height_on_desktop": 100,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_image_9mrWxx": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "",
+                "image_height_on_desktop": 75,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            },
+            "dbtfy_scrolling_banner_image_3GcYKT": {
+              "type": "_dbtfy-scrolling-banner_image",
+              "name": "t:general.settings.image",
+              "settings": {
+                "image": "",
+                "image_height_on_desktop": 75,
+                "image_height_on_mobile": 50
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_scrolling_banner_image_f4PwAg",
+            "dbtfy_scrolling_banner_image_MXRxJa",
+            "dbtfy_scrolling_banner_image_9mrWxx",
+            "dbtfy_scrolling_banner_image_3GcYKT"
+          ]
+        }
+      },
+      "name": "t:sections.dbtfy-scrolling-banner.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "marquee_direction": "left",
+        "animation_duration": 10,
+        "pause_on_hover": true,
+        "gap": 20,
+        "mobile_gap": 12,
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_EKaVWC": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves",
+        "flip": false,
+        "separator_color_scheme": "scheme-4",
+        "color": "#ffffff",
+        "separator_height": 89,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "rich_text_zCEfV6": {
+      "type": "rich-text",
+      "blocks": {
+        "title_zFa36b": {
+          "type": "_title",
+          "settings": {
+            "title": "we've all been <strong>there</strong>",
+            "title_text_color": "default",
+            "title_text_color_custom": "#a52a2a",
+            "custom_color": true,
+            "title_color": "#c82291",
+            "title_line": "curve",
+            "title_bg_color": "#000000",
+            "highlighted_1_border_radius": 8,
+            "highlighted_1_border_width": 0,
+            "highlighted_1_border": "solid",
+            "highlighted_1_border_color": "#003934",
+            "highlighted_1_vertical_padding": 20,
+            "highlighted_1_horizontal_padding": 20,
+            "stroke_thickness": 20,
+            "half_stroke_thickness": 40,
+            "stroke_vertical_position": 100,
+            "alignment": "text-center",
+            "alignment_mobile": "",
+            "size": "inherit",
+            "style": "inherit",
+            "icon_enable": false,
+            "icon": "lock",
+            "icon_size": "medium",
+            "icon_alignment": "align-items-center",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          },
+          "blocks": {}
+        },
+        "description_7rCgEW": {
+          "type": "_description",
+          "settings": {
+            "description": "<p>You've tried countless skincare products, each promising to be 'the one' — only to deal with breakouts, irritation, or zero results. At Soft Pauses, we've eliminated the guesswork. No harsh chemicals, no empty promises, no settling for products that don't deliver. Just clean, effective ingredients that work with your skin, not against it.</p>",
+            "alignment": "text-center",
+            "alignment_mobile": "",
+            "custom_bullet_icon": "",
+            "text_animation": "none",
+            "glacier_speed": 5,
+            "typing_speed": 50,
+            "typing_initial_delay": 0,
+            "typing_pause_duration": 2000,
+            "typing_deleting_speed": 30,
+            "typing_show_cursor": true,
+            "typing_cursor_character": "|",
+            "typing_cursor_blink_duration": 500,
+            "typing_hide_cursor_while_typing": false,
+            "padding___top": "inherit",
+            "custom_padding_top": 36,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "title_zFa36b",
+        "description_7rCgEW"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "custom_container_size": 1600,
+        "desktop_content_position": "center",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "color_scheme": "scheme-4",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "featured_product_abhDNN": {
+      "type": "featured-product",
+      "blocks": {
+        "product_text_UaUnwE": {
+          "type": "_product_text",
+          "settings": {
+            "text": "{{ closest.product.vendor }}",
+            "text_style": "uppercase",
+            "alignment": "text-left"
+          },
+          "blocks": {}
+        },
+        "product_title_QAiFq7": {
+          "type": "_product_title",
+          "settings": {
+            "size": "h1",
+            "custom_size_desktop": 40,
+            "custom_size_mobile": 15
+          },
+          "blocks": {}
+        },
+        "product_bullet_points_J7gPCP": {
+          "type": "_product_bullet-points",
+          "settings": {},
+          "blocks": {}
+        },
+        "product_rating_9K9PtM": {
+          "type": "_product_rating",
+          "disabled": true,
+          "settings": {},
+          "blocks": {}
+        },
+        "product_price_WchNPD": {
+          "type": "_product_price",
+          "settings": {
+            "hide_shipping_policy": true
+          },
+          "blocks": {}
+        },
+        "product_variant_picker_HD4zfT": {
+          "type": "_product_variant-picker",
+          "settings": {},
+          "blocks": {}
+        },
+        "product_quantity_selector_zV8jWU": {
+          "type": "_product_quantity-selector",
+          "settings": {
+            "full_width": false
+          },
+          "blocks": {}
+        },
+        "product_buy_buttons_MqVebJ": {
+          "type": "_product_buy-buttons",
+          "settings": {
+            "custom_add_to_cart_buttons": "inherit",
+            "add_to_cart_style": "button button--secondary",
+            "add_to_cart_color": "primary_color",
+            "add_to_cart__custom_background_color": "",
+            "add_to_cart__custom_text_color": "",
+            "buy_it_now_style": "button button--primary",
+            "buy_it_now_color": "secondary_color",
+            "custom_buy_it_now_background_color": "",
+            "custom_buy_it_now_text_color": "",
+            "show_gift_card_recipient": true,
+            "display_price_in_add_to_cart": false,
+            "price_position": "after-button",
+            "display_icon_in_add_to_cart": false,
+            "button_icon": "add_shopping_cart",
+            "icon_position": "after-label",
+            "dbtfy_addtocart_animation_enable": true,
+            "dbtfy_addtocart_animation_type": "tada",
+            "dbtfy_addtocart_animation_interval": 5,
+            "dbtfy_addtocart_animation_duration": 1,
+            "add_to_cart_overlay_effect": "inherit"
+          },
+          "blocks": {}
+        },
+        "product_description_6XfFf6": {
+          "type": "_product_description",
+          "settings": {
+            "show_as_separate_section": false
+          },
+          "blocks": {}
+        },
+        "product_icon_with_text_LkcYni": {
+          "type": "_product_icon-with-text",
+          "name": "t:sections.main-product.blocks.icon_with_text.name",
+          "settings": {
+            "layout": "horizontal",
+            "alignment": "align-items-center",
+            "text_size": "h4",
+            "enable_divider": false,
+            "show_separate_cards": false,
+            "color_scheme_block": "none",
+            "custom_color_scheme_block": "",
+            "icon_1": "truck",
+            "custom_icon_1": "home",
+            "heading_1": "free shipping enabled",
+            "icon_2": "recycle",
+            "custom_icon_2": "home",
+            "heading_2": "subscribe and save available",
+            "icon_3": "star",
+            "custom_icon_3": "home",
+            "heading_3": "5 star reviews",
+            "custom_icon_size": "medium"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "product_text_UaUnwE",
+        "product_title_QAiFq7",
+        "product_bullet_points_J7gPCP",
+        "product_rating_9K9PtM",
+        "product_price_WchNPD",
+        "product_variant_picker_HD4zfT",
+        "product_quantity_selector_zV8jWU",
+        "product_buy_buttons_MqVebJ",
+        "product_description_6XfFf6",
+        "product_icon_with_text_LkcYni"
+      ],
+      "name": "t:sections.featured-product.name",
+      "settings": {
+        "product": "soft pauses-mixed-bundle-24-x-330ml",
+        "show_on": "both",
+        "container_size": "page-width",
+        "enable_sticky_info": true,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "thumbnail_position": "bottom",
+        "media_fit": "contain",
+        "image_ratio": "100%",
+        "image_crop_position": "inherit",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "mobile_thumbnails": "hide",
+        "enable_progress_bar": false,
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "enable_video_control": false,
+        "product_enable_arrows": false,
+        "enable_arrows": true,
+        "arrow_color": "custom",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#030303",
+        "color_scheme": "custom",
+        "custom_color_scheme": "scheme-4",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_horizontal_ticker_qg9HTU": {
+      "type": "dbtfy-horizontal-ticker",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 10,
+            "column_gap": 10,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-horizontal-ticker-block": {
+          "type": "_dbtfy-horizontal-ticker-block",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_horizontal_ticker_cxcgFp": {
+              "type": "_dbtfy-horizontal-ticker",
+              "name": "t:sections.horizontal_ticker.name_1",
+              "settings": {
+                "star_rating": 5,
+                "text": "Perfect pre-workout boost. Smooth, clean, and powerful.",
+                "author": "<p><strong>hannah nasif - verified buyer</strong></p>",
+                "color_scheme": "scheme-1",
+                "custom_color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_9jRaqp": {
+              "type": "_dbtfy-horizontal-ticker",
+              "name": "t:sections.horizontal_ticker.name_1",
+              "settings": {
+                "star_rating": 5,
+                "text": "Finally, an perimenopause patch that boosts without the sugar overload.",
+                "author": "<p><strong>vincent yaldoo - verified buyer</strong></p>",
+                "color_scheme": "scheme-1",
+                "custom_color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_3p8bhb": {
+              "type": "_dbtfy-horizontal-ticker",
+              "name": "t:sections.horizontal_ticker.name_1",
+              "settings": {
+                "star_rating": 5,
+                "text": "Soft Pauses keeps me sharp and energized all day.",
+                "author": "<p><strong>thomas rose - verified buyer</strong></p>",
+                "color_scheme": "scheme-1",
+                "custom_color_scheme": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_horizontal_ticker_cxcgFp",
+            "dbtfy_horizontal_ticker_9jRaqp",
+            "dbtfy_horizontal_ticker_3p8bhb"
+          ]
+        }
+      },
+      "name": "t:sections.horizontal_ticker.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "border_radius": "default",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "marquee_direction": "left",
+        "animation_duration": 30,
+        "pause_on_hover": true,
+        "gap": 0,
+        "mobile_gap": 4,
+        "color_scheme": "custom",
+        "custom_color_scheme": "scheme-4",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "small",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_separator_aMck6t": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "curve_1",
+        "flip": true,
+        "separator_color_scheme": "scheme-2",
+        "color": "",
+        "separator_height": 89,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_result_section_4ihmXx": {
+      "type": "dbtfy-result-section",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_WVdTL6": {
+              "type": "_title",
+              "settings": {
+                "title": "Why Decide on Soft Pauses Patch?",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": false,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 36,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_WVdTL6"
+          ]
+        },
+        "result-section": {
+          "type": "_result-section",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "result_section_block_rTcgAk": {
+              "type": "_result-section-block",
+              "settings": {
+                "percentage": 90,
+                "result": "<p>Transform Your Daily Practice with Top-Quality Essentials.</p>",
+                "enable_icon": true,
+                "icon": ""
+              },
+              "blocks": {}
+            },
+            "result_section_block_XFktFW": {
+              "type": "_result-section-block",
+              "settings": {
+                "percentage": 92,
+                "result": "<p>This product adjustment has significantly improved their routine!</p>",
+                "enable_icon": true,
+                "icon": ""
+              },
+              "blocks": {}
+            },
+            "result_section_block_HkfdW3": {
+              "type": "_result-section-block",
+              "settings": {
+                "percentage": 95,
+                "result": "<p>Scientifically Formulated Patch to Strengthen your Immunity.</p>",
+                "enable_icon": true,
+                "icon": ""
+              },
+              "blocks": {}
+            },
+            "result_section_block_FDe4QR": {
+              "type": "_result-section-block",
+              "settings": {
+                "percentage": 99,
+                "result": "<p>Experience the Power of Soft Pauses Perimenopause Patchs for Boosted Performance</p>",
+                "enable_icon": true,
+                "icon": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "result_section_block_rTcgAk",
+            "result_section_block_XFktFW",
+            "result_section_block_HkfdW3",
+            "result_section_block_FDe4QR"
+          ]
+        }
+      },
+      "name": "t:sections.dbtfy_result_section.name",
+      "settings": {
+        "show_on": "both",
+        "image": "",
+        "enable_autoplay": true,
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "spacing": "custom",
+        "horizontal_spacing": 45,
+        "vertical_spacing": 12,
+        "horizontal_spacing_mobile": 8,
+        "vertical_spacing_mobile": 8,
+        "result_type": "donut-chart",
+        "result_placement": "result-right",
+        "rows_vertical_spacing": 15,
+        "rows_vertical_spacing_mobile": 15,
+        "result_columns": 3,
+        "result_heading": "Real People, Real Results",
+        "result_heading_color": "#000000",
+        "result_heading_font_size": "h1",
+        "result_text": "<p>Here's what our customers say about our products</p>",
+        "result_text_alignment": "left",
+        "caption": "<p>Read detailed customer stories and see the science behind our supplements.</p>",
+        "button_label": "Learn more",
+        "button_link": "shopify://products/soft pauses-mixed-bundle-24-x-330ml",
+        "button_icon": "",
+        "button_style": "button button--secondary",
+        "button_size": "inherit",
+        "add_to_cart_label": "Try New",
+        "add_to_cart_link": "shopify://products/soft pauses-berry-12-x-330ml",
+        "add_to_cart_icon": "Shopping Cart",
+        "add_to_cart_style": "button button--primary",
+        "button_size_add_to_cart": "inherit",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "custom",
+        "custom_padding_bottom": 64
+      }
+    },
+    "rich_text_TF9QhR": {
+      "type": "rich-text",
+      "blocks": {
+        "title_c37QLy": {
+          "type": "_title",
+          "settings": {
+            "title": "<strong>VitalCore Supports</strong> You, Empowers You.",
+            "title_text_color": "default",
+            "title_text_color_custom": "#a52a2a",
+            "custom_color": true,
+            "title_color": "#c82291",
+            "title_line": "curve",
+            "title_bg_color": "#000000",
+            "highlighted_1_border_radius": 8,
+            "highlighted_1_border_width": 0,
+            "highlighted_1_border": "solid",
+            "highlighted_1_border_color": "#003934",
+            "highlighted_1_vertical_padding": 20,
+            "highlighted_1_horizontal_padding": 20,
+            "stroke_thickness": 20,
+            "half_stroke_thickness": 40,
+            "stroke_vertical_position": 100,
+            "alignment": "text-center",
+            "alignment_mobile": "",
+            "size": "inherit",
+            "style": "inherit",
+            "icon_enable": false,
+            "icon": "lock",
+            "icon_size": "medium",
+            "icon_alignment": "align-items-center",
+            "padding___top": "custom",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          },
+          "blocks": {}
+        },
+        "description_CQG4gz": {
+          "type": "_description",
+          "settings": {
+            "description": "<p>VitalCore offers premium, bioavailable ingredients that blend naturally into your day — regardless of your goals.</p>",
+            "alignment": "text-center",
+            "alignment_mobile": "",
+            "custom_bullet_icon": "",
+            "text_animation": "none",
+            "glacier_speed": 5,
+            "typing_speed": 50,
+            "typing_initial_delay": 0,
+            "typing_pause_duration": 2000,
+            "typing_deleting_speed": 30,
+            "typing_show_cursor": true,
+            "typing_cursor_character": "|",
+            "typing_cursor_blink_duration": 500,
+            "typing_hide_cursor_while_typing": false,
+            "padding___top": "small",
+            "custom_padding_top": 36,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          },
+          "blocks": {}
+        },
+        "double_button_tCnWT4": {
+          "type": "_double_button",
+          "name": "t:blocks.double_button.heading",
+          "settings": {
+            "button_label_1": "Explore Our Range",
+            "button_link_1": "shopify://products/soft pauses-berry-12-x-330ml",
+            "button_style_1": "button button--primary",
+            "button_size_1": "inherit",
+            "text_style_first": "inherit",
+            "button_1_icon_show": false,
+            "button_1_icon": "shopping_cart",
+            "icon_position_1": "left",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "button button--primary",
+            "button_size_2": "inherit",
+            "text_style_second": "inherit",
+            "button_2_icon_show": false,
+            "button_2_icon": "shopping_cart",
+            "icon_position_2": "left",
+            "alignment": "justify-content-center",
+            "alignment_mobile": "",
+            "padding___top": "inherit",
+            "custom_padding_top": 0,
+            "padding___bottom": "custom",
+            "custom_padding_bottom": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "title_c37QLy",
+        "description_CQG4gz",
+        "double_button_tCnWT4"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-full",
+        "custom_container_size": 1600,
+        "desktop_content_position": "center",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 12,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 12
+      }
+    },
+    "dbtfy_horizontal_ticker_MahMMi": {
+      "type": "dbtfy-horizontal-ticker",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-horizontal-ticker-block": {
+          "type": "_dbtfy-horizontal-ticker-block",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_horizontal_ticker_image_xchJ6W": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_khNPK3": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_LCh639": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_pLfrMp": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_horizontal_ticker_image_xchJ6W",
+            "dbtfy_horizontal_ticker_image_khNPK3",
+            "dbtfy_horizontal_ticker_image_LCh639",
+            "dbtfy_horizontal_ticker_image_pLfrMp"
+          ]
+        }
+      },
+      "disabled": true,
+      "name": "t:sections.horizontal_ticker.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "border_radius": "default",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "marquee_direction": "left",
+        "animation_duration": 40,
+        "pause_on_hover": true,
+        "gap": 0,
+        "mobile_gap": 0,
+        "color_scheme": "scheme-2",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_horizontal_ticker_ApMzkW": {
+      "type": "dbtfy-horizontal-ticker",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        },
+        "dbtfy-horizontal-ticker-block": {
+          "type": "_dbtfy-horizontal-ticker-block",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_horizontal_ticker_image_pG6EBf": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_Pw9mBR": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_zPDqhg": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_CzAibw": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            },
+            "dbtfy_horizontal_ticker_image_iiMiQR": {
+              "type": "_dbtfy-horizontal-ticker_image",
+              "name": "t:general.settings.image",
+              "settings": {},
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_horizontal_ticker_image_pG6EBf",
+            "dbtfy_horizontal_ticker_image_Pw9mBR",
+            "dbtfy_horizontal_ticker_image_zPDqhg",
+            "dbtfy_horizontal_ticker_image_CzAibw",
+            "dbtfy_horizontal_ticker_image_iiMiQR"
+          ]
+        }
+      },
+      "disabled": true,
+      "name": "t:sections.horizontal_ticker.name",
+      "settings": {
+        "show_on": "both",
+        "show_overlay": false,
+        "image_overlay_opacity": 0,
+        "border_radius": "default",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "marquee_direction": "right",
+        "animation_duration": 40,
+        "pause_on_hover": true,
+        "gap": 0,
+        "mobile_gap": 0,
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "featured_blog_9p4cDM": {
+      "type": "featured-blog",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 2,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "none",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {}
+        }
+      },
+      "name": "t:sections.featured-blog.name",
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "blog": "news",
+        "post_limit": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "background_overlay": false,
+        "show_image": true,
+        "image_ratio": "75%",
+        "image_crop_position": "inherit",
+        "show_date": false,
+        "show_author": false,
+        "show_view_all": false,
+        "button_style": "button button--primary",
+        "button_size": "inherit",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "description_word_count": 15,
+        "show_tags": false,
+        "show_comments": false,
+        "slider_on": "both",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": false,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "scheme-1",
+        "padding___top": "inherit",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
+      }
+    },
+    "dbtfy_testimonials_Uf39nq": {
+      "type": "dbtfy-testimonials",
+      "blocks": {
+        "heading": {
+          "type": "_heading",
+          "static": true,
+          "settings": {
+            "as_column": false,
+            "columns": 1,
+            "row_gap": 20,
+            "column_gap": 20,
+            "columns_mobile": 1,
+            "row_gap_mobile": 20,
+            "column_gap_mobile": 20,
+            "padding___top": "none",
+            "custom_padding_top": 36,
+            "padding___bottom": "small",
+            "custom_padding_bottom": 36
+          },
+          "blocks": {
+            "title_WiMAVJ": {
+              "type": "_title",
+              "settings": {
+                "title": "Worn & Loved",
+                "title_text_color": "default",
+                "title_text_color_custom": "#a52a2a",
+                "custom_color": true,
+                "title_color": "#000000",
+                "title_line": "none",
+                "title_bg_color": "#000000",
+                "highlighted_1_border_radius": 8,
+                "highlighted_1_border_width": 0,
+                "highlighted_1_border": "solid",
+                "highlighted_1_border_color": "#003934",
+                "highlighted_1_vertical_padding": 20,
+                "highlighted_1_horizontal_padding": 20,
+                "stroke_thickness": 20,
+                "half_stroke_thickness": 40,
+                "stroke_vertical_position": 100,
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "size": "h2",
+                "style": "inherit",
+                "icon_enable": false,
+                "icon": "lock",
+                "icon_size": "medium",
+                "icon_alignment": "align-items-center",
+                "padding___top": "inherit",
+                "custom_padding_top": 0,
+                "padding___bottom": "extra_small",
+                "custom_padding_bottom": 16
+              },
+              "blocks": {}
+            },
+            "caption_rpXTpC": {
+              "type": "_caption",
+              "settings": {
+                "caption": "Real stories from real customers rocking real Soft Pauses",
+                "alignment": "text-center",
+                "alignment_mobile": "",
+                "text_style": "caption-with-letter-spacing",
+                "padding___top": "custom",
+                "custom_padding_top": 0,
+                "padding___bottom": "inherit",
+                "custom_padding_bottom": 20
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_WiMAVJ",
+            "caption_rpXTpC"
+          ]
+        },
+        "testimonials": {
+          "type": "_dbtfy-testimonials",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "dbtfy_testimonial_item_rg7aUe": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "image": "",
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "badge_1": "badge 1",
+                "badge_2": "badge 2",
+                "text": "<p>Discover the Health Advantages of Soft Pauses Patch and Boost Your Energy Explore the scientific research behind the ingredients in Soft Pauses Patch and how they benefit your body Uncover the scientific evidence supporting the health advantages of Soft Pauses Patch and its energy-boosting properties</p>",
+                "date": "01-05-2025",
+                "profession": "",
+                "author_image": "",
+                "author": "Jonny Alok",
+                "verified_badge": "Verified",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_testimonial_item_4Hp4tJ": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "badge_1": "badge 1",
+                "badge_2": "badge 2",
+                "text": "<p>Boost Your Productivity with ETGery Power Patchs. Explore the unique ingredients in ETGery Power Patchs that set them apart as a productivity-boosting choice s a productivity-boosting choice <strong>for sustained energy, focus, and peak daily performance.</strong></p>",
+                "date": "18-8-2025",
+                "profession": "",
+                "author_image": "",
+                "author": "Noah Parker",
+                "verified_badge": "Verified",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "dbtfy_testimonial_item_d73kDL": {
+              "type": "_dbtfy-testimonial-item",
+              "settings": {
+                "star_rating": 5,
+                "video_link": "",
+                "enable_autoplay": false,
+                "enalbe_mute": false,
+                "badge_1": "badge 1",
+                "badge_2": "badge 2",
+                "text": "<p>Unlock Health Benefits with Each Sip of Soft Pauses Patchs. Enhance your well-being with every sip of Soft Pauses Patchs. Experience a boost in your health with every sip of Soft Pauses Patchs. Improve your well-being one sip at a time.</p>",
+                "date": "08-06-2025",
+                "profession": "",
+                "author_image": "",
+                "author": "Liam Brooks",
+                "verified_badge": "Verified",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dbtfy_testimonial_item_rg7aUe",
+            "dbtfy_testimonial_item_4Hp4tJ",
+            "dbtfy_testimonial_item_d73kDL"
+          ]
+        }
+      },
+      "settings": {
+        "show_on": "both",
+        "container_size": "page-width",
+        "display_type": "grid",
+        "layout": "layout_1",
+        "pattern_bg": "none",
+        "pattern_color": "#a52a2a",
+        "pattern_size": 20,
+        "pattern_size_thickness": 1,
+        "pattern_opacity": 50,
+        "columns_desktop": 3,
+        "enable_star_rating": true,
+        "enable_author_image": true,
+        "enable_line_before_author_name": false,
+        "enable_default_avatar": false,
+        "enable_author_name": true,
+        "enable_paragraph": true,
+        "enable_compay_profession": true,
+        "enable_date": true,
+        "date_format": "1",
+        "profile_picture_style": "circle",
+        "user_data_location": "above",
+        "profile_content_alignment": "center",
+        "review_content_aignment": "center",
+        "border_radius": "default",
+        "border_radius_custom": 10,
+        "media_position": "image-first",
+        "enable_quotation_icon": false,
+        "icon": "format_quote",
+        "icon_position": "right",
+        "icon_height": "medium",
+        "icon_height_mobile": "medium",
+        "line_limit": 4,
+        "enable_read_more": true,
+        "button_style": "button button--primary",
+        "button_size": "inherit",
+        "read_more_label": "Show more",
+        "read_less_label": "Show less",
+        "enable_read_more_shadow": false,
+        "show_more_gradient": "",
+        "show_more_gradient_height": 40,
+        "slider_on": "both",
+        "enable_autoplay": false,
+        "autoplay_speed": 5,
+        "enable_loop": true,
+        "enable_dots": true,
+        "enable_arrows": true,
+        "arrow_color": "inherit",
+        "custom_arrow_color": "#ffffff",
+        "custom_arrow_background_color": "#7559ff",
+        "arrow_position": "bottom",
+        "block_color": "custom",
+        "color_scheme_block": "scheme-2",
+        "custom_color_scheme_block": "",
+        "color_scheme": "scheme-1",
+        "custom_color_scheme": "",
+        "padding___top": "inherit",
+        "custom_padding_top": 12,
+        "padding___bottom": "inherit",
+        "custom_padding_bottom": 12
+      }
+    },
+    "dbtfy_separator_iTMFxT": {
+      "type": "dbtfy-separator",
+      "name": "Separator",
+      "settings": {
+        "show_on": "both",
+        "container_size": "",
+        "opacity": 100,
+        "separator_type": "waves_animated",
+        "flip": true,
+        "separator_color_scheme": "custom",
+        "color": "#ffffff",
+        "separator_height": 89,
+        "color_scheme": "scheme-4",
+        "custom_color_scheme": "",
+        "padding___top": "none",
+        "custom_padding_top": 36,
+        "padding___bottom": "none",
+        "custom_padding_bottom": 36
       }
     }
   },
   "order": [
-    "promo-bar",
-    "hero",
-    "stat-band",
-    "pain",
-    "mechanism",
-    "ingredients",
-    "how-it-works",
-    "clinical",
-    "rings",
-    "ugc",
-    "press",
-    "risk-free",
-    "faq",
-    "email",
-    "footer",
-    "sticky-cta"
+    "slideshow_CnH9TB",
+    "featured_collection_iTAeV4",
+    "collection_list",
+    "comparison_table_K8mphh",
+    "dbtfy_scrolling_banner_FJB4gg",
+    "dbtfy_separator_EKaVWC",
+    "rich_text_zCEfV6",
+    "featured_product_abhDNN",
+    "dbtfy_horizontal_ticker_qg9HTU",
+    "dbtfy_separator_aMck6t",
+    "dbtfy_result_section_4ihmXx",
+    "rich_text_TF9QhR",
+    "dbtfy_horizontal_ticker_MahMMi",
+    "dbtfy_horizontal_ticker_ApMzkW",
+    "featured_blog_9p4cDM",
+    "dbtfy_testimonials_Uf39nq",
+    "dbtfy_separator_iTMFxT"
   ]
 }

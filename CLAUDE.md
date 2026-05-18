@@ -9,7 +9,21 @@ Context for any AI agent (or human) working on this Shopify theme.
 ## What this is
 
 OS 2.0 Shopify theme for **SoftPauses**, a perimenopause support patch brand.
-Scaffolded from Dawn 15.4.1, with custom `sp-*` sections layered on top.
+**Base: Debutify Zorix 8.14** (premium CRO theme). The previous Dawn-based
+build was archived in git history (commits before c614ed9). Debutify gives us
+a much larger pre-built section library and high-converting widgets we used
+to hand-build. SoftPauses brand is layered on top via:
+- `assets/sp-base.css` (brand tokens + Debutify class overrides)
+- `config/settings_data.json` (palette + fonts overridden for brand)
+- `layout/theme.liquid` (loads Fraunces + IBM Plex Sans, sp-base.css)
+- `templates/index.json` and `templates/product.json` (rewritten with
+  SoftPauses copy using Debutify's sections)
+
+The hand-built `sp-*` sections from the Dawn era are gone — Debutify has
+equivalents (or richer ones) already. Our generated brand images
+(`assets/sp-ing-*.png`, `sp-ugc-*.png`, `sp-advisor-*.png`,
+`sp-patch-on-wrist.png`, `sp-pouch-hero.png`) survived the migration and are
+still in `assets/`. Wire them via Theme Editor image_picker fields.
 
 - Branch convention: dev work happens on `claude/shopify-theme-setup-pyjWK`.
 - Package + release lives at `releases/SoftPauses-X.Y.Z.zip`. Bump

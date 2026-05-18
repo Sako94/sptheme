@@ -4,30 +4,46 @@
   Usage:
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
+{%- assign label = label | escape -%}
+{%- assign color = color | escape -%}
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
-      <li>
+      <li class="{% if section.settings.active_badge %} active_menu {% endif %}">
         {%- if link.links != blank -%}
-          <header-menu>
+          <header-menu
+            data-hover="{% if section.settings.open_dropdown_hover %}true{% else %}false{% endif %}"
+          >
             <details id="Details-HeaderMenu-{{ forloop.index }}">
               <summary
                 id="HeaderMenu-{{ link.handle }}"
-                class="header__menu-item list-menu__item link focus-inset"
+                class="header__menu-item list-menu__item link focus-inset font-size-custom {% if link.current %} list-menu__item--active{% endif %}"
               >
+                {% if section.settings.open_dropdown_hover %}
+                  <a
+                    id="HeaderMenu-{{ link.handle }}"
+                    href="{{ link.url }}"
+                    class="header__menu-item open-menu list-menu__item focus-inset font-size-custom"
+                    {% if link.current %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                {% endif %}
                 <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
+                  class="{% if link.current %}header__active-menu-item{% endif %}"
+                  style="{% if link.title == label %}color: {{ color }};{% endif %}"
                 >
                   {{- link.title | escape -}}
                 </span>
+                {% if section.settings.open_dropdown_hover %}
+                  </a>
+                {% endif %}
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
               <ul
                 id="HeaderMenu-MenuList-{{ forloop.index }}"
-                class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+                class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.custom_menu_color_scheme }} dbtfy-color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
                 role="list"
                 tabindex="-1"
               >
@@ -45,34 +61,53 @@
                         {{ childlink.title | escape }}
                       </a>
                     {%- else -%}
-                      <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
-                        <summary
-                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                          class="header__menu-item link link--text list-menu__item focus-inset caption-large"
-                        >
-                          <span>{{ childlink.title | escape }}</span>
-                          {{- 'icon-caret.svg' | inline_asset_content -}}
-                        </summary>
-                        <ul
-                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                          class="header__submenu list-menu motion-reduce"
-                        >
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      </details>
+                      <header-menu
+                        data-hover="{% if section.settings.open_dropdown_hover %}true{% else %}false{% endif %}"
+                      >
+                        <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
+                          <summary
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            class="header__menu-item link link--text list-menu__item focus-inset caption-large dropdown-font-size"
+                          >
+                            <span>
+                              {% if section.settings.open_dropdown_hover %}
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}"
+                                  href="{{ link.url }}"
+                                  class="header__menu-item open-menu list-menu__item focus-inset font-size-custom"
+                                  {% if link.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                              {% endif %}
+                              {{ childlink.title | escape }}
+                              {% if section.settings.open_dropdown_hover %}
+                                </a>
+                              {% endif %}
+                            </span>
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                          </summary>
+                          <ul
+                            id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                            class="header__submenu list-menu motion-reduce"
+                          >
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="header__menu-item list-menu__item link link--text focus-inset caption-large dropdown-font-size-level-2{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      </header-menu>
                     {%- endif -%}
                   </li>
                 {%- endfor -%}
@@ -83,15 +118,14 @@
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
-            class="header__menu-item list-menu__item link link--text focus-inset"
+            class="header__menu-item list-menu__item link link--text focus-inset font-size-custom"
             {% if link.current %}
               aria-current="page"
             {% endif %}
           >
             <span
-              {%- if link.current %}
-                class="header__active-menu-item"
-              {% endif %}
+              class="{%- if link.current %} header__active-menu-item{% endif %}"
+              style="{% if link.title == label %}color: {{ color }};{% endif %}"
             >
               {{- link.title | escape -}}
             </span>

@@ -12,11 +12,18 @@
     },
     "social": {
       "alt_text": {
+        "copy": "Copy",
         "share_on_facebook": "Share on Facebook",
         "share_on_twitter": "Share on X",
-        "share_on_pinterest": "Pin on Pinterest"
+        "share_on_pinterest": "Pin on Pinterest",
+        "share_on_whatsapp": "Share on WhatsApp",
+        "share_on_linkedin": "Share on LinkedIn",
+        "share_on_reddit": "Share on Reddit",
+        "share_on_email": "Share on Email",
+        "share_on_messenger": "Share on Messenger"
       },
       "links": {
+        "copy_link": "Copy link",
         "twitter": "X (Twitter)",
         "facebook": "Facebook",
         "pinterest": "Pinterest",
@@ -35,6 +42,7 @@
       "next": "Next page",
       "previous": "Previous page"
     },
+    "breadcrumb": "home",
     "search": {
       "search": "Search",
       "reset": "Clear search term"
@@ -55,12 +63,20 @@
       "next_slide": "Slide right",
       "previous_slide": "Slide left",
       "name": "Slider"
-    }
+    },
+    "section": {
+      "section_id": "Click to copy section ID",
+      "copied_id": "Copied section ID"
+    },
+    "save": "SAVE"
   },
   "newsletter": {
     "label": "Email",
     "success": "Thanks for subscribing",
-    "button_label": "Subscribe"
+    "error": "Invalid or Duplicate email address",
+    "button_label": "Subscribe",
+    "email_marketing": "Subscribe to email marketing",
+    "name_label": "Full name"
   },
   "accessibility": {
     "skip_to_text": "Skip to content",
@@ -129,7 +145,6 @@
         "play_model": "Play 3D Viewer",
         "play_video": "Play video"
       },
-      "nested_label": "{{ title }} for {{ parent_title }}",
       "quantity": {
         "label": "Quantity",
         "input_label": "Quantity for {{ product }}",
@@ -141,14 +156,13 @@
         "min_of": "Min {{ quantity }}",
         "max_of": "Max {{ quantity }}",
         "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> in cart",
-        "in_cart_aria_label": "Quantity ({{ quantity }} in cart)",
         "note": "View quantity rules"
       },
       "volume_pricing": {
         "title": "Volume Pricing",
         "note": "Volume pricing available",
         "minimum": "{{ quantity }}+",
-        "price_at_each_html": "at {{ price }}/ea",
+        "price_at_each": "at {{ price }}/ea",
         "price_range": "{{ minimum }} - {{ maximum }}"
       },
       "pickup_availability": {
@@ -179,7 +193,13 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "review": {
+        "load_more": "Load more",
+        "file_size": "File limit is 5 MB",
+        "media_required": "Media is required",
+        "max_file": "Max file size is 5 MB."
+      }
     },
     "modal": {
       "label": "Media gallery"
@@ -258,7 +278,10 @@
         "comment": "Comment",
         "send": "Send",
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
-        "error_heading": "Please adjust the following:"
+        "error_heading": "Please adjust the following:",
+        "email_require": "This field is required for the form to work properly.",
+        "one_email_error": "Please ensure that there is one email block for proper functionality.",
+        "email_error": "Please ensure that there is only one email block for proper functionality."
       }
     },
     "404": {
@@ -274,7 +297,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -309,6 +331,10 @@
         "quantity": "Quantity",
         "image": "Product image"
       },
+      "discount": {
+        "apply": "Apply a discount code here",
+        "discount_replace": "Are you sure you want to replace the current discount?"
+      },
       "update": "Update",
       "login": {
         "title": "Have an account?",
@@ -326,6 +352,13 @@
     "featured_collection": {
       "view_all": "View all",
       "view_all_label": "View all products in the {{ collection_name }} collection"
+    },
+    "facebook-testimonials": {
+      "like": "Like",
+      "replay": "Reply",
+      "comment": "Comment",
+      "comments": "Comments",
+      "share": "Share"
     },
     "collection_list": {
       "view_all": "View all"
@@ -374,6 +407,33 @@
       "min_error": "This item has a minimum of {{ min }}",
       "max_error": "This item has a maximum of {{ max }}",
       "step_error": "You can only add this item in increments of {{ step }}"
+    },
+    "age-check": {
+      "month_list": {
+        "label": "Month",
+        "jan": "January",
+        "feb": "February",
+        "mar": "March",
+        "apr": "April",
+        "may": "May",
+        "jun": "June",
+        "jul": "July",
+        "aug": "August",
+        "sep": "September",
+        "oct": "October",
+        "nov": "November",
+        "dec": "December"
+      }
+    },
+    "sales-popup": {
+      "disable_popup": "Don't show again",
+      "powered_by_debutify": "Powered by debutify"
+    },
+    "order-feedback": {
+      "example_name": "E.g. My friend Leo"
+    },
+    "instagram_story": {
+      "minute": "minutes"
     }
   },
   "localization": {
@@ -386,6 +446,7 @@
     "country_results_count": "{{ count }} countries/regions found"
   },
   "customer": {
+    "customer_tag": "Customer",
     "account": {
       "title": "Account",
       "details": "Account details",
@@ -527,5 +588,69 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "widgets": {
+    "whatsapp_chat": {
+      "title": "Type a message..."
+    },
+    "wishlist": {
+      "name": "Wishlist",
+      "add_to_wishlist_text": "Add to Wish list",
+      "remove_from_wishlist_text": "Remove from Wish list",
+      "empty_wishlist_text": "Your wishlist is currently empty.",
+      "share_wishlist_text": "Share Wish list",
+      "wishlist_icon_text": "Show wishlist cart",
+      "drawer_title": "Your wishlist",
+      "empty_drawer": "Your wishlist is empty"
+    },
+    "quick_compare": {
+      "name": "Compare",
+      "remove_from_compare_text": "Remove from Quick compare",
+      "add_to_compare_text": "Add to Quick compare",
+      "title_modal": "Quick compare",
+      "empty_table": "Currently there are no items in quick compare list",
+      "images_cell": "Product image",
+      "title_cell": "Product title",
+      "price_cell": "Price",
+      "type_cell": "Type",
+      "vendor_cell": "Vendor",
+      "collections_cell": "Collections",
+      "tags_cell": "Tags",
+      "short_description_cell": "Short descriptions",
+      "view_more": "View more"
+    },
+    "order_tracking": {
+      "input_placeholder": "Enter your tracking number...",
+      "button_text": "Track my order"
+    },
+    "conditional_gift": {
+      "congratulation_text": "Congrats! You added {{ title }} to your cart."
+    },
+    "agree_to_terms": {
+      "order_title": "I agree terms and conditions.",
+      "yes_label": "Yes"
+    },
+    "gift_wrap": {
+      "checkbox_label": "Add a gift box/wrap",
+      "text_field_label": "Gift message",
+      "text_field_placeholder": "Write your gift message here..."
+    }
+  },
+  "block_limit": {
+    "block": "Maximum limit reached: Only 5 blocks are allowed in Stacked image block."
+  },
+  "widget_limit": {
+    "title": "Upgrade Required",
+    "message": "You're trying to access widgets/sections not included in your current plan.",
+    "show_details": "Show Extra Widgets/Sections",
+    "hide_details": "Hide Extra Widgets/Sections",
+    "upgrade_prompt": "Upgrade now to unlock more powerful widgets/sections and grow your store faster! 🚀",
+    "free_plan_only": "Upgrade now to unlock more powerful widgets/sections and grow your store faster! 🚀",
+    "contact_support": "If you need further assistance, feel free to contact our support team.",
+    "upgrade_button": "Upgrade",
+    "learn_how": "Learn How to Fix This",
+    "enabled_widget_list": "Extra Widgets/Sections that you need to disable",
+    "enabled_section_list": "Enabled Section List",
+    "current_plan": "Your current plan is"
   }
 }
