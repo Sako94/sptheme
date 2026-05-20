@@ -1,11 +1,28 @@
-{{ 'customer.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'customer.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'customer.js' | asset_url }}" defer></script>
 
-{% render 'section-padding', section: section %}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
 
 {%- paginate customer.addresses by 5 -%}
   <div class="customer addresses section-{{ section.id }}-padding" data-customer-addresses>
+    <svg style="display: none">
+      <symbol id="icon-caret" viewBox="0 0 10 6">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+      </symbol>
+    </svg>
     <h1>{{ 'customer.addresses.title' | t }}</h1>
     <a href="{{ routes.account_url }}">
       {{ 'customer.account.return' | t }}
@@ -99,9 +116,9 @@
               >
                 {{ all_country_option_tags }}
               </select>
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <use href="#icon-caret" />
+              </svg>
             </div>
           </div>
           <div id="AddressProvinceContainerNew" style="display: none">
@@ -113,9 +130,9 @@
                 data-default="{{ form.province }}"
                 autocomplete="address-level1"
               ></select>
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                <use href="#icon-caret" />
+              </svg>
             </div>
           </div>
           <div class="field">
@@ -262,9 +279,9 @@
                   >
                     {{ all_country_option_tags }}
                   </select>
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                    <use href="#icon-caret" />
+                  </svg>
                 </div>
               </div>
               <div id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
@@ -278,9 +295,9 @@
                     data-default="{{ form.province }}"
                     autocomplete="address-level1"
                   ></select>
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                    <use href="#icon-caret" />
+                  </svg>
                 </div>
               </div>
               <div class="field">
@@ -329,9 +346,9 @@
             {%- if paginate.previous -%}
               <li>
                 <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                  </svg>
                 </a>
               </li>
             {%- endif -%}
@@ -357,9 +374,9 @@
             {%- if paginate.next -%}
               <li>
                 <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                  </svg>
                 </a>
               </li>
             {%- endif -%}
@@ -371,9 +388,9 @@
 {%- endpaginate -%}
 
 <script>
-  window.addEventListener('load', () => {
+  window.onload = () => {
     typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
-  });
+  };
 </script>
 
 {% schema %}
@@ -382,90 +399,26 @@
   "settings": [
     {
       "type": "header",
-      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
-    },
-    {
-      "type": "select",
-      "id": "padding___top",
-      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
-      "default": "inherit",
-      "options": [
-        {
-          "value": "inherit",
-          "label": "t:general.settings.size.option__1"
-        },
-        {
-          "value": "none",
-          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
-        },
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        },
-        {
-          "value": "custom",
-          "label": "t:general.settings.size.option__9"
-        }
-      ]
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
-      "id": "custom_padding_top",
+      "id": "padding_top",
       "min": 0,
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding_section.custom_top",
+      "label": "t:sections.all.padding.padding_top",
       "default": 36
     },
     {
-      "type": "select",
-      "id": "padding___bottom",
-      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
-      "default": "inherit",
-      "options": [
-        {
-          "value": "inherit",
-          "label": "t:general.settings.size.option__1"
-        },
-        {
-          "value": "none",
-          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
-        },
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        },
-        {
-          "value": "custom",
-          "label": "t:general.settings.size.option__9"
-        }
-      ]
-    },
-    {
       "type": "range",
-      "id": "custom_padding_bottom",
+      "id": "padding_bottom",
       "min": 0,
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding_section.custom_bottom",
+      "label": "t:sections.all.padding.padding_bottom",
       "default": 36
     }
   ]

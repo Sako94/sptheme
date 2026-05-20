@@ -1,16 +1,13 @@
-{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-{{ 'component-collection-hero.css' | asset_url | stylesheet_tag: preload: true }}
-
 {%- style -%}
   @media screen and (max-width: 749px) {
     .collection-hero--with-image .collection-hero__inner {
-      padding-bottom: calc({{settings.media_shadow_vertical_offset | at_least: 0}}px + 2rem);
+      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
     }
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient collection-banner--{{ section.settings.height }} collection-banner--{{ section.settings.height_mobile }}-mobile">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+  <div class="collection-hero__inner page-width">
     <div class="collection-hero__text-wrapper">
       <h1 class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
@@ -18,12 +15,12 @@
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div class="collection-hero__description rte center">{{ collection.description }}</div>
       {%- endif -%}
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient show-on--{{ section.settings.show_image_on }}">
+      <div class="collection-hero__image-container media gradient">
         <img
           srcset="
             {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
@@ -36,7 +33,7 @@
           "
           src="{{ collection.image | image_url: width: 750 }}"
           sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
-          alt="{{ collection.image.alt | escape }}"
+          alt=""
           width="{{ collection.image.width }}"
           height="{{ collection.image.height }}"
         >
@@ -69,110 +66,31 @@
     },
     {
       "type": "select",
-      "id": "show_image_on",
-      "label": "t:sections.main-collection-banner.settings.show_collection_image.show_on",
-      "default": "both",
-      "options": [
-        {
-          "value": "desktop-only",
-          "label": "t:sections.all.show_on.options__1.label"
-        },
-        {
-          "value": "mobile-only",
-          "label": "t:sections.all.show_on.options__2.label"
-        },
-        {
-          "value": "both",
-          "label": "t:sections.all.show_on.options__3.label"
-        }
-      ]
-    },
-    {
-      "type": "header",
-      "content": "t:sections.main-collection-banner.settings.height"
-    },
-    {
-      "type": "paragraph",
-      "content": "t:sections.main-collection-banner.settings.height_note"
-    },
-    {
-      "type": "select",
-      "id": "height",
-      "options": [
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        }
-      ],
-      "default": "medium",
-      "label": "t:sections.dbtfy-parallax-image.settings.height.desktop"
-    },
-    {
-      "type": "select",
-      "id": "height_mobile",
-      "options": [
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        }
-      ],
-      "default": "medium",
-      "label": "t:sections.dbtfy-parallax-image.settings.height.mobile"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.color_schemes.header.heading.label",
-      "info": "t:sections.all.color_schemes.header.info.content"
-    },
-    {
-      "type": "select",
       "id": "color_scheme",
-      "label": "t:sections.all.color_schemes.default.label",
       "options": [
         {
-          "value": "scheme-1",
-          "label": "t:sections.all.color_schemes.default.options__1.label"
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
         },
         {
-          "value": "scheme-2",
-          "label": "t:sections.all.color_schemes.default.options__2.label"
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
         },
         {
-          "value": "scheme-3",
-          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
         },
         {
-          "value": "scheme-4",
-          "label": "t:sections.all.color_schemes.default.options__4.label"
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
         },
         {
-          "value": "custom",
-          "label": "t:general.settings.size.option__9"
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
         }
       ],
-      "default": "scheme-1"
-    },
-    {
-      "type": "color_scheme",
-      "id": "custom_color_scheme",
-      "label": "t:sections.all.color_schemes.custom.label",
-      "default": "scheme-1"
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
     }
   ]
 }

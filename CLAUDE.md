@@ -9,21 +9,30 @@ Context for any AI agent (or human) working on this Shopify theme.
 ## What this is
 
 OS 2.0 Shopify theme for **SoftPauses**, a perimenopause support patch brand.
-**Base: Debutify Zorix 8.14** (premium CRO theme). The previous Dawn-based
-build was archived in git history (commits before c614ed9). Debutify gives us
-a much larger pre-built section library and high-converting widgets we used
-to hand-build. SoftPauses brand is layered on top via:
-- `assets/sp-base.css` (brand tokens + Debutify class overrides)
-- `config/settings_data.json` (palette + fonts overridden for brand)
-- `layout/theme.liquid` (loads Fraunces + IBM Plex Sans, sp-base.css)
-- `templates/index.json` and `templates/product.json` (rewritten with
-  SoftPauses copy using Debutify's sections)
+**Base: Aeon (Shrine PRO engine)** — premium CRO theme. Previous bases
+(Debutify Zorix, Dawn) are in git history.
 
-The hand-built `sp-*` sections from the Dawn era are gone — Debutify has
-equivalents (or richer ones) already. Our generated brand images
-(`assets/sp-ing-*.png`, `sp-ugc-*.png`, `sp-advisor-*.png`,
-`sp-patch-on-wrist.png`, `sp-pouch-hero.png`) survived the migration and are
-still in `assets/`. Wire them via Theme Editor image_picker fields.
+Why Aeon: it ships with rich product templates already (shield, shield2,
+core, core2, flow), each pre-composed with high-converting patterns —
+testimonials banner, scrolling tickers, results sections, goat-timelines
+(for journeys / 24hr arc), product-features grids, content-tabs (FAQ),
+comparison-table. The SoftPauses **PDP uses `product.shield2.json`** which
+ships with 24 sections covering the full funnel.
+
+SoftPauses brand is layered on top via:
+- `assets/sp-base.css` (brand tokens + Aeon class overrides, no font
+  !importants so Theme Editor font controls still work)
+- `config/settings_data.json` (Aeon's `colors_accent_*`,
+  `colors_background_*`, `type_*_font`, button/radius/badge settings
+  rewritten for SoftPauses)
+- `layout/theme.liquid` (loads Fraunces + IBM Plex Sans Google Fonts,
+  loads sp-base.css)
+- `templates/product.shield2.json` rewritten with SoftPauses copy
+
+Generated brand images (`assets/sp-ing-*.png`, `sp-ugc-*.png`,
+`sp-advisor-*.png`, `sp-patch-on-wrist.png`, `sp-pouch-hero.png`)
+survived all migrations and live in `assets/`. Wire them via Theme
+Editor image_picker fields on the relevant sections.
 
 - Branch convention: dev work happens on `claude/shopify-theme-setup-pyjWK`.
 - Package + release lives at `releases/SoftPauses-X.Y.Z.zip`. Bump

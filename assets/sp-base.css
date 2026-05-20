@@ -1,8 +1,8 @@
 /* ==========================================================================
-   SoftPauses brand layer for Debutify Zorix theme.
-   Brand tokens and color overrides only. Fonts and sizes flow through
-   Debutify's theme settings — DO NOT override font-family or font-size
-   here with !important, or Theme Editor font controls won't work.
+   SoftPauses brand layer for Aeon theme.
+   Brand tokens + color overrides. Fonts and sizes flow through Aeon's
+   theme settings (type_header_font, type_body_font, etc.). DO NOT
+   override font-family or font-size with !important here.
    ========================================================================== */
 
 :root {
@@ -19,10 +19,8 @@
   --sp-ink-mid: #5C3A33;
   --sp-ink-muted: #8A6E64;
   --sp-rule: #E8D5C5;
-  --sp-rule-soft: #F0DDC9;
 }
 
-/* Page-level brand surface (no font-family override — Debutify drives fonts) */
 body {
   background: var(--sp-cream);
   color: var(--sp-ink);
@@ -32,31 +30,30 @@ body {
 
 ::selection { background: var(--sp-poppy); color: var(--sp-cream); }
 
-/* Italic emphasis in headings shows brand color */
-h1 em, h2 em, h3 em,
+h1 em, h2 em, h3 em, h4 em,
 .h0 em, .h1 em, .h2 em, .h3 em {
   color: var(--sp-poppy);
   font-style: italic;
 }
 
-/* Buttons — color/shape only, font flows from theme settings */
 .button,
 .btn,
 button[type="submit"],
 .shopify-payment-button__button--unbranded {
   border-radius: 999px;
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  letter-spacing: 0.02em;
 }
 
 .button--primary,
-.btn--primary,
+button[type="submit"][name="add"],
 .shopify-payment-button__button--unbranded {
   background: var(--sp-poppy);
   color: var(--sp-cream);
   border: none;
 }
 .button--primary:hover,
-.btn--primary:hover,
+button[type="submit"][name="add"]:hover,
 .shopify-payment-button__button--unbranded:hover {
   background: var(--sp-poppy-deep);
   transform: translateY(-1px);
@@ -64,82 +61,66 @@ button[type="submit"],
 }
 
 .button--secondary,
-.btn--secondary {
+.button--tertiary {
   background: transparent;
   color: var(--sp-poppy);
   border: 1px solid var(--sp-poppy);
 }
 .button--secondary:hover,
-.btn--secondary:hover {
+.button--tertiary:hover {
   background: var(--sp-poppy);
   color: var(--sp-cream);
 }
 
-/* Cards and inputs — radius only */
 .card,
 .card-wrapper,
-.product-card {
+.product-card-wrapper {
   border-radius: 8px;
 }
 
-input[type="email"],
-input[type="text"],
-input[type="search"],
-input[type="password"],
-input[type="number"],
-input[type="tel"],
-textarea,
-select,
-.field__input {
+input[type="email"], input[type="text"], input[type="search"],
+input[type="password"], input[type="number"], input[type="tel"],
+textarea, select, .field__input {
   border-radius: 6px;
 }
 
-/* Header — keep brand color on logo only, don't touch nav fonts */
-.header__heading-link,
-.shop-name a {
+.header__heading-link, .header__heading, .shop-name a {
   color: var(--sp-poppy);
 }
 
-/* Footer — brand surface */
-.footer,
-.site-footer {
+.horizontal-ticker, .scrolling-banner {
+  background: var(--sp-ink);
+  color: var(--sp-cream);
+}
+
+.footer, .site-footer {
   background: var(--sp-ink);
   color: rgba(250, 241, 234, 0.7);
 }
 .footer h2, .footer h3, .footer h4, .footer h5,
-.site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5,
-.footer-block__heading {
+.site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5 {
   color: var(--sp-cream);
 }
 .footer a, .site-footer a { color: rgba(250, 241, 234, 0.65); }
 .footer a:hover, .site-footer a:hover { color: var(--sp-coral); }
 
-/* Promo / scrolling banners */
-.announcement-bar,
-.dbtfy-announcement {
-  background: var(--sp-ink);
-  color: var(--sp-cream);
-}
-.announcement-bar strong { color: var(--sp-shell); }
-
-/* Badges */
-.badge,
-.product-card__badge {
+.badge {
   background: var(--sp-poppy);
   color: var(--sp-cream);
   border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* Star ratings */
-.rating-star,
-.review-stars,
-[class*="star"] svg {
+.rating-star, .review-stars, [class*="star"] svg {
   color: var(--sp-poppy);
   fill: var(--sp-poppy);
 }
 
-/* Sticky add-to-cart */
-.dbtfy-sticky-addtocart,
+.product-features__item, .product-features__card {
+  background: var(--sp-cream);
+}
+
 .sticky-add-to-cart {
   background: var(--sp-cream);
   border-top: 1px solid var(--sp-rule);

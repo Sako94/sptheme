@@ -133,10 +133,18 @@ def main():
         if not f.endswith(".json"):
             continue
         path = os.path.join(TEMPLATES_DIR, f)
+        if os.path.getsize(path) == 0:
+            # Aeon ships empty template files for templates rendered via section groups
+            continue
+        raw = open(path).read()
+        # Strip C-style comments (Aeon ships them at the top of some templates)
+        raw_clean = re.sub(r'/\*.*?\*/', '', raw, flags=re.DOTALL)
         try:
-            tpl = json.load(open(path))
+            tpl = json.loads(raw_clean) if raw_clean.strip() else {}
         except json.JSONDecodeError as e:
             all_issues.append(f"{path}: NOT VALID JSON — {e}")
+            continue
+        if not tpl:
             continue
         sections_obj = tpl.get("sections", {})
         if len(sections_obj) > 25:

@@ -1,299 +1,365 @@
-{%- if request.design_mode -%}
-  {%- render 'widget-blocker',
-    enabled: settings.dbtfy_announcement_bar,
-    section: section,
-    type: '🎁 Free widgets',
-    name: 'Announcement bar'
-  -%}
-{%- endif -%}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
 
-{%- if request.design_mode or settings.dbtfy_announcement_bar -%}
-  {%- render 'widget-settings', key: 'announcement', settings: section.settings -%}
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
 
-  <script>
-    Debutify.widgets['announcement'] = {}
-    Debutify.widgets['announcement'].sticky_bar = {{ section.settings.sticky_bar | json }};
-  </script>
-  {% render 'section-padding', section: section %}
+  .announcement-bar-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+  }
+{%- endstyle -%}
 
-  {% if section.settings.sticky_bar %}
-    {% style %}
-      #shopify-section-{{ section.id }} {
-        position: sticky;
-        width: 100%;
-        top: var(--height--annauncement-bar);
-      }
-      body:not(.header-loaded) .dbtfy-announcement-bar #section--{{ section.id }} {
-        position: absolute;
-        width: 100%;
-      }
-    {% endstyle %}
-    <script>
-      header_loaded = false;
-      document.body.appendChild(document.createElement('style')).textContent =
-        'body:not(.header-loaded) .dbtfy-announcement-bar #section--{{ section.id }} { position: unset; }';
-      var announcementLoadAfterHeader = false;
-    </script>
-  {% else %}
-    <script>
-      if (typeof header_loaded !== 'undefined' && header_loaded && typeof announcementLoadAfterHeader === 'undefined') {
-        document.body.appendChild(document.createElement('style')).textContent =
-          'body:not(.header-loaded) .dbtfy-announcement-bar #section--{{ section.id }} { position: absolute; width: 100%; }';
+{% liquid
+  assign has_mobile_slider = false
+  assign has_desktop_slider = false
+  if section.settings.slider_mobile and section.settings.columns_mobile > 0
+    assign has_mobile_slider = true
+  endif
+  if section.settings.slider_desktop and section.settings.columns_desktop > 0
+    assign has_desktop_slider = true
+  endif
 
-        var announcementLoadAfterHeader = true;
-      } else {
-        header_loaded = false;
-        document.body.appendChild(document.createElement('style')).textContent =
-          'body:not(.header-loaded) .dbtfy-announcement-bar #section--{{ section.id }} { position: unset; }';
-        var announcementLoadAfterHeader = false;
-      }
-    </script>
-  {% endif %}
+  assign displayed = true
+  if section.settings.hidden_products != blank
+    assign hidden_handles = section.settings.hidden_products | split: ','
+    for hidden_handle in hidden_handles
+      assign handle_strip = hidden_handle | strip
+      if handle_strip == product.handle
+        assign displayed = false
+        break
+      endif
+    endfor
+  endif
+  if section.settings.enable_specific_display and section.settings.displayed_products != blank
+    assign displayed_handles = section.settings.displayed_products | split: ','
+    assign displayed = false
+    for displayed_handle in displayed_handles
+      assign handle_strip = displayed_handle | strip
+      if handle_strip == product.handle
+        assign displayed = true
+        break
+      endif
+    endfor
+  endif
+%}
 
-  {%- if request.design_mode -%}
-    <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
-    <style>
-      /* theme editor power preview fix */
-      .announcement-bar-slider .slider__slide[aria-hidden='true'] {
-        visibility: hidden;
-      }
-    </style>
-  {%- endif -%}
-  {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-  {{ 'component-slider.css' | asset_url | stylesheet_tag: preload: true }}
-  {{ 'announcement-bar.css' | asset_url | stylesheet_tag: preload: true }}
-  {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
-
-  <announcement-bar
-    data-selector-length=".slideshow__slide"
-    data-selector-arrow=".slider-button"
+{% if displayed %}
+  <div
+    class="announcement-bar announcement-bar-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient {{ section.settings.visibility }}"
+    role="region"
+    style="--columns-desktop: {{ section.settings.columns_desktop }};--columns-mobile: {{ section.settings.columns_mobile }};--gap-desktop:{{ section.settings.desktop_spacing | divided_by: 10.0 }}rem;--gap-mobile:{{ section.settings.mobile_spacing | divided_by: 10.0 }}rem;"
   >
-    <div
-      id="section--{{ section.id }}"
-      class="utility-bar color-{{ section.settings.custom_color_scheme }} dbtfy-color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} utility-bar--bottom-border {% endif %} header-localization section-{{ section.id }}-padding"
-      {{ block.shopify_attributes }}
-    >
-      <div class="page-width utility-bar__grid--3-col utility-bar__grid announcement-contents">
-        {%- content_for 'block', type: '_announcement-bar-left-bar', id: 'announcement-bar-left-bar' -%}
-        {%- content_for 'block', type: '_announcement-bar-message', id: 'announcement-bar-message' -%}
-        {%- content_for 'block', type: '_announcement-bar-right-bar', id: 'announcement-bar-right-bar' -%}
+    <div class="page-width">
+      {% if has_mobile_slider or has_desktop_slider %}
+        <splide-component
+          data-type="{{ section.settings.type }}"
+          data-autoplay="{{ section.settings.autoplay }}"
+          data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+          data-slides-desktop="{{ section.settings.columns_desktop }}"
+          data-slides-mobile="{{ section.settings.columns_mobile }}"
+          data-gap-desktop="{{ section.settings.desktop_spacing }}"
+          data-gap-mobile="{{ section.settings.mobile_spacing }}"
+          data-arrows="false"
+          data-pagination="false"
+          {% if has_desktop_slider == false %}
+            data-destroy-desktop="true"
+          {% elsif has_mobile_slider == false %}
+            data-destroy-mobile="true"
+          {% endif %}
+        >
+      {% endif %}
+      <div class="splide splide--vertically-centered{% if has_desktop_slider %} splide--precalc-width-desktop{% endif %}{% if has_mobile_slider %} splide--precalc-width-mobile{% endif %}">
+        <div class="splide__track">
+          <ul
+            class="splide__list{% if has_desktop_slider == false %} announcement-bar__desktop-grid{% endif %}{% if has_mobile_slider == false %} announcement-bar__mobile-grid{% endif %}"
+            data-columns-desktop="{{ section.settings.columns_desktop }}"
+            data-columns-mobile="{{ section.settings.columns_mobile }}"
+          >
+            {% content_for 'blocks' %}
+          </ul>
+        </div>
       </div>
+      {% if has_mobile_slider or has_desktop_slider %}
+        </splide-component>
+      {% endif %}
     </div>
-  </announcement-bar>
-  <script src="{{ 'announcement-bar.js' | asset_url  }}" defer="defer"></script>
-{%- endif -%}
-{%- schema -%}
+  </div>
+{% endif %}
+
+<script>
+  function copyCode(e) {
+    const btn = e.currentTarget;
+    navigator.clipboard.writeText(btn.dataset.code.trim());
+    btn.classList.add('success');
+    setTimeout(() => {
+      btn.classList.remove('success');
+    }, 2000);
+  }
+</script>
+
+{% schema %}
 {
-  "name": "t:sections.announcement-bar.name",
+  "name": "Announcement bar",
   "max_blocks": 12,
-  "class": "announcement-bar-section dbtfy-announcement-bar",
-  "enabled_on": {
-    "groups": ["header"]
-  },
+  "class": "announcement-bar-section",
   "settings": [
     {
-      "type": "paragraph",
-      "content": "t:sections.announcement-bar.settings.help.info"
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
     },
     {
       "type": "header",
-      "content": "t:blocks.help.header"
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns desktop",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns mobile",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 1
     },
     {
       "type": "paragraph",
-      "content": "t:sections.announcement-bar.settings.help.link"
+      "content": "NOTE: Set number of columns to 0 to autofit all blocks in the center."
     },
     {
-      "type": "paragraph",
-      "content": "t:help.free_info"
+      "type": "range",
+      "id": "desktop_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop spacing",
+      "default": 28
     },
     {
-      "type": "paragraph",
-      "content": "t:sections.dbtfy-quick-compare.help.info"
-    },
-    {
-      "type": "header",
-      "content": "t:general.settings.settigns"
+      "type": "range",
+      "id": "mobile_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile spacing",
+      "default": 16
     },
     {
       "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "sticky_bar",
-      "label": "t:sections.announcement-bar.settings.sticky.label",
+      "id": "show_separator",
+      "label": "Show separator between blocks",
       "default": false
-    },
-    {
-      "type": "header",
-      "content": "t:settings_schema.layout.settings.spacing.section_desktop.label"
-    },
-    {
-      "type": "select",
-      "id": "padding___top",
-      "label": "t:settings_schema.layout.settings.spacing.block_padding.top",
-      "default": "inherit",
-      "options": [
-        {
-          "value": "inherit",
-          "label": "t:general.settings.size.option__1"
-        },
-        {
-          "value": "none",
-          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
-        },
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        },
-        {
-          "value": "custom",
-          "label": "t:general.settings.size.option__9"
-        }
-      ]
-    },
-    {
-      "type": "range",
-      "id": "custom_padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding_section.custom_top",
-      "default": 36
-    },
-    {
-      "type": "select",
-      "id": "padding___bottom",
-      "label": "t:settings_schema.layout.settings.spacing.block_padding.bottom",
-      "default": "inherit",
-      "options": [
-        {
-          "value": "inherit",
-          "label": "t:general.settings.size.option__1"
-        },
-        {
-          "value": "none",
-          "label": "t:settings_schema.global_settings.settings.add-to-cart-animation-effect.options__1"
-        },
-        {
-          "value": "small",
-          "label": "t:general.settings.small"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.all.animation.image_behavior.parallax_speed.medium"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.image_banner.settings.section_height_mobile.options__4.label"
-        },
-        {
-          "value": "custom",
-          "label": "t:general.settings.size.option__9"
-        }
-      ]
-    },
-    {
-      "type": "range",
-      "id": "custom_padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding_section.custom_bottom",
-      "default": 36
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.color_schemes.header.heading.label",
-      "info": "t:sections.all.color_schemes.header.info.content"
     },
     {
       "type": "select",
       "id": "color_scheme",
-      "label": "t:sections.all.color_schemes.default.label",
       "options": [
         {
-          "value": "scheme-1",
-          "label": "t:sections.all.color_schemes.default.options__1.label"
+          "value": "accent-1",
+          "label": "Accent 1"
         },
         {
-          "value": "scheme-2",
-          "label": "t:sections.all.color_schemes.default.options__2.label"
+          "value": "accent-2",
+          "label": "Accent 2"
         },
         {
-          "value": "scheme-3",
-          "label": "t:sections.dbtfy_text_col_with_img.settings.background_style.label"
+          "value": "background-1",
+          "label": "Background 1"
         },
         {
-          "value": "scheme-4",
-          "label": "t:sections.all.color_schemes.default.options__4.label"
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
         },
         {
           "value": "custom",
-          "label": "t:general.settings.size.option__9"
+          "label": "Custom"
         }
       ],
-      "default": "scheme-4"
+      "default": "accent-1",
+      "label": "Color scheme"
     },
     {
-      "type": "color_scheme",
-      "id": "custom_color_scheme",
-      "label": "t:sections.all.color_schemes.custom.label",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#dd1d1d",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#FFFFFF",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_mobile",
+      "label": "Enable mobile slider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable desktop slider",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Classic"
+        },
+        {
+          "value": "loop",
+          "label": "Infinite"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "loop",
+      "label": "Type"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 1,
+      "max": 15,
+      "step": 0.5,
+      "default": 3,
+      "unit": "sec",
+      "label": "Autoplay speed"
+    },
+    {
+      "type": "header",
+      "content": "Visibility",
+      "info": "Use this if you want to display/hide this section on certain product page(s)."
+    },
+    {
+      "type": "text",
+      "id": "hidden_products",
+      "label": "Product pages to hide the section on",
+      "info": "Handles of products to hide the section on, split with a comma."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_specific_display",
+      "label": "Display the section on specific product pages only",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "displayed_products",
+      "label": "Specific product pages to display the section on",
+      "info": "Applied if the checkbox above is checked. Handles of products to only display the section on, split with a comma."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 16
     }
   ],
   "blocks": [
     {
-      "type": "@theme"
-    }
+      "type": "announcement"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "discount"
+    },
+    {
+      "type": "socials"
+    },
   ],
   "presets": [
     {
-      "name": "t:sections.announcement-bar.name",
+      "name": "Announcement bar",
       "blocks": [
         {
-          "type": "_announcement-bar-left-bar",
-          "static": true,
-          "id": "announcement-bar-left-bar",
-          "blocks": [{ "type": "_social-media-block", "settings": { "show_social": true } }]
-        },
-        {
-          "type": "_announcement-bar-message",
-          "static": true,
-          "id": "announcement-bar-message",
-          "blocks": [
-            {
-              "type": "_announcement-bar-message-block",
-              "settings": { "text": "t:sections.announcement-bar.blocks.announcement.settings.text.default" }
-            }
-          ]
-        },
-        {
-          "type": "_announcement-bar-right-bar",
-          "static": true,
-          "id": "announcement-bar-right-bar",
-          "blocks": [
-            {
-              "type": "_language-currency-selector-block",
-              "settings": { "enable_language_selector": true, "enable_country_selector": true }
-            }
-          ]
+          "type": "announcement"
         }
       ]
     }
   ]
 }
-{%- endschema -%}
+{% endschema %}

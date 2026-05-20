@@ -1,1 +1,506 @@
-class FacetFiltersForm extends HTMLElement{constructor(){super(),this.onActiveFilterClick=this.onActiveFilterClick.bind(this),this.debouncedOnSubmit=debounce(e=>{this.onSubmitHandler(e)},800);this.querySelector("form").addEventListener("input",this.debouncedOnSubmit.bind(this));const e=this.querySelector("#FacetsWrapperDesktop");e&&e.addEventListener("keyup",onKeyUpEscape)}static setListeners(){window.addEventListener("popstate",e=>{const t=e.state?e.state.searchParams:FacetFiltersForm.searchParamsInitial;t!==FacetFiltersForm.searchParamsPrev&&FacetFiltersForm.renderPage(t,null,!1)})}static toggleActiveFacets(e=!0){document.querySelectorAll(".js-facet-remove").forEach(t=>{t.classList.toggle("disabled",e)})}static renderPage(e,t,r=!0){FacetFiltersForm.searchParamsPrev=e;const i=FacetFiltersForm.getSections(),a=document.getElementById("ProductCount"),n=document.getElementById("ProductCountDesktop");document.querySelectorAll(".facets-container .loading__spinner, facet-filters-form .loading__spinner").forEach(e=>e.classList.remove("hidden")),document.getElementById("ProductGridContainer").querySelector(".collection").classList.add("loading"),a&&a.classList.add("loading"),n&&n.classList.add("loading"),i.forEach(r=>{const i=`${window.location.pathname}?section_id=${r.section}&${e}`,a=e=>e.url===i;FacetFiltersForm.filterData.some(a)?FacetFiltersForm.renderSectionFromCache(a,t):FacetFiltersForm.renderSectionFromFetch(i,t)}),r&&FacetFiltersForm.updateURLHash(e)}static renderSectionFromFetch(e,t){fetch(e).then(e=>e.text()).then(r=>{const i=r;FacetFiltersForm.filterData=[...FacetFiltersForm.filterData,{html:i,url:e}],FacetFiltersForm.renderFilters(i,t),FacetFiltersForm.renderProductGridContainer(i),FacetFiltersForm.renderProductCount(i),"function"==typeof initializeScrollAnimationTrigger&&initializeScrollAnimationTrigger(i.innerHTML)})}static renderSectionFromCache(e,t){const r=FacetFiltersForm.filterData.find(e).html;FacetFiltersForm.renderFilters(r,t),FacetFiltersForm.renderProductGridContainer(r),FacetFiltersForm.renderProductCount(r),"function"==typeof initializeScrollAnimationTrigger&&initializeScrollAnimationTrigger(r.innerHTML)}static renderProductGridContainer(e){document.getElementById("ProductGridContainer").innerHTML=(new DOMParser).parseFromString(e,"text/html").getElementById("ProductGridContainer").innerHTML,document.getElementById("ProductGridContainer").querySelectorAll(".scroll-trigger").forEach(e=>{e.classList.add("scroll-trigger--cancel")})}static renderProductCount(e){const t=(new DOMParser).parseFromString(e,"text/html").getElementById("ProductCount").innerHTML,r=document.getElementById("ProductCount"),i=document.getElementById("ProductCountDesktop");r.innerHTML=t,r.classList.remove("loading"),i&&(i.innerHTML=t,i.classList.remove("loading"));document.querySelectorAll(".facets-container .loading__spinner, facet-filters-form .loading__spinner").forEach(e=>e.classList.add("hidden"))}static renderFilters(e,t){const r=(new DOMParser).parseFromString(e,"text/html"),i=r.querySelectorAll("#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter"),a=document.querySelectorAll("#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter");Array.from(a).forEach(e=>{Array.from(i).some(({id:t})=>e.id===t)||e.remove()});const n=e=>{const r=t?t.target.closest(".js-filter"):void 0;return!!r&&e.id===r.id},s=Array.from(i).filter(e=>!n(e)),o=Array.from(i).find(n);if(s.forEach((e,t)=>{if(document.getElementById(e.id))document.getElementById(e.id).innerHTML=e.innerHTML;else{if(t>0){const{className:r,id:i}=s[t-1];if(e.className===r)return void document.getElementById(i).after(e)}e.parentElement&&document.querySelector(`#${e.parentElement.id} .js-filter`).before(e)}}),FacetFiltersForm.renderActiveFacets(r),FacetFiltersForm.renderAdditionalElements(r),o){const e=t.target.closest(".js-filter").id;if(e){FacetFiltersForm.renderCounts(o,t.target.closest(".js-filter")),FacetFiltersForm.renderMobileCounts(o,document.getElementById(e));const r=document.getElementById(e),i=r.classList.contains("mobile-facets__details")?".mobile-facets__close-button":".facets__summary",a=r.querySelector(i),n="text"===t.target.getAttribute("type");a&&!n&&a.focus()}}}static renderActiveFacets(e){[".active-facets-mobile",".active-facets-desktop"].forEach(t=>{const r=e.querySelector(t);r&&(document.querySelector(t).innerHTML=r.innerHTML)}),FacetFiltersForm.toggleActiveFacets(!1)}static renderAdditionalElements(e){[".mobile-facets__open",".mobile-facets__count",".sorting"].forEach(t=>{e.querySelector(t)&&(document.querySelector(t).innerHTML=e.querySelector(t).innerHTML)}),document.getElementById("FacetFiltersFormMobile").closest("menu-drawer").bindEvents()}static renderCounts(e,t){const r=t.querySelector(".facets__summary"),i=e.querySelector(".facets__summary");i&&r&&(r.outerHTML=i.outerHTML);const a=t.querySelector(".facets__header"),n=e.querySelector(".facets__header");n&&a&&(a.outerHTML=n.outerHTML);const s=t.querySelector(".facets-wrap"),o=e.querySelector(".facets-wrap");if(o&&s){Boolean(t.querySelector("show-more-button .label-show-more.hidden"))&&o.querySelectorAll(".facets__item.hidden").forEach(e=>e.classList.replace("hidden","show-more-item")),s.outerHTML=o.outerHTML}}static renderMobileCounts(e,t){const r=t.querySelector(".mobile-facets__list"),i=e.querySelector(".mobile-facets__list");i&&r&&(r.outerHTML=i.outerHTML)}static updateURLHash(e){history.pushState({searchParams:e},"",`${window.location.pathname}${e&&"?".concat(e)}`)}static getSections(){return[{section:document.getElementById("product-grid").dataset.id}]}createSearchParams(e){const t=new FormData(e);return new URLSearchParams(t).toString()}onSubmitForm(e,t){FacetFiltersForm.renderPage(e,t)}onSubmitHandler(e){e.preventDefault();const t=document.querySelectorAll("facet-filters-form form");if("mobile-facets__checkbox"==e.srcElement.className){const t=this.createSearchParams(e.target.closest("form"));this.onSubmitForm(t,e)}else{const r=[],i="FacetFiltersFormMobile"===e.target.closest("form").id;t.forEach(e=>{i?"FacetFiltersFormMobile"===e.id&&r.push(this.createSearchParams(e)):"FacetSortForm"!==e.id&&"FacetFiltersForm"!==e.id&&"FacetSortDrawerForm"!==e.id||r.push(this.createSearchParams(e))}),this.onSubmitForm(r.join("&"),e)}}onActiveFilterClick(e){e.preventDefault(),FacetFiltersForm.toggleActiveFacets();const t=-1==e.currentTarget.href.indexOf("?")?"":e.currentTarget.href.slice(e.currentTarget.href.indexOf("?")+1);FacetFiltersForm.renderPage(t)}}FacetFiltersForm.filterData=[],FacetFiltersForm.searchParamsInitial=window.location.search.slice(1),FacetFiltersForm.searchParamsPrev=window.location.search.slice(1),customElements.define("facet-filters-form",FacetFiltersForm),FacetFiltersForm.setListeners();class PriceRange extends HTMLElement{constructor(){super(),this.querySelectorAll("input").forEach(e=>{e.addEventListener("change",this.onRangeChange.bind(this)),e.addEventListener("keydown",this.onKeyDown.bind(this))}),this.setMinAndMaxValues()}onRangeChange(e){this.adjustToValidValues(e.currentTarget),this.setMinAndMaxValues()}onKeyDown(e){if(e.metaKey)return;e.key.match(/[0-9]|\.|,|'| |Tab|Backspace|Enter|ArrowUp|ArrowDown|ArrowLeft|ArrowRight|Delete|Escape/)||e.preventDefault()}setMinAndMaxValues(){const e=this.querySelectorAll("input"),t=e[0],r=e[1];r.value&&t.setAttribute("data-max",r.value),t.value&&r.setAttribute("data-min",t.value),""===t.value&&r.setAttribute("data-min",0),""===r.value&&t.setAttribute("data-max",r.getAttribute("data-max"))}adjustToValidValues(e){const t=Number(e.value),r=Number(e.getAttribute("data-min")),i=Number(e.getAttribute("data-max"));t<r&&(e.value=r),t>i&&(e.value=i)}}customElements.define("price-range",PriceRange);class FacetRemove extends HTMLElement{constructor(){super();const e=this.querySelector("a");e.setAttribute("role","button"),e.addEventListener("click",this.closeFilter.bind(this)),e.addEventListener("keyup",e=>{e.preventDefault(),"SPACE"===e.code.toUpperCase()&&this.closeFilter(e)})}closeFilter(e){e.preventDefault();(this.closest("facet-filters-form")||document.querySelector("facet-filters-form")).onActiveFilterClick(e)}}customElements.define("facet-remove",FacetRemove);class FacetPriceSlider extends HTMLElement{constructor(){super(),this.price_slider=this.querySelector("#price-slider"),this.updatePriceSlider()}updatePriceSlider(){if(!this.price_slider)return;if(this.price_slider?.noUiSlider)return;var e=this.querySelector('[name="filter.v.price.gte"]'),t=this.querySelector('[name="filter.v.price.lte"]');let r,i,a,n;Shopify.dummyAmountWithoutCurrency.includes(".")?(r=e.dataset.min.replace(".",""),i=t.dataset.max.replace(".",""),a=""!==e.value?e.value.replace(".",""):r,n=""!==t.value?t.value.replace(".",""):i):(r=e.dataset.min.replace(",",""),i=t.dataset.max.replace(",",""),a=""!==e.value?e.value.replace(",",""):r,n=""!==t.value?t.value.replace(",",""):i);var s=parseInt(r),o=parseInt(i),c=""!==a?parseInt(a):s,l=""!==n?parseInt(n):o,d=parseFloat(t.getAttribute("step")),u=document.body.classList.contains("rtl")?"rtl":"ltr";noUiSlider.create(this.price_slider,{start:[c,l],step:isNaN(d)?1:d,connect:!0,direction:u,range:{min:s,max:o}}),e.value=e.dataset.default,t.value=t.dataset.default;document.querySelector(".field-currency");this.price_slider.noUiSlider.on("change",function(r,i){const a=!0;i?(t.value=Shopify.formatMoney(r[i],"",a),t.dispatchEvent(new Event("input",{bubbles:!0}))):(e.value=Shopify.formatMoney(r[i],"",a),e.dispatchEvent(new Event("input",{bubbles:!0})))});const m=this;e.addEventListener("input",function(e){m.price_slider.noUiSlider.set([e.target.value,null])}),t.addEventListener("input",function(e){m.price_slider.noUiSlider.set([null,e.target.value])})}}customElements.define("facet-price-slider",FacetPriceSlider);
+class FacetFiltersForm extends HTMLElement {
+  constructor() {
+    super();
+    this.onActiveFilterClick = this.onActiveFilterClick.bind(this);
+
+    this.debouncedOnSubmit = debounce((event) => {
+      this.onSubmitHandler(event);
+    }, 500);
+
+    const facetForm = this.querySelector('form');
+    facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this));
+
+    const facetWrapper = this.querySelector('#FacetsWrapperDesktop');
+    if (facetWrapper) facetWrapper.addEventListener('keyup', onKeyUpEscape);
+  }
+
+  static setListeners() {
+    const onHistoryChange = (event) => {
+      const searchParams = event.state ? event.state.searchParams : FacetFiltersForm.searchParamsInitial;
+      if (searchParams === FacetFiltersForm.searchParamsPrev) return;
+      FacetFiltersForm.renderPage(searchParams, null, false);
+    }
+    window.addEventListener('popstate', onHistoryChange);
+  }
+
+  static toggleActiveFacets(disable = true) {
+    document.querySelectorAll('.js-facet-remove').forEach((element) => {
+      element.classList.toggle('disabled', disable);
+    });
+  }
+
+  static renderPage(searchParams, event, updateURLHash = true) {
+    FacetFiltersForm.searchParamsPrev = searchParams;
+    const sections = FacetFiltersForm.getSections();
+    const countContainer = document.getElementById('ProductCount');
+    const countContainerDesktop = document.getElementById('ProductCountDesktop');
+    document.getElementById('ProductGridContainer').querySelector('.collection').classList.add('loading');
+    if (countContainer){
+      countContainer.classList.add('loading');
+    }
+    if (countContainerDesktop){
+      countContainerDesktop.classList.add('loading');
+    }
+
+    sections.forEach((section) => {
+      const url = `${window.location.pathname}?section_id=${section.section}&${searchParams}`;
+      const filterDataUrl = element => element.url === url;
+
+      FacetFiltersForm.filterData.some(filterDataUrl) ?
+        FacetFiltersForm.renderSectionFromCache(filterDataUrl, event) :
+        FacetFiltersForm.renderSectionFromFetch(url, event);
+    });
+
+    if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
+  }
+
+  static renderSectionFromFetch(url, event) {
+    fetch(url)
+      .then(response => response.text())
+      .then((responseText) => {
+        const html = responseText;
+        FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }];
+        FacetFiltersForm.renderFilters(html, event);
+        FacetFiltersForm.renderProductGridContainer(html);
+        FacetFiltersForm.renderProductCount(html);
+      });
+  }
+
+  static renderSectionFromCache(filterDataUrl, event) {
+    const html = FacetFiltersForm.filterData.find(filterDataUrl).html;
+    FacetFiltersForm.renderFilters(html, event);
+    FacetFiltersForm.renderProductGridContainer(html);
+    FacetFiltersForm.renderProductCount(html);
+  }
+
+  static renderProductGridContainer(html) {
+    document.getElementById('ProductGridContainer').innerHTML = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductGridContainer').innerHTML;
+  }
+
+  static renderProductCount(html) {
+    const count = new DOMParser().parseFromString(html, 'text/html').getElementById('ProductCount').innerHTML
+    const container = document.getElementById('ProductCount');
+    const containerDesktop = document.getElementById('ProductCountDesktop');
+    container.innerHTML = count;
+    container.classList.remove('loading');
+    if (containerDesktop) {
+      containerDesktop.innerHTML = count;
+      containerDesktop.classList.remove('loading');
+    }
+  }
+
+  static renderFilters(html, event) {
+    const parsedHTML = new DOMParser().parseFromString(html, 'text/html');
+
+    const facetDetailsElements =
+      parsedHTML.querySelectorAll('#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter');
+    const matchesIndex = (element) => {
+      const jsFilter = event ? event.target.closest('.js-filter') : undefined;
+      return jsFilter ? element.dataset.index === jsFilter.dataset.index : false;
+    }
+    const facetsToRender = Array.from(facetDetailsElements).filter(element => !matchesIndex(element));
+    const countsToRender = Array.from(facetDetailsElements).find(matchesIndex);
+
+    facetsToRender.forEach((element) => {
+      let elementToReplace = document.querySelector(`.js-filter[data-index="${element.dataset.index}"]`);
+      if (elementToReplace.querySelector(':scope > details')) {
+        elementToReplace.querySelector(':scope > details').innerHTML = element.querySelector(':scope > details').innerHTML;
+      } else {
+        elementToReplace.innerHTML = element.innerHTML;
+      }
+      if (elementToReplace.querySelector('.drawer__submenu-content-wrapper')) {
+        elementToReplace.querySelector('.drawer__submenu-content-wrapper').innerHTML = element.querySelector('.drawer__submenu-content-wrapper').innerHTML;
+      }
+    });
+
+    FacetFiltersForm.renderActiveFacets(parsedHTML);
+    FacetFiltersForm.renderAdditionalElements(parsedHTML);
+
+    if (countsToRender) FacetFiltersForm.renderCounts(countsToRender, event.target.closest('.js-filter'));
+  }
+
+  static renderActiveFacets(html) {
+    const activeFacetElementSelectors = ['.active-facets-mobile', '.active-facets-desktop'];
+
+    activeFacetElementSelectors.forEach((selector) => {
+      const activeFacetsElement = html.querySelector(selector);
+      if (!activeFacetsElement) return;
+      document.querySelector(selector).innerHTML = activeFacetsElement.innerHTML;
+    })
+
+    FacetFiltersForm.toggleActiveFacets(false);
+  }
+
+  static renderAdditionalElements(html) {
+    const mobileElementSelectors = ['.mobile-facets__open', '.mobile-facets__count', '.sorting'];
+
+    mobileElementSelectors.forEach((selector) => {
+      if (!html.querySelector(selector)) return;
+      document.querySelector(selector).innerHTML = html.querySelector(selector).innerHTML;
+    });
+
+    document.getElementById('FacetFiltersFormMobile').closest('menu-drawer').bindEvents();
+  }
+
+  static renderCounts(source, target) {
+    const targetElement = target.querySelector('.facets__selected');
+    const sourceElement = source.querySelector('.facets__selected');
+
+    const targetElementAccessibility = target.querySelector('.facets__summary');
+    const sourceElementAccessibility = source.querySelector('.facets__summary');
+
+    if (sourceElement && targetElement) {
+      target.querySelector('.facets__selected').outerHTML = source.querySelector('.facets__selected').outerHTML;
+    }
+
+    if (targetElementAccessibility && sourceElementAccessibility) {
+      target.querySelector('.facets__summary').outerHTML = source.querySelector('.facets__summary').outerHTML;
+    }
+  }
+
+  static updateURLHash(searchParams) {
+    history.pushState({ searchParams }, '', `${window.location.pathname}${searchParams && '?'.concat(searchParams)}`);
+  }
+
+  static getSections() {
+    return [
+      {
+        section: document.getElementById('product-grid').dataset.id,
+      }
+    ]
+  }
+
+  createSearchParams(form) {
+    const formData = new FormData(form);
+    return new URLSearchParams(formData).toString();
+  }
+
+  onSubmitForm(searchParams, event) {
+    FacetFiltersForm.renderPage(searchParams, event);
+  }
+
+  onSubmitHandler(event) {
+    event.preventDefault();
+    const sortFilterForms = document.querySelectorAll('facet-filters-form form');
+    if (event.srcElement.className == 'mobile-facets__checkbox') {
+      const searchParams = this.createSearchParams(event.target.closest('form'))
+      this.onSubmitForm(searchParams, event)
+    } else {
+      const forms = [];
+      const isMobile = event.target.closest('form').id === 'FacetFiltersFormMobile';
+
+      sortFilterForms.forEach((form) => {
+        if (!isMobile) {
+          if (form.id === 'FacetSortForm' || form.id === 'FacetFiltersForm' || form.id === 'FacetSortDrawerForm') {
+            const noJsElements = document.querySelectorAll('.no-js-list');
+            noJsElements.forEach((el) => el.remove());
+            forms.push(this.createSearchParams(form));
+          }
+        } else if (form.id === 'FacetFiltersFormMobile') {
+          forms.push(this.createSearchParams(form));
+        }
+      });
+      this.onSubmitForm(forms.join('&'), event)
+    }
+  }
+
+  onActiveFilterClick(event) {
+    event.preventDefault();
+    FacetFiltersForm.toggleActiveFacets();
+    const url = event.currentTarget.href.indexOf('?') == -1 ? '' : event.currentTarget.href.slice(event.currentTarget.href.indexOf('?') + 1);
+    FacetFiltersForm.renderPage(url);
+  }
+}
+
+FacetFiltersForm.filterData = [];
+FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
+FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
+customElements.define('facet-filters-form', FacetFiltersForm);
+FacetFiltersForm.setListeners();
+
+// class PriceRange extends HTMLElement {
+//   constructor() {
+//     super();
+//     this.querySelectorAll('input')
+//       .forEach(element => element.addEventListener('change', this.onRangeChange.bind(this)));
+//     this.setMinAndMaxValues();
+//   }
+
+//   onRangeChange(event) {
+//     this.adjustToValidValues(event.currentTarget);
+//     this.setMinAndMaxValues();
+//   }
+
+//   setMinAndMaxValues() {
+//     const inputs = this.querySelectorAll('input');
+//     const minInput = inputs[0];
+//     const maxInput = inputs[1];
+//     if (maxInput.value) minInput.setAttribute('max', maxInput.value);
+//     if (minInput.value) maxInput.setAttribute('min', minInput.value);
+//     if (minInput.value === '') maxInput.setAttribute('min', 0);
+//     if (maxInput.value === '') minInput.setAttribute('max', maxInput.getAttribute('max'));
+//   }
+
+//   adjustToValidValues(input) {
+//     const value = Number(input.value);
+//     const min = Number(input.getAttribute('min'));
+//     const max = Number(input.getAttribute('max'));
+
+//     if (value < min) input.value = min;
+//     if (value > max) input.value = max;
+//   }
+// }
+
+// customElements.define('price-range', PriceRange);
+
+class PriceRange extends HTMLElement {
+  constructor() {
+    super();
+
+    // native inputs (kept for no-JS + form integration)
+    this.inputs = this.querySelectorAll('input');
+    this.minInput = this.inputs[0];
+    this.maxInput = this.inputs[1];
+
+    // slider parts (if JS-enhanced UI exists)
+    this.slider = this.querySelector('.price-slider');
+    this.track = this.querySelector('.price-slider__track');
+    this.range = this.querySelector('.price-slider__range');
+    this.minHandle = this.querySelector('.price-slider__handle--min');
+    this.maxHandle = this.querySelector('.price-slider__handle--max');
+    this.minLabel = this.querySelector('[data-label="min"]');
+    this.maxLabel = this.querySelector('[data-label="max"]');
+
+    // numbers
+    this.maxAllowed = Number(this.dataset.max || this.maxInput?.getAttribute('max') || 0);
+    this.valueMin = Number(this.dataset.initialMin || this.minInput?.value || 0);
+    this.valueMax = Number(this.dataset.initialMax || this.maxInput?.value || this.maxAllowed);
+    this.currency = this.dataset.currency || '';
+
+    // keep existing behavior for manual typing
+    this.inputs.forEach(el => el.addEventListener('change', this.onInputChange.bind(this)));
+
+    // If slider parts aren’t present, bail (keeps old behavior).
+    if (!this.slider || !this.track || !this.range || !this.minHandle || !this.maxHandle) {
+      this.setMinAndMaxValues(); // original guard-rails
+      return;
+    }
+
+    this.facetForm = this.closest('facet-filters-form')?.querySelector('form') || this.closest('form');
+
+    // Init positions & listeners
+    this.rect = null; // track rect cache
+    this.attachPointer(this.minHandle);
+    this.attachPointer(this.maxHandle);
+    this.track.addEventListener('pointerdown', this.onTrackClick.bind(this));
+
+    // keyboard support
+    this.minHandle.addEventListener('keydown', (e) => this.onHandleKey(e, 'min'));
+    this.maxHandle.addEventListener('keydown', (e) => this.onHandleKey(e, 'max'));
+
+    this.syncFromValues(); // position handles
+    this.setMinAndMaxValues(); // keep input min/max in sync
+  }
+
+  /* ---------- original input constraints ---------- */
+  onInputChange(e) {
+    this.adjustToValidValues(e.currentTarget);
+    this.setMinAndMaxValues();
+
+    // reflect typed values into slider (if present)
+    if (this.slider) {
+      this.valueMin = Number(this.minInput.value || 0);
+      this.valueMax = Number(this.maxInput.value || this.maxAllowed);
+      this.syncFromValues();
+    }
+  }
+
+  setMinAndMaxValues() {
+    const minVal = this.minInput.value !== '' ? Number(this.minInput.value) : 0;
+    const maxVal = this.maxInput.value !== '' ? Number(this.maxInput.value) : this.maxAllowed;
+
+    if (this.maxInput.value) this.minInput.setAttribute('max', maxVal);
+    if (this.minInput.value) this.maxInput.setAttribute('min', minVal);
+
+    if (this.minInput.value === '') this.maxInput.setAttribute('min', 0);
+    if (this.maxInput.value === '') this.minInput.setAttribute('max', this.maxInput.getAttribute('max'));
+  }
+
+  adjustToValidValues(input) {
+    const value = Number(input.value);
+    const min = Number(input.getAttribute('min') || 0);
+    const max = Number(input.getAttribute('max') || this.maxAllowed);
+
+    if (value < min) input.value = min;
+    if (value > max) input.value = max;
+  }
+
+  /* ---------- slider helpers ---------- */
+  attachPointer(handle) {
+    handle.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.suppressNextDocumentClick();
+      handle.setPointerCapture(e.pointerId);
+      this.rect = this.track.getBoundingClientRect();
+
+      const move = this.onPointerMove.bind(this, handle);
+      const up = (ev) => {
+        handle.releasePointerCapture(ev.pointerId);
+        window.removeEventListener('pointermove', move);
+        window.removeEventListener('pointerup', up);
+
+        // On release: write to inputs and dispatch change events to trigger filtering.
+        if (handle.dataset.handle === 'min') {
+          this.minInput.value = this.valueMin;
+          this.minInput.dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+          this.maxInput.value = this.valueMax;
+          this.maxInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        this.setMinAndMaxValues();
+        this.emitFacetInput();
+      };
+
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+    }, { passive: false });
+  }
+
+  onPointerMove(handle, e) {
+    const x = Math.min(Math.max(e.clientX - this.rect.left, 0), this.rect.width);
+    const pct = x / this.rect.width;
+    const raw = pct * this.maxAllowed;
+
+    // choose which value we’re moving
+    if (handle.dataset.handle === 'min') {
+      this.valueMin = Math.min(Math.max(0, this.roundValue(raw)), this.valueMax);
+    } else {
+      this.valueMax = Math.max(Math.min(this.maxAllowed, this.roundValue(raw)), this.valueMin);
+    }
+    this.updateUI();
+  }
+
+  onTrackClick(e) {
+    this.suppressNextDocumentClick();
+
+    this.rect = this.track.getBoundingClientRect();
+    const x = Math.min(Math.max(e.clientX - this.rect.left, 0), this.rect.width);
+    const pct = x / this.rect.width;
+    const raw = this.roundValue(pct * this.maxAllowed);
+
+    // move the closest handle
+    const distToMin = Math.abs(raw - this.valueMin);
+    const distToMax = Math.abs(raw - this.valueMax);
+    if (distToMin <= distToMax) {
+      this.valueMin = Math.min(raw, this.valueMax);
+      this.minInput.value = this.valueMin;
+      this.minInput.dispatchEvent(new Event('change', { bubbles: true }));
+    } else {
+      this.valueMax = Math.max(raw, this.valueMin);
+      this.maxInput.value = this.valueMax;
+      this.maxInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    this.updateUI();
+    this.emitFacetInput();
+  }
+
+  onHandleKey(e, which) {
+    const step = Math.max(1, Math.round(this.maxAllowed / 100)); // 1% of max, min 1
+    let delta = 0;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') delta = -step;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') delta = step;
+    if (!delta) return;
+
+    e.preventDefault();
+    if (which === 'min') {
+      this.valueMin = Math.max(0, Math.min(this.valueMin + delta, this.valueMax));
+      this.minInput.value = this.valueMin;
+      this.minInput.dispatchEvent(new Event('change', { bubbles: true }));
+    } else {
+      this.valueMax = Math.min(this.maxAllowed, Math.max(this.valueMax + delta, this.valueMin));
+      this.maxInput.value = this.valueMax;
+      this.maxInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    this.updateUI();
+    this.emitFacetInput();
+  }
+
+  roundValue(v) {
+    // keep integers by default; adjust here if you want finer precision
+    return Math.round(v);
+  }
+
+  percentFromValue(v) {
+    return (v / this.maxAllowed) * 100;
+  }
+
+  syncFromValues() {
+    // clamp & order
+    this.valueMin = Math.max(0, Math.min(this.valueMin, this.maxAllowed));
+    this.valueMax = Math.max(this.valueMin, Math.min(this.valueMax, this.maxAllowed));
+    this.updateUI();
+  }
+
+  updateUI() {
+    const minPct = this.percentFromValue(this.valueMin);
+    const maxPct = this.percentFromValue(this.valueMax);
+
+    // handles
+    this.minHandle.style.left = `${minPct}%`;
+    this.maxHandle.style.left = `${maxPct}%`;
+
+    // filled range bar
+    this.range.style.left = `${minPct}%`;
+    this.range.style.right = `${100 - maxPct}%`;
+
+    // labels
+    if (this.minLabel) this.minLabel.textContent = `${this.valueMin}`;
+    if (this.maxLabel) this.maxLabel.textContent = `${this.valueMax}`;
+  }
+
+  emitFacetInput() {
+    const facetFiltersForm = this.closest('facet-filters-form');
+    if (facetFiltersForm && facetFiltersForm.debouncedOnSubmit) {
+      facetFiltersForm.debouncedOnSubmit({
+        preventDefault() {},            // no-op to satisfy handler
+        target: this,                   // <price-range> element; .closest('form') will work
+        srcElement: { className: '' }   // avoid the mobile checkbox branch
+      });
+    }
+    // if (!this.facetForm) return;
+    // this.facetForm.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  // Suppress exactly one upcoming document-level click (used to avoid closing drawers/details)
+  suppressNextDocumentClick() {
+    const kill = (e) => {
+      e.stopPropagation();
+      document.removeEventListener('click', kill, true);
+    };
+    // capture so we stop it before theme listeners
+    document.addEventListener('click', kill, true);
+  }
+}
+customElements.define('price-range', PriceRange);
+
+
+class FacetRemove extends HTMLElement {
+  constructor() {
+    super();
+    const facetLink = this.querySelector('a');
+    facetLink.setAttribute('role', 'button');
+    facetLink.addEventListener('click', this.closeFilter.bind(this));
+    facetLink.addEventListener('keyup', (event) => {
+      event.preventDefault();
+      if (event.code.toUpperCase() === 'SPACE') this.closeFilter(event);
+    });
+  }
+
+  closeFilter(event) {
+    event.preventDefault();
+    const form = this.closest('facet-filters-form') || document.querySelector('facet-filters-form');
+    form.onActiveFilterClick(event);
+  }
+}
+
+customElements.define('facet-remove', FacetRemove);

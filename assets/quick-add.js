@@ -1,1 +1,141 @@
-customElements.get("quick-add-modal")||customElements.define("quick-add-modal",class extends ModalDialog{constructor(){super(),this.modalContent=this.querySelector('[id^="QuickAddInfo-"]'),this.addEventListener("product-info:loaded",({target:e})=>{e.addPreProcessCallback(this.preprocessHTML.bind(this))})}hide(e=!1){const t=document.querySelector("cart-notification")||document.querySelector("cart-drawer");t&&t.setActiveElement(this.openedBy),this.modalContent.innerHTML="",e&&(this.openedBy=null),super.hide()}show(e){e.setAttribute("aria-disabled",!0),e.classList.add("loading"),e.querySelector(".loading__spinner").classList.remove("hidden"),fetch(e.getAttribute("data-product-url")).then(e=>e.text()).then(t=>{const r=(new DOMParser).parseFromString(t,"text/html").querySelector("product-info");this.preprocessHTML(r),HTMLUpdateUtility.setInnerHTML(this.modalContent,r.outerHTML),window.Shopify&&Shopify.PaymentButton&&Shopify.PaymentButton.init(),window.ProductModel&&window.ProductModel.loadShopifyXR(),super.show(e)}).finally(()=>{e.removeAttribute("aria-disabled"),e.classList.remove("loading"),e.querySelector(".loading__spinner").classList.add("hidden"),publish(PUB_SUB_EVENTS.quickViewLoaded,{opener:e})})}preprocessHTML(e){e.classList.forEach(e=>{(e.startsWith("dbtfy-color-")||"gradient"===e)&&this.modalContent.classList.add(e)}),this.preventDuplicatedIDs(e),this.removeDOMElements(e),this.removeGalleryListSemantic(e),this.updateImageSizes(e),this.preventVariantURLSwitching(e)}preventVariantURLSwitching(e){e.setAttribute("data-update-url","false")}removeDOMElements(e){const t=e.querySelector("pickup-availability");t&&t.remove();const r=e.querySelector("product-modal");r&&r.remove();const i=e.querySelectorAll("modal-dialog");i&&i.forEach(e=>e.remove())}preventDuplicatedIDs(e){const t=e.dataset.section,r=t,i=`quickadd-${t}`;e.innerHTML=e.innerHTML.replaceAll(r,i),Array.from(e.attributes).forEach(t=>{t.value.includes(r)&&e.setAttribute(t.name,t.value.replace(r,i))}),e.dataset.originalSection=t}removeGalleryListSemantic(e){const t=e.querySelector('[id^="Slider-Gallery"]');t&&(t.setAttribute("role","presentation"),t.querySelectorAll('[id^="Slide-"]').forEach(e=>e.setAttribute("role","presentation")))}updateImageSizes(e){const t=e.querySelector(".product"),r=t?.classList.contains("product--columns");if(!r)return;const i=t.querySelectorAll(".product__media img");if(!i.length)return;let o="(min-width: 1000px) 715px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)";t.classList.contains("product--medium")?o=o.replace("715px","605px"):t.classList.contains("product--small")&&(o=o.replace("715px","495px")),i.forEach(e=>e.setAttribute("sizes",o))}});
+if (!customElements.get('quick-add-modal')) {
+  customElements.define('quick-add-modal', class QuickAddModal extends ModalDialog {
+    constructor() {
+      super();
+      this.modalContent = this.querySelector('[id^="QuickAddInfo-"]');
+    }
+
+    hide(preventFocus = false) {
+      const cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      if (cartNotification) cartNotification.setActiveElement(this.openedBy);
+      this.modalContent.innerHTML = '';
+
+      if (preventFocus) this.openedBy = null;
+      super.hide();
+    }
+
+    show(opener) {
+      opener.setAttribute('aria-disabled', true);
+      opener.classList.add('loading');
+      opener.querySelector('.loading-overlay__spinner').classList.remove('hidden');
+
+      fetch(opener.getAttribute('data-product-url'))
+        .then((response) => response.text())
+        .then((responseText) => {
+          const responseHTML = new DOMParser().parseFromString(responseText, 'text/html');
+          this.productElement = responseHTML.querySelector('section[id^="MainProduct-"]');
+          this.preventDuplicatedIDs();
+          this.removeDOMElements();
+          this.fixQuantityBreaks();
+          const mediaGallery = this.productElement.querySelector('media-gallery');
+          // if (mediaGallery) {
+          //   mediaGallery.dataset.disablePrepend = 'false';
+          //   mediaGallery.removeAttribute('data-filtering-option');
+          //   mediaGallery.querySelectorAll('.product__media-item.hidden, .thumbnail-list__item.hidden').forEach(item => {
+          //     item.classList.remove('hidden');
+          //   })
+          // }
+          // if (this.productElement.querySelector('variant-selects')) this.productElement.querySelector('variant-selects').dataset.hasFiltering = 'false';
+          this.setInnerHTML(this.modalContent, this.productElement.innerHTML);
+
+          if (window.Shopify && Shopify.PaymentButton) {
+            Shopify.PaymentButton.init();
+          }
+
+          if (window.ProductModel) window.ProductModel.loadShopifyXR();
+
+          this.removeGalleryListSemantic();
+          this.updateImageSizes();
+          this.preventVariantURLSwitching();
+          super.show(opener);
+        })
+        .finally(() => {
+          opener.removeAttribute('aria-disabled');
+          opener.classList.remove('loading');
+          opener.querySelector('.loading-overlay__spinner').classList.add('hidden');
+        });
+    }
+
+    setInnerHTML(element, html) {
+      element.innerHTML = html;
+
+      // Reinjects the script tags to allow execution. By default, scripts are disabled when using element.innerHTML.
+      element.querySelectorAll('script').forEach(oldScriptTag => {
+        const newScriptTag = document.createElement('script');
+        Array.from(oldScriptTag.attributes).forEach(attribute => {
+          newScriptTag.setAttribute(attribute.name, attribute.value)
+        });
+        newScriptTag.appendChild(document.createTextNode(oldScriptTag.innerHTML));
+        oldScriptTag.parentNode.replaceChild(newScriptTag, oldScriptTag);
+      });
+    }
+
+    preventVariantURLSwitching() {
+      const variantPicker = this.modalContent.querySelector('variant-radios,variant-selects');
+      if (!variantPicker) return;
+
+      variantPicker.setAttribute('data-update-url', 'false');
+    }
+
+    removeDOMElements() {
+      const pickupAvailability = this.productElement.querySelector('pickup-availability');
+      if (pickupAvailability) pickupAvailability.remove();
+
+      const productModal = this.productElement.querySelector('product-modal');
+      if (productModal) productModal.remove();
+
+      const stickyAtc = this.productElement.querySelector('sticky-atc');
+      if (stickyAtc) stickyAtc.remove();
+
+      const modalDialog = this.productElement.querySelectorAll('modal-dialog');
+      if (modalDialog) modalDialog.forEach(modal => modal.remove());
+    }
+
+    fixQuantityBreaks() {
+      const quantityBreaks = this.productElement.querySelector('quantity-breaks');
+      if (!quantityBreaks) return;
+      quantityBreaks.querySelectorAll('input').forEach(input => {
+        input.id += '-QuickAdd'
+      })
+      quantityBreaks.querySelectorAll('label').forEach((label, index) => {
+        const oldValue = label.getAttribute('for');
+        label.setAttribute('for', `${oldValue}-QuickAdd`);
+      })
+    }
+
+    preventDuplicatedIDs() {
+      const sectionId = this.productElement.dataset.section;
+      this.productElement.innerHTML = this.productElement.innerHTML.replaceAll(sectionId, `quickadd-${ sectionId }`);
+      this.productElement.querySelectorAll('variant-selects, variant-radios, product-info').forEach((element) => {
+        element.dataset.originalSection = sectionId;
+      });
+    }
+
+    removeGalleryListSemantic() {
+      const galleryList = this.modalContent.querySelector('[id^="Slider-Gallery"]');
+      if (!galleryList) return;
+
+      galleryList.setAttribute('role', 'presentation');
+      galleryList.querySelectorAll('[id^="Slide-"]').forEach(li => li.setAttribute('role', 'presentation'));
+    }
+
+    updateImageSizes() {
+      const product = this.modalContent.querySelector('.product');
+      const desktopColumns = product.classList.contains('product--columns');
+      if (!desktopColumns) return;
+
+      const mediaImages = product.querySelectorAll('.product__media img');
+      if (!mediaImages.length) return;
+
+      let mediaImageSizes = '(min-width: 1000px) 715px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)';
+      
+      if (product.classList.contains('product--medium')) {
+        mediaImageSizes = mediaImageSizes.replace('715px', '605px');
+      } else if (product.classList.contains('product--small')) {
+        mediaImageSizes = mediaImageSizes.replace('715px', '495px');
+      }
+
+      mediaImages.forEach(img => img.setAttribute('sizes', mediaImageSizes));
+    }
+  });
+}
