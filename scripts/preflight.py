@@ -101,6 +101,7 @@ def main():
 
     # 1. Validate every section schema
     section_types = {}
+    section_range_limits = {}  # sec_type -> {setting_id: (min, max)}
     for f in sorted(os.listdir(SECTIONS_DIR)):
         if not f.endswith(".liquid"):
             continue
@@ -125,8 +126,21 @@ def main():
         if issues:
             for i in issues:
                 all_issues.append(f"  {f}: {i}")
-        # Track section type (filename without .liquid)
-        section_types[f[:-len(".liquid")]] = path
+        sec_name = f[:-len(".liquid")]
+        section_types[sec_name] = path
+        # Record range limits for template value validation
+        limits = {}
+        def collect_ranges(obj):
+            if isinstance(obj, dict):
+                if obj.get("type") == "range" and "id" in obj and "max" in obj:
+                    limits[obj["id"]] = (obj.get("min", 0), obj["max"])
+                for v in obj.values():
+                    collect_ranges(v)
+            elif isinstance(obj, list):
+                for v in obj:
+                    collect_ranges(v)
+        collect_ranges(schema)
+        section_range_limits[sec_name] = limits
 
     # 2. Validate every template's section references + 25-section cap
     for f in sorted(os.listdir(TEMPLATES_DIR)):
@@ -161,6 +175,30 @@ def main():
                         f"  {f}: section '{sec_id}' references type '{sec_type}' "
                         f"but no sections/{sec_type}.liquid exists"
                     )
+            # Validate template setting values against schema range min/max
+            limits = section_range_limits.get(sec_type, {})
+            for setting_id, val in sec.get("settings", {}).items():
+                if setting_id in limits and isinstance(val, (int, float)):
+                    mn, mx = limits[setting_id]
+                    if val > mx:
+                        all_issues.append(
+                            f"  {f}: section '{sec_id}' setting '{setting_id}'={val} "
+                            f"exceeds schema max={mx} (Shopify rejects on save)"
+                        )
+                    if val < mn:
+                        all_issues.append(
+                            f"  {f}: section '{sec_id}' setting '{setting_id}'={val} "
+                            f"below schema min={mn}"
+                        )
+            # Flag section-group sections that hardcode a template instance ID
+            if sec_type == "section-group":
+                for k, v in sec.get("settings", {}).items():
+                    if isinstance(v, str) and "shopify-section-template--" in v:
+                        all_issues.append(
+                            f"  {f}: section-group '{sec_id}' setting '{k}' hardcodes a "
+                            f"template instance ID ({v[:50]}...) — won't resolve in other "
+                            f"stores. Remove the section-group or re-point in Theme Editor."
+                        )
 
     if all_issues:
         print("PRE-FLIGHT FAILED:\n")

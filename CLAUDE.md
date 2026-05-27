@@ -105,7 +105,32 @@ adding more, swap one out (or move to a section group / footer).
 
 `scripts/preflight.py` enforces this — fails if any template exceeds 25.
 
-### 7. Image attachments dropped in chat aren't on disk
+### 7. Template setting VALUES must respect section schema min/max
+
+A range setting's value set in a *template* (not just the schema default)
+must stay within the section schema's `min`/`max`. Shopify rejects on save:
+
+  `FileSaveError: Setting 'speed' can't be greater than 5`
+
+Real bug: Aeon's `horizontal-ticker` caps `speed` at 5, but a rewrite set
+it to 25. `scripts/preflight.py` now validates template setting values
+against each section's schema range limits, not just schema defaults.
+
+### 8. Aeon section-group sections hardcode a template instance ID
+
+Aeon's `section-group` is a meta-section that visually combines two other
+sections, referencing them by full DOM id:
+`#shopify-section-template--25360076833091__product_features_pUkYn4`.
+
+That numeric `25360076833091` is the template instance ID **from Aeon's
+demo store**. It does not exist in another store, so the section-group
+renders empty (shows "Section #1 ID: ..." in the editor but nothing on
+the page). The wrapped sections also appear independently in `order`, so
+the section-group is redundant. **Fix: delete the section-group sections**
+from the template (both from `sections` and `order`). `preflight.py` flags
+any section-group that hardcodes a template instance ID.
+
+### 9. Image attachments dropped in chat aren't on disk
 
 Files the user uploads via chat are visible to the model but not saved to
 the filesystem. Either:
