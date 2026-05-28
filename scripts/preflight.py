@@ -206,7 +206,50 @@ def main():
             print(i)
         sys.exit(1)
     else:
+        # Also check global settings_data.json
+        gs_issues = check_global_settings()
+        if gs_issues:
+            print("PRE-FLIGHT FAILED:\n")
+            for i in gs_issues:
+                print(i)
+            sys.exit(1)
         print(f"Pre-flight clean: {len(section_types)} sections, schemas valid.")
+
+
+def check_global_settings():
+    """Validate config/settings_data.json values against config/settings_schema.json range constraints."""
+    issues = []
+    try:
+        schema = json.load(open("config/settings_schema.json"))
+        data = json.load(open("config/settings_data.json"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return issues
+
+    range_limits = {}
+    def walk(obj):
+        if isinstance(obj, dict):
+            if obj.get("type") == "range" and "id" in obj:
+                range_limits[obj["id"]] = (obj.get("min"), obj.get("max"), obj.get("step"))
+            for v in obj.values(): walk(v)
+        elif isinstance(obj, list):
+            for v in obj: walk(v)
+    walk(schema)
+
+    cur = data.get("current", {})
+    if isinstance(cur, str):
+        cur = data.get("presets", {}).get(cur, {})
+    for k, v in cur.items():
+        if k in range_limits and isinstance(v, (int, float)):
+            mn, mx, st = range_limits[k]
+            if mx is not None and v > mx:
+                issues.append(f"  settings_data.json: '{k}'={v} > schema max={mx} (Shopify rejects on save)")
+            if mn is not None and v < mn:
+                issues.append(f"  settings_data.json: '{k}'={v} < schema min={mn}")
+            if st and mn is not None:
+                steps = (v - mn) / st
+                if abs(steps - round(steps)) > 1e-6:
+                    issues.append(f"  settings_data.json: '{k}'={v} doesn't align to step={st} from min={mn}")
+    return issues
 
 
 if __name__ == "__main__":

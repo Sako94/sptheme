@@ -130,7 +130,26 @@ the section-group is redundant. **Fix: delete the section-group sections**
 from the template (both from `sections` and `order`). `preflight.py` flags
 any section-group that hardcodes a template instance ID.
 
-### 9. Image attachments dropped in chat aren't on disk
+### 9. Global theme settings have schema range limits too
+
+`config/settings_data.json` values are bounded by ranges defined in
+`config/settings_schema.json`. Setting a value above the max gets
+silently accepted by `theme package`, but Shopify rejects on app
+install or theme save with:
+
+  `Setting 'badge_corner_radius' can't be greater than 40`
+
+Real bug: applied `badge_corner_radius=50` and `buttons_radius=50` for
+"pill shape" but Aeon caps both at 40. Hit when installing Judge.me
+(any third-party Shopify app does a theme save when injecting blocks,
+which surfaces every latent setting violation). Same pattern as
+horizontal-ticker `speed=25 > max 5`.
+
+`scripts/preflight.py` now validates global settings_data.json values
+against settings_schema.json range constraints — run before every
+package + push.
+
+### 10. Image attachments dropped in chat aren't on disk
 
 Files the user uploads via chat are visible to the model but not saved to
 the filesystem. Either:
